@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="game.js"></script>
+    <title>Taki</title>
+</head>
+<body>
+<ul id="players">
+
+</ul>
+    <Player1Box>
+        <cards>
+            <card onDrag = "player1Box.dragvalidation(this)">
+            <card onDrag = "player1Box.dragvalidation(this)">
+            <card onDrag = "player1Box.dragvalidation(this)">
+            <card onDrag = "player1Box.dragvalidation(this)">
+            <card onDrag = "player1Box.dragvalidation(this)">
+            <card onDrag = "player1Box.dragvalidation(this)">
+        </cards>
+    </Player1Box>
+    <Player2Box>
+        <cards>
+
+        </cards>
+
+    </Player2Box>
+    <stock>
+        <card onDrop = "game.dropvalidation(player1Box)">
+    </stock>
+</body>
+</html>
