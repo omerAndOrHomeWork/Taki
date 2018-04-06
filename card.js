@@ -1,6 +1,6 @@
 function Card(color, sign,validation, operation) {
-    this.color = undefined;
-    this.sign = undefined;
+    this.color = color;
+    this.sign = sign;
     this.validation = validation;
     this.operate = operation;
     /*
@@ -10,6 +10,17 @@ function Card(color, sign,validation, operation) {
     *    validation
     *
     * */
+
+    var setColor = function (color)
+    {
+        this.color = color;
+    }
+
+    var setSign = function (sign)
+    {
+        this.sign = sign;
+    }
+
     return{
         doValidation: validation,
 
