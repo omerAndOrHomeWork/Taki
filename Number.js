@@ -1,26 +1,22 @@
-function Number() {
-    var color;
-    var numberOperation = function () {
+function Number(color) {
 
-    };
+    var numberOperation = function () {};
 
     function numberValidation(card) {
-
-    }
-
-    function color(card) {
-
-    }
-
-    Card.call(this, color, numberValidation, numberOperation);
-
-    inherits(Number, Card);
-
-    function doValidation(card) {
-        if(card.color == this.color || card.number == this.number)
+        if(card.color == this.color || card.sign == this.sign)
             return true;
         else
             return false;
+
     }
+
+ //   function color(card) {
+// }
+
+    Card.call(this, color,"Number", numberValidation, numberOperation);
+
+    inherits(Number, Card);
+
+
 }
 
