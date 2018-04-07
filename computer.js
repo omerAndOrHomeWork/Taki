@@ -1,10 +1,12 @@
 function Computer() {
+    var cards = [];
+
     function pickCard() {
-        card = this.super_.cards[2];
+        //need to pick card from my stock and put in stock
         game.dropValidation(); //why?
     }
 
-    function checkSuitblaCard(lastGameCardsign)
+    function checkSuitableCard(lastGameCardSign)
     {
         var isSuitable = false;
         var currentCard = undefined;
@@ -13,7 +15,7 @@ function Computer() {
         {
             if(isSuitable === false)
             {
-                if (cards[i].sign === lastGameCardsign && card[i].doValidation(gameCards.lastIndexOf(card)))
+                if (cards[i].sign === lastGameCardSign && card[i].doValidation(gameCards.lastIndexOf(card)))
                 {
                     isSuitable = true;
                     currentCard = cards[i];

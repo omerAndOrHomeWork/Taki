@@ -1,15 +1,21 @@
 function Game() {
     var stock = new Stock();
-    var gameCards = new Array();
+    var gameCards = [];
     var turn = 0;
-    var players = new Array(new Player(), new Player());
+    var players = [new Player(), new Player()];
+    var amountOfCardsToTakeFromStock = 1;
 
     function changeTurn(promote) {
         players[turn].calculateAVG();
         turn = (turn + promote) % players.length;
         players[turn].startClock();
-        if(players[turn] === Computer)
-            players[turn].do();
+        if(players[turn] === Computer){
+            var card = players[turn].do(gameCards.lastIndexOf(card));
+            if(card == null)
+                pullCardValidation(players[turn]);
+            else
+                dropValidation(players[turn], card);
+        }
     }
 
     function Partition() {
@@ -20,10 +26,9 @@ function Game() {
     }
 
     function dropValidation(player, card) {
-        if(player == turn) {
-            if (card.doValidation(gameCards.lastIndexOf(card))) {
-                player.getCards.pop(card);
-                var promote = card.doOperation();
+        if (player === players[turn]){
+            if (card.doValidation(gameCards.lastIndexOf(Card))) {
+                var promote = player.doOperation(card);
                 gameCards.push(card);
                 updateStatics();
                 changeTurn(promote);
@@ -34,14 +39,18 @@ function Game() {
             return false;
     }
 
+
     function pullCardValidation(player) {
-        if(player == turn){
-            var card = stock.getCard();
-            player.getCards.push(card);
+        if(player == players[turn]){
+            player.takiMode = false;
+            var cards = stock.getCards(amountOfCardsToTakeFromStock);
+            player.getCards.push(cards);
+            gameCards.lastIndexOf(Card).makePassive();
             updateStatistics();
             changeTurn(1);
         }
     }
+
 
     // function setPlayerInPage(player) {
     //     var players = document.getElementById("players");

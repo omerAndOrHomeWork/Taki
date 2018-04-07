@@ -1,18 +1,13 @@
 function Stop(color) {
-    //<script src="card.js" type="text/javascript"></script>
     function stopOperation() {
         return 2;
     }
 
     function stopValidation(card) {
-        if(card.color == this.color || card.sign == this.sign)
-            return true;
-        else
-            return false;
-
+        return !card.active && (card.color === this.color || card.sign === this.sign);
     }
 
-    Card.call(this, color,"Stop", numberValidation, numberOperation);
+    Card.call(this, color,"Stop", stopValidation, stopOperation, false);
 
 }
 

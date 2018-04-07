@@ -1,8 +1,10 @@
-function Card(color, sign,validation, operation) {
+function Card(color, sign, validation, operation, active) {
     this.color = color;
     this.sign = sign;
     this.validation = validation;
     this.operate = operation;
+    this.active = active;
+
     /*
     * dragvalidation
     * dropvalidation
@@ -11,6 +13,7 @@ function Card(color, sign,validation, operation) {
     *
     * */
 
+/*
     var setColor = function (color)
     {
         this.color = color;
@@ -20,11 +23,14 @@ function Card(color, sign,validation, operation) {
     {
         this.sign = sign;
     }
+*/
 
     return{
         doValidation: validation,
-
-
+        doOperation: operation,
+        makePassive: function () {
+            active = false;
+        }
     }
 }
 
