@@ -10,12 +10,9 @@ function Stock() {
             return cards;
         },
 
-        getCard: function() {
-
-        },
-
         reShufel: function(openCards) {
             cards = openCards;
+            card[card.length - 1] = null;
             randomSort();
             return getCard();
         }
