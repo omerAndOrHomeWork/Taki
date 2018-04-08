@@ -6,7 +6,7 @@ function ChangeColorCards() {
     function changeColorOperation() {
         //hide = false
         //TODO: create 4 buttons and connect it to game(functionally)
-        //comment;
+        //comment;ggggg
         return 1;
     }
 
