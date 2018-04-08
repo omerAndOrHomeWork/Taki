@@ -27,10 +27,14 @@ function Card(color, sign, validation, operation, active) {
 
     return{
         doValidation: validation,
+
         doOperation: operation,
+
         makePassive: function () {
             active = false;
-        }
+        },
+
+        isActive: this.active
     }
 }
 

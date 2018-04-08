@@ -1,6 +1,8 @@
 function Number(color) {
 
-    var numberOperation = function () {};
+    var numberOperation = function () {
+        return 1;
+    };
 
     function numberValidation(card) {
         return !card.active && (card.color === this.color || card.sign === this.sign);
@@ -13,7 +15,5 @@ function Number(color) {
     Card.call(this, color,"Number", numberValidation, numberOperation, false);
 
     inherits(Number, Card);
-
-
 }
 

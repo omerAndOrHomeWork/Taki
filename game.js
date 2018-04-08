@@ -4,25 +4,36 @@ function Game() {
     var turn = 0;
     var players = [new Player(), new Player()];
     var amountOfCardsToTakeFromStock = 1;
+    var statistics = new Statistics();
 
     function changeTurn(promote) {
-        players[turn].calculateAVG();
+        players[turn].calculateAVG(); //TODO calculateAVG
         turn = (turn + promote) % players.length;
-        players[turn].startClock();
+        players[turn].startClock(); //TODO startClock
         if(players[turn] === Computer){
             var card = players[turn].do(gameCards.lastIndexOf(card));
             if(card == null)
                 pullCardValidation(players[turn]);
-            else
+            else {
                 dropValidation(players[turn], card);
+            }
         }
+    }
+
+    function calcAmountCardsToTake(card){
+        if(card.sign === "+2") {
+            if (amountOfCardsToTakeFromStock % 2 === 0)
+                amountOfCardsToTakeFromStock += 2;
+            else
+                amountOfCardsToTakeFromStock = 2;
+        }else
+            amountOfCardsToTakeFromStock = 1;
     }
 
     function Partition() {
         gameCards.push(stock.getCard());
-        players.forEach(player => {
-            player.setCards(stock.getCards());
-        });
+        for(var i=0; i < players.length; ++i)
+            players[i].setCards(stock.getCards(8));
     }
 
     function dropValidation(player, card) {
@@ -30,6 +41,7 @@ function Game() {
             if (card.doValidation(gameCards.lastIndexOf(Card))) {
                 var promote = player.doOperation(card);
                 gameCards.push(card);
+                calcAmountCardsToTake(card);
                 updateStatics();
                 changeTurn(promote);
             }
@@ -41,8 +53,8 @@ function Game() {
 
 
     function pullCardValidation(player) {
-        if(player == players[turn]){
-            player.takiMode = false;
+        if(player === players[turn]){
+            player.takiMode = null;
             var cards = stock.getCards(amountOfCardsToTakeFromStock);
             player.getCards.push(cards);
             gameCards.lastIndexOf(Card).makePassive();
