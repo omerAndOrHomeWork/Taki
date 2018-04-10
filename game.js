@@ -21,7 +21,7 @@ function Game() {
     }
 
     function calcAmountCardsToTake(card){
-        if(card.sign === Card.enumTypes.TWO_PLUS) {
+        if(card.sign === "+2") {
             if (amountOfCardsToTakeFromStock % 2 === 0)
                 amountOfCardsToTakeFromStock += 2;
             else
