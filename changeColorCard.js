@@ -1,4 +1,4 @@
-function ChangeColorCards() {
+function ChangeColorCard() {
 
     /**
      * @return {number}
@@ -17,7 +17,7 @@ function ChangeColorCards() {
         return !card.isActive();
     }
 
-    Card.call(this, null, "changeColor", ChangeColorValidation, ChangeColorOperation, false);
+    Card.call(this, null, Card.enumTypes.CHANGE_COLOR, ChangeColorValidation, ChangeColorOperation, false);
 }
 
 

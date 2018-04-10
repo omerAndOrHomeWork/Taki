@@ -11,23 +11,23 @@ function Computer() {
     }
 
     function pickCardFromGiven(lastGameCard, changeColor, stop, plus, superTaki, taki, sameColor, sameSign) {
-        if(sameSign.sign === "+2")
+        if(sameSign instanceof TwoPlus)
             return sameSign;
         else if(changeColor !== null)
             return changeColor;
         else if(stop !== null)
             return stop;
-        else if(sameSign.sign === "stop")
+        else if(sameSign instanceof Stop)
             return sameSign;
         else if(plus !== null)
             return plus;
-        else if(sameSign.sign === "plus")
+        else if(sameSign instanceof Plus)
             return sameSign;
         else if(superTaki)
             return superTaki;
         else if(taki !== null)
             return taki;
-        else if(sameSign.sign === "taki")
+        else if(sameSign instanceof Taki)
             return sameSign;
         else if(sameColor !== null)
             return sameColor;
@@ -42,21 +42,21 @@ function Computer() {
             superTaki = null, taki = null, sameColor = null, sameSign = null;
         for(var i = 0; i < cards.length; ++i){
             if(cards[i].color === lastGameCard.color){
-                if(cards[i].sign === "+2")
+                if(cards[i] instanceof TwoPlus)
                     return cards[i];
-                else if(cards[i].sign === "stop")
+                else if(cards[i] instanceof Stop)
                     stop = cards[i];
-                else if(cards[i].sign === "plus")
+                else if(cards[i] instanceof Plus)
                     plus = cards[i];
-                else if(cards[i].sign === "taki")
+                else if(cards[i] instanceof Taki)
                     taki = cards[i];
                 else
                     sameColor = cards[i];
-            }else if(cards[i].sign === "changeColor"){
+            }else if(cards[i] instanceof ChangeColorCard){
                 changeColor = cards[i];
-            }else if(cards[i].sign === "superTaki"){
+            }else if(cards[i] instanceof SuperTaki){
                 superTaki = cards[i];
-            }else if(cards[i].sign === lastGameCard.sign){
+            }else if(cards[i] instanceof lastGameCard){
                 sameSign = cards[i];
             }
         }
@@ -66,7 +66,7 @@ function Computer() {
 
     function doOperation(lastGameCard){
         var promote;
-        if(lastGameCard.sign == "+2" && lastGameCard.isActive())
+        if(lastGameCard instanceof TwoPlus && lastGameCard.isActive())
             return doTwoPlusInHand();
         return doRegularHand(lastGameCard);
     }

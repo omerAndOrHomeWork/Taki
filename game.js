@@ -31,7 +31,7 @@ function Game() {
     }
 
     function Partition() {
-        gameCards.push(stock.getCard());
+        gameCards.push(stock.getCards(1));
         for(var i=0; i < players.length; ++i)
             players[i].setCards(stock.getCards(8));
     }
@@ -55,8 +55,7 @@ function Game() {
     function pullCardValidation(player) {
         if(player === players[turn]){
             player.takiMode = null;
-            var cards = stock.getCards(amountOfCardsToTakeFromStock);
-            player.getCards.push(cards);
+            player.getCards.push(stock.getCards(amountOfCardsToTakeFromStock));
             gameCards.lastIndexOf(Card).makePassive();
             updateStatistics();
             changeTurn(1);

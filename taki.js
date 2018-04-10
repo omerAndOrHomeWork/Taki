@@ -13,6 +13,6 @@ function Taki(color) {
         return !card.active && (card.color === this.color || card.sign === this.sign);
     }
 
-    Card.call(this, color, "Taki", takiValidation, takiOperation, false);
+    Card.call(this, color, Card.enumTypes.TAKI, takiValidation, takiOperation, false);
 }
 inherits(Taki, Card);

@@ -7,7 +7,7 @@ function Stop(color) {
         return !card.active && (card.color === this.color || card.sign === this.sign);
     }
 
-    Card.call(this, color,"Stop", stopValidation, stopOperation, false);
+    Card.call(this, color, Card.enumTypes.STOP, stopValidation, stopOperation, false);
 
 }
 
