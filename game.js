@@ -1,30 +1,47 @@
 function Game() {
     var stock = new Stock();
-    var gameCards = new Array();
+    var gameCards = [];
     var turn = 0;
-    var players = new Array(new Player(), new Player());
+    var players = [new Player(), new Player()];
+    var amountOfCardsToTakeFromStock = 1;
+    var statistics = new Statistics();
 
     function changeTurn(promote) {
-        players[turn].calculateAVG();
+        players[turn].calculateAVG(); //TODO calculateAVG
         turn = (turn + promote) % players.length;
-        players[turn].startClock();
-        if(players[turn] === Computer)
-            players[turn].do();
+        players[turn].startClock(); //TODO startClock
+        if(players[turn] === Computer){
+            var card = players[turn].do(gameCards.lastIndexOf(card));
+            if(card == null)
+                pullCardValidation(players[turn]);
+            else {
+                dropValidation(players[turn], card);
+            }
+        }
+    }
+
+    function calcAmountCardsToTake(card){
+        if(card.sign === Card.enumTypes.TWO_PLUS) {
+            if (amountOfCardsToTakeFromStock % 2 === 0)
+                amountOfCardsToTakeFromStock += 2;
+            else
+                amountOfCardsToTakeFromStock = 2;
+        }else
+            amountOfCardsToTakeFromStock = 1;
     }
 
     function Partition() {
-        gameCards.push(stock.getCard());
-        players.forEach(player => {
-            player.setCards(stock.getCards());
-        });
+        gameCards.push(stock.getCards(1));
+        for(var i=0; i < players.length; ++i)
+            players[i].setCards(stock.getCards(8));
     }
 
     function dropValidation(player, card) {
-        if(player == turn) {
-            if (card.doValidation(gameCards.lastIndexOf(card))) {
-                player.getCards.pop(card);
-                var promote = card.doOperation();
+        if (player === players[turn]){
+            if (card.doValidation(gameCards.lastIndexOf(Card))) {
+                var promote = player.doOperation(card);
                 gameCards.push(card);
+                calcAmountCardsToTake(card);
                 updateStatics();
                 changeTurn(promote);
             }
@@ -34,14 +51,17 @@ function Game() {
             return false;
     }
 
+
     function pullCardValidation(player) {
-        if(player == turn){
-            var card = stock.getCard();
-            player.getCards.push(card);
+        if(player === players[turn]){
+            player.takiMode = null;
+            player.getCards.push(stock.getCards(amountOfCardsToTakeFromStock));
+            gameCards.lastIndexOf(Card).makePassive();
             updateStatistics();
             changeTurn(1);
         }
     }
+
 
     // function setPlayerInPage(player) {
     //     var players = document.getElementById("players");
