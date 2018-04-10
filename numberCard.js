@@ -1,4 +1,5 @@
-function Number(color) {
+function NumberCard(number, color) {
+    this.number = number;
 
     var numberOperation = function () {
         return 1;
@@ -12,8 +13,9 @@ function Number(color) {
  //   function color(card) {
 // }
 
-    Card.call(this, color,"Number", numberValidation, numberOperation, false);
+    Card.call(this, color, Card.enumTypes.NUMBER, numberValidation, numberOperation, false);
 
-    inherits(Number, Card);
+
+    inherits(NumberCard, Card);
 }
 

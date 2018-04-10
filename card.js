@@ -26,6 +26,11 @@ function Card(color, sign, validation, operation, active) {
 */
 
     return{
+        enumColor: Object.freeze({RED:0,BLUE:1, GREEN:2, YELLOW:3}),
+
+        enumTypes: Object.freeze({STOP:0, CHANGE_COLOR:1, PLUS:2, NUMBER:3, TAKI:4,
+            SUPER_TAKI:5, TWO_PLUS:6}),
+
         doValidation: validation,
 
         doOperation: operation,
