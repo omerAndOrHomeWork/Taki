@@ -44,7 +44,7 @@ clock.prototype.updateTime = function (secs)
 };
 var gameClock = new clock(
     document.querySelector('.clock'));
-clock.run();
+gameClock.run();
 /*
 </script>
 
