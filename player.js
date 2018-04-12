@@ -38,37 +38,7 @@ function Player() {
         return promote;
     }
 
-    /*
-    function timer(){
-        setTimeout(function() {
-            time++;
-            /*
-                        var hours = Math.floor(time/60/60/60);
-                        var minutes = Math.floor(time/60/60);
-                        var seceonds = Math.floor(time/60);
 
-                        if(min < 10) {
-                            min = "0" + min;
-                        }
-
-                        if(sec < 10) {
-                            sec = "0" + sec;
-                        }
-
-                        if(sec >= 60) {
-                            sec = sec % 60;
-                        }
-
-                        if(hours === 23 && minutes === 59 && seconds === 59) {
-                            hours = 0;
-                            minutes = 0;
-                            seceonds = 0;
-
-        }
-        }, 10
-
-            );
-*/
     return{
         calculateAVG: function(currentTurnTime){
             avrageTimePlayed *= turnsPlayed;
@@ -79,21 +49,6 @@ function Player() {
 
         startClock: function () {
             currentTurnTime = 0;
-            var minutes=0;
-            var seconds=0;
-            var hours = 0;
-            document.d.d2.value='0';
-
-            function display(){
-                if (seconds>=59){
-                    seconds=0;
-                    minutes+=1;
-                }
-                else
-                    seconds+=1;
-                document.d.d2.value=minutes+"."+seconds;
-                setTimeout("display()",1000);
-            }
         },
 
         clacCureentTruen: function() {
@@ -117,5 +72,99 @@ function Player() {
         }
 
     };
+
+    /*
+    class Stopwatch {
+    constructor(display, results) {
+        this.running = false;
+        this.display = display;
+        this.results = results;
+        this.laps = [];
+        this.reset();
+        this.print(this.times);
+    }
+
+    reset() {
+        this.times = [ 0, 0, 0 ];
+    }
+
+    start() {
+        if (!this.time) this.time = performance.now();
+        if (!this.running) {
+            this.running = true;
+            requestAnimationFrame(this.step.bind(this));
+        }
+    }
+
+    stop() {
+        this.running = false;
+        this.time = null;
+    }
+
+    restart() {
+        if (!this.time) this.time = performance.now();
+        if (!this.running) {
+            this.running = true;
+            requestAnimationFrame(this.step.bind(this));
+        }
+        this.reset();
+    }
+
+    clear() {
+        clearChildren(this.results);
+    }
+
+    step(timestamp) {
+        if (!this.running) return;
+        this.calculate(timestamp);
+        this.time = timestamp;
+        this.print();
+        requestAnimationFrame(this.step.bind(this));
+    }
+
+    calculate(timestamp) {
+        var diff = timestamp - this.time;
+        // Hundredths of a second are 100 ms
+        this.times[2] += diff / 1000;
+        // Seconds are 100 hundredths of a second
+        if (this.times[2] == 60) {
+            this.times[1] += 1;
+            this.times[2] = 0;
+        }
+        // Minutes are 60 seconds
+        if (this.times[1] == 60) {
+            this.times[0] += 1;
+            this.times[1] -= 60;
+        }
+    }
+
+    print() {
+    	this.display.innerText = this.format(this.times);
+    }
+
+    format(times) {
+        return `\
+${pad0(times[0], 2)}:\
+${pad0(times[1], 2)}:\
+${pad0(Math.floor(times[2]), 2)}`;
+    }
+}
+
+function pad0(value, count) {
+    var result = value.toString();
+    for (; result.length < count; --count)
+        result = '0' + result;
+    return result;
+}
+
+function clearChildren(node) {
+    while (node.lastChild)
+        node.removeChild(node.lastChild);
+}
+
+let stopwatch = new Stopwatch(
+    document.querySelector('.stopwatch'),
+    document.querySelector('.results'));
+     */
 }
 
