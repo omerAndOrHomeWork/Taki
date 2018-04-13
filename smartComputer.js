@@ -126,7 +126,7 @@ function SmartComputer() {
     function typeCardWithLeastSameColorInHand(type) {
         var card = null;
         for(var i = 0; i < typesCards[type].length; ++i) {
-            var currentCard = typesCards[Card.enumTypes.NUMBER][i];
+            var currentCard = typesCards[type][i];
             if(card === null)
                 card = currentCard;
             else if(colorsCards[card.color].length > colorsCards[currentCard.color].length)

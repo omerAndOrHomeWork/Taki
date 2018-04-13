@@ -10,9 +10,7 @@ function Player() {
     // will get also "players","turn"
     //and will check in addition this === players[turn]
     function dragValidation(card) {
-        if(cards.contains(card))
-            return true;
-        return false;
+        return cards.contains(card);
     }
 
     /*function setCards(playerHtml) {
@@ -39,6 +37,14 @@ function Player() {
     }
 
 
+    function removeCard(card) {
+        for(var i = 0; i < cards.length; ++i){
+            if(cards[i] === card){
+                cards.splice(i, 1);
+            }
+        }
+    }
+
     return{
         calculateAVG: function(currentTurnTime){
             avrageTimePlayed *= turnsPlayed;
@@ -60,11 +66,11 @@ function Player() {
         },
 
         doOperation: function (card) {
-            this.getCards.pop(card);
+            removeCard(card);
             var promote = card.doOperation();
             if(promote === -1)
-                player.takiMode = card;
-            if(player.takiMode !== null)
+                takiMode = card;
+            if(takiMode !== null)
                 promote = checkMoreFromTakiColor();
             if(cards.length === 1)
                 singleCardCounter++;

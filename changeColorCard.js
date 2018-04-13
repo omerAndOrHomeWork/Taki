@@ -21,4 +21,4 @@ function ChangeColorCard() {
 }
 
 
-inherits(Stop, Card);
+// inherits(Stop, Card);
