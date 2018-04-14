@@ -10,7 +10,6 @@ function changeColorOperation() {
 /**
  * @return {boolean}
  */
-
 function changeColorValidation(card) {
     return !card.isActive();
 }
@@ -74,4 +73,38 @@ function twoPlusOperation() {
 
 function twoPlusValidation(card) {
     return (card.color === this.color || card.sign === this.sign);
+}
+
+function pullApproval(cards, lastCard) {
+    for(var i = 0; i < lastCard.length; ++i){
+        if(lastCard[i].doValidation(lastCard))
+            return false;
+    }
+    return true;
+}
+
+function takiModeChecker(cards) {
+    var promote;
+    var foundColor = false;
+    for (var i = 0; i < cards.length; ++i) {
+        if (cards[i].color === this.takiMode.color) {
+            promote = 0;
+            foundColor = true;
+            break;
+        }
+    }
+    if (!foundColor) {
+        this.takiMode = null;
+        promote = 1;
+    }
+    return promote;
+}
+
+
+function removeCard(cards, card) {
+    for (var i = 0; i < cards.length; ++i) {
+        if (cards[i] === card) {
+            cards.splice(i, 1);
+        }
+    }
 }

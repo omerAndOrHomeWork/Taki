@@ -5,6 +5,33 @@ var card = function(color, sign, validation, operation) {
     this.operate = operation;
     this.active = false;
 
+    function addEvents(player) {
+        var div  =  document.getElementById("cards");
+        var span = document.createElement("span");
+        span.appendChild(document.createTextNode("card one"));
+   /*
+    <div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p ondragstart="dragStart(event)" ondrag="dragging(event)" draggable="true" id="dragtarget">Drag me!</p>
+*/
+        span.addEventListener("ondragstart", function(){
+            if(player.dragValidation(this))
+                span.draggable = true;
+        });
+        span.ondragstart = function (ev) {
+            if(player.dragValidation(this))
+                span.draggable = true;
+        }
+
+        // span.addEventListener("ondragover", function(){
+        //     span.draggable = false;
+        // });
+    }
+
+
+/*var ul = document.getElementById("list");
+  var li = document.createElement("li");
+  li.appendChild(document.createTextNode("Element 4"));
+* */
     return{
         enumColor: Object.freeze({RED:0,BLUE:1, GREEN:2, YELLOW:3}),
 

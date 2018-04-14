@@ -1,17 +1,14 @@
-function Player() {
+var player = function (pullApproval, takiChecker, removeCard) {
     var cards = [];
-    var avrageTimePlayed;
+    var averageTimePlayed;
     var turnsPlayed = 0;
     var singleCardCounter = 0;
     var takiMode;
     var currentTurnTime;
+    var pullApprovalFunc = pullApproval;
+    var takiCheckerFunc = takiChecker;
+    var removeCardFunc = removeCard;
 
-    //optional that player can drag his cards only in his turn
-    // will get also "players","turn"
-    //and will check in addition this === players[turn]
-    function dragValidation(card) {
-        return cards.contains(card);
-    }
 
     /*function setCards(playerHtml) {
 
@@ -19,17 +16,17 @@ function Player() {
         ///players.Add(<li>player</li>);
     }*/
 
-    function checkMoreFromTakiColor () {
+    /*function checkMoreFromTakiColor() {
         var promote;
         var foundColor = false;
-        for(var i = 0; i < cards.length; ++i){
-            if(cards[i].color === takiMode.color){
+        for (var i = 0; i < cards.length; ++i) {
+            if (cards[i].color === takiMode.color) {
                 promote = 0;
                 foundColor = true;
                 break;
             }
         }
-        if(!foundColor) {
+        if (!foundColor) {
             takiMode = null;
             promote = 1;
         }
@@ -38,15 +35,15 @@ function Player() {
 
 
     function removeCard(card) {
-        for(var i = 0; i < cards.length; ++i){
-            if(cards[i] === card){
+        for (var i = 0; i < cards.length; ++i) {
+            if (cards[i] === card) {
                 cards.splice(i, 1);
             }
         }
-    }
+    }*/
 
-    return{
-        calculateAVG: function(currentTurnTime){
+    return {
+        calculateAVG: function (currentTurnTime) {
             avrageTimePlayed *= turnsPlayed;
             avrageTimePlayed += currentTurnTime;
             turnsPlayed++;
@@ -57,7 +54,7 @@ function Player() {
             currentTurnTime = 0;
         },
 
-        clacCureentTruen: function() {
+        clacCureentTruen: function () {
             currentTurnTime += 1;
         },
 
@@ -66,111 +63,30 @@ function Player() {
         },
 
         doOperation: function (card) {
-            removeCard(card);
+            removeCardFunc(cards, card);
             var promote = card.doOperation();
-            if(promote === -1)
+            if (promote === -1)
                 takiMode = card;
-            if(takiMode !== null)
-                promote = checkMoreFromTakiColor();
-            if(cards.length === 1)
+            if (takiMode !== null)
+                promote = takiCheckerFunc();
+            if (cards.length === 1)
                 singleCardCounter++;
             return promote;
-        }
+        },
 
+        pullCardFromStock: function (card) {
+            player.getCards.push(card);
+        },
+
+        //optional that player can drag his cards only in his turn
+        // will get also "players","turn"
+        //and will check in addition this === players[turn]
+        dragValidation: function(card) {
+            return cards.contains(card);
+        },
+
+        pullApproval: function (lastCard){
+            pullApprovalFunc(cards, lastCard);
+        }
     };
-
-    /*
-    class Stopwatch {
-    constructor(display, results) {
-        this.running = false;
-        this.display = display;
-        this.results = results;
-        this.laps = [];
-        this.reset();
-        this.print(this.times);
-    }
-
-    reset() {
-        this.times = [ 0, 0, 0 ];
-    }
-
-    start() {
-        if (!this.time) this.time = performance.now();
-        if (!this.running) {
-            this.running = true;
-            requestAnimationFrame(this.step.bind(this));
-        }
-    }
-
-    stop() {
-        this.running = false;
-        this.time = null;
-    }
-
-    restart() {
-        if (!this.time) this.time = performance.now();
-        if (!this.running) {
-            this.running = true;
-            requestAnimationFrame(this.step.bind(this));
-        }
-        this.reset();
-    }
-
-    clear() {
-        clearChildren(this.results);
-    }
-
-    step(timestamp) {
-        if (!this.running) return;
-        this.calculate(timestamp);
-        this.time = timestamp;
-        this.print();
-        requestAnimationFrame(this.step.bind(this));
-    }
-
-    calculate(timestamp) {
-        var diff = timestamp - this.time;
-        // Hundredths of a second are 100 ms
-        this.times[2] += diff / 1000;
-        // Seconds are 100 hundredths of a second
-        if (this.times[2] == 60) {
-            this.times[1] += 1;
-            this.times[2] = 0;
-        }
-        // Minutes are 60 seconds
-        if (this.times[1] == 60) {
-            this.times[0] += 1;
-            this.times[1] -= 60;
-        }
-    }
-
-    print() {
-    	this.display.innerText = this.format(this.times);
-    }
-
-    format(times) {
-        return `\
-${pad0(times[0], 2)}:\
-${pad0(times[1], 2)}:\
-${pad0(Math.floor(times[2]), 2)}`;
-    }
 }
-
-function pad0(value, count) {
-    var result = value.toString();
-    for (; result.length < count; --count)
-        result = '0' + result;
-    return result;
-}
-
-function clearChildren(node) {
-    while (node.lastChild)
-        node.removeChild(node.lastChild);
-}
-
-let stopwatch = new Stopwatch(
-    document.querySelector('.stopwatch'),
-    document.querySelector('.results'));
-     */
-}
-
