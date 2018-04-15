@@ -108,3 +108,22 @@ function removeCard(cards, card) {
         }
     }
 }
+
+function searchCard(cards, id) {
+    for (var i = 0; i < cards.length; ++i) {
+        if (cards[i].getId() === id) {
+            return card;
+        }
+    }
+    return null;
+}
+
+var enumCard = (function(){
+    return {
+        enumColor: Object.freeze({RED: 0, BLUE: 1, GREEN: 2, YELLOW: 3}),
+        enumTypes: Object.freeze({
+            STOP: 0, CHANGE_COLOR: 1, PLUS: 2, NUMBER: 3, TAKI: 4,
+            SUPER_TAKI: 5, TWO_PLUS: 6
+        })
+    }
+})();
