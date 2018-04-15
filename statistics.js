@@ -8,7 +8,6 @@ function Statistics() {
             amountTurns++;
             //TODO: GetAVG in loop
             //TODO: GetSingleCardsInloop
-
         }
     };
 }
