@@ -1,10 +1,15 @@
-function SmartComputer() {
+var smartComputer = function(pullApproval, takiChecker, removeCard) {
     var colorsCards = [[], [], [], []];//sorting in enumColor sort
     var typesCards = [[], [], [], [], [], [], []];//sorting in enumType sort
     var playerCards = [];
     var takiMode = false;
     var numberOfPlayers;
     var lastCardInTaki = null;
+    var pullApprovalFunc = pullApproval;
+    var takiCheckerFunc = takiChecker;
+    var removeCardFunc = removeCard;
+    var singleCardCounter = 0;
+
     function insertColor(playerCard) {
         colorsCards[playerCard.color].push(playerCard);
     }
@@ -69,18 +74,18 @@ function SmartComputer() {
 */
 
     function connectionNumber(color, matchFunc) {
-        var card = null;
+        var pickedCard = null;
         for(var i = 0; i < colorsCards[color].length; ++i){
             if(colorsCards[color][i].sign === Card.enumTypes.NUMBER)
-                card = cardNumberInDifferentColor(colorsCards[color][i]);
-            if(matchFunc(card,null)) {
-                if(card !== null)
-                    return card;
+                pickedCard = cardNumberInDifferentColor(colorsCards[color][i]);
+            if(matchFunc(pickedCard,null)) {
+                if(pickedCard !== null)
+                    return pickedCard;
                 else
                     return colorsCards[color][i];
             }
         }
-        return card;
+        return pickedCard;
     }
 
 /*
@@ -124,15 +129,15 @@ function SmartComputer() {
 
     //find the given type in the most least color in hand
     function typeCardWithLeastSameColorInHand(type) {
-        var card = null;
+        var pickedCard = null;
         for(var i = 0; i < typesCards[type].length; ++i) {
-            var currentCard = typesCards[Card.enumTypes.NUMBER][i];
-            if(card === null)
-                card = currentCard;
-            else if(colorsCards[card.color].length > colorsCards[currentCard.color].length)
-                card = currentCard;
+            var currentCard = typesCards[type][i];
+            if(pickedCard === null)
+                pickedCard = currentCard;
+            else if(colorsCards[pickedCard.color].length > colorsCards[currentCard.color].length)
+                pickedCard = currentCard;
         }
-        return card;
+        return pickedCard;
     }
 
     //search for the first same color, in different type
@@ -144,50 +149,50 @@ function SmartComputer() {
         return null;
     }
 
-    function removeCard(array, card) {
+   /*function removeCard(array, card) {
         for(var i = 0; i < array.length; ++i) {
             if(array[i] === card) {
                 array.splice(i, 1);
                 return;
             }
         }
-    }
+    }*/
 
     function regularOperationWithTwoPlayers(lastGameCard) {
-        var card;
-        card = typeAndColorMatch(Card.enumTypes.STOP, lastGameCard.color, equal);
-        if(card !== null)
-            return card;
-        card = connectionNumber(lastGameCard.color, different);
-        if(card !== null)
-            return card;
-        card = connectionNumber(lastGameCard.color, equal);
-        if(card !== null)
-            return card;
-        card = typeAndColorMatch(Card.enumTypes.TWO_PLUS, lastGameCard.color, equal);
-        if(card !== null)
-            return card;
-        card = typeAndColorMatch(Card.enumTypes.STOP, lastGameCard.color, equal);
-        if(card !== null)
-            return card;
+        var pickedCard;
+        pickedCard = typeAndColorMatch(Card.enumTypes.STOP, lastGameCard.color, equal);
+        if(pickedCard !== null)
+            return pickedCard;
+        pickedCard = connectionNumber(lastGameCard.color, different);
+        if(pickedCard !== null)
+            return pickedCard;
+        pickedCard = connectionNumber(lastGameCard.color, equal);
+        if(pickedCard !== null)
+            return pickedCard;
+        pickedCard = typeAndColorMatch(Card.enumTypes.TWO_PLUS, lastGameCard.color, equal);
+        if(pickedCard !== null)
+            return pickedCard;
+        pickedCard = typeAndColorMatch(Card.enumTypes.STOP, lastGameCard.color, equal);
+        if(pickedCard !== null)
+            return pickedCard;
         return typeAndColorMatch(Card.enumTypes.PLUS, lastGameCard.color, equal);
     }
 
     function regularOperationWithMorePlayers(lastGameCard) {
-        var card;
-        card = connectionNumber(lastGameCard.color, different);
-        if(card !== null)
-            return card;
-        card = connectionNumber(lastGameCard.color, equal);
-        if(card !== null)
-            return card;
-        card = typeAndColorMatch(Card.enumTypes.PLUS, lastGameCard.color, equal);
-        if(card !== null)
-            return card;
-        card = typeAndColorMatch(Card.enumTypes.STOP, lastGameCard.color, equal);
-        if(card !== null)
-            return card;
-        return typeAndColorMatch(Card.enumTypes.TWO_PLUS, lastGameCard.color, equal);
+        var pickedCard;
+        pickedCard = connectionNumber(lastGameCard.color, different);
+        if(pickedCard !== null)
+            return pickedCard;
+        pickedCard = connectionNumber(lastGameCard.color, equal);
+        if(pickedCard !== null)
+            return pickedCard;
+        pickedCard = typeAndColorMatch(card.enumTypes.PLUS, lastGameCard.color, equal);
+        if(pickedCard !== null)
+            return pickedCard;
+        pickedCard = typeAndColorMatch(card.enumTypes.STOP, lastGameCard.color, equal);
+        if(pickedCard !== null)
+            return pickedCard;
+        return typeAndColorMatch(card.enumTypes.TWO_PLUS, lastGameCard.color, equal);
     }
 
     function colorCardInTaki(lastGameCard) {
@@ -200,7 +205,7 @@ function SmartComputer() {
         }
 
         if(lastCardInTaki.doOperation(lastGameCard)){
-            takiMode = false;
+            // takiMode = false;
             currentCard = lastCardInTaki;
             lastGameCard = null;
             return currentCard;
@@ -266,31 +271,31 @@ function SmartComputer() {
 
     function removeAllCardAppearances(card) {
         if(card.color !== null)
-            removeCard(colorsCards[card.color], card);
-        removeCard(typesCards[card.type], card);
-        removeCard(playerCards, card);
+            removeCardFunc(colorsCards[card.color], card);
+        removeCardFunc(typesCards[card.type], card);
+        removeCardFunc(playerCards, card);
     }
 
     function firstAvailableCard(lastGameCard) {
         for(var i = 0; i < playerCards.length; ++i){
-            if(playerCards[i].doOperation(lastGameCard))
+            if(playerCards[i].doValidation(lastGameCard))
                 return playerCards[i];
         }
         return null;
     }
 
     function regularOperation(lastGameCard) {
-        var card = null;
+        var pickedCard = null;
         if(colorsCards[lastGameCard.color].length > 0) {
             if(typeAndColorMatch(Card.enumTypes.PLUS, lastGameCard.color, different) === null){
-                card = typeAndColorMatch(Card.enumTypes.PLUS, lastGameCard.color, equal);
+                pickedCard = typeAndColorMatch(Card.enumTypes.PLUS, lastGameCard.color, equal);
             }
             if (numberOfPlayers === 2)
-                card = regularOperationWithTwoPlayers(lastGameCard);
+                pickedCard = regularOperationWithTwoPlayers(lastGameCard);
             else if (numberOfPlayers > 2)
-                card = regularOperationWithMorePlayers(lastGameCard);
+                pickedCard = regularOperationWithMorePlayers(lastGameCard);
         }
-        return card;
+        return pickedCard;
     }
 
     function signOperation(lastGameCard) {
@@ -306,17 +311,17 @@ function SmartComputer() {
     }
 
     function superTakiExecute(lastGameCard) {
-        var card = null;
+        var pickedCard = null;
         if(colorsLeftAmount() === 1 && colorsCards[lastGameCard.color].length > 0 &&
             typesCards[Card.enumTypes.SUPER_TAKI].length > 0){
-            takiMode = true;
-            card = typesCards[Card.enumTypes.SUPER_TAKI][0];
+            // takiMode = true;
+            pickedCard = typesCards[Card.enumTypes.SUPER_TAKI][0];
         }
-        return card;
+        return pickedCard;
     }
 
     function takiOperation(lastGameCard) {
-        var card = null;
+        var pickedCard = null;
         if(takiMode === true){
             if(lastCardInTaki === null) {
                 if (numberOfPlayers === 2)
@@ -324,14 +329,14 @@ function SmartComputer() {
                 else if (numberOfPlayers > 2)
                     takiOperationWithMorePlayers(lastGameCard);
             }
-            card = colorCardInTaki(lastGameCard.color);
+            pickedCard = colorCardInTaki(lastGameCard.color);
         }else{
-            card = typeAndColorMatch(Card.enumTypes.TAKI, lastGameCard.color, equal);
-            if(card !== null && card.doOperation()){
+            pickedCard = typeAndColorMatch(card.enumTypes.TAKI, lastGameCard.color, equal);
+            /*if(pickedCard !== null && pickedCard.doOperation()){
                 takiMode = true;
-            }
+            }*/
         }
-        return card;
+        return pickedCard;
     }
 
     function plusTwoOperation(lastGameCard) {
@@ -340,25 +345,23 @@ function SmartComputer() {
     }
 
     function operation(lastGameCard){
-        var card;
-        card = plusTwoOperation(lastGameCard);
-        if(card === null)
-            card = takiOperation(lastGameCard);
-        if(card === null)
-            card = superTakiExecute(lastGameCard);
-        if(card === null)
-            card = signOperation(lastGameCard);
-        if(card === null)
-            card = regularOperation(lastGameCard);
-        if(card === null){
-            if (typesCards[Card.enumTypes.CHANGE_COLOR].length > 0)
-                card = typesCards[Card.enumTypes.CHANGE_COLOR][0];
+        var pickedCard;
+        pickedCard = plusTwoOperation(lastGameCard);
+        if(pickedCard === null)
+            pickedCard = takiOperation(lastGameCard);
+        if(pickedCard === null)
+            pickedCard = superTakiExecute(lastGameCard);
+        if(pickedCard === null)
+            pickedCard = signOperation(lastGameCard);
+        if(pickedCard === null)
+            pickedCard = regularOperation(lastGameCard);
+        if(pickedCard === null){
+            if (typesCards[card.enumTypes.CHANGE_COLOR].length > 0)
+                pickedCard = typesCards[card.enumTypes.CHANGE_COLOR][0];
         }
-        if(card === null)
-            card = firstAvailableCard(lastGameCard);
-        if(card !== null)
-            removeAllCardAppearances(card);
-        return card;
+        if(pickedCard === null)
+            pickedCard = firstAvailableCard(lastGameCard);
+        return pickedCard;
     }
 
 
@@ -379,12 +382,28 @@ function SmartComputer() {
             addCard(card);
         },
 
-        doOperation: function(){
+        pickCard: function(){
             operation();
         },
 
         reducePlayer: function(){
             numberOfPlayers = numberOfPlayers - 1;
+        },
+
+        doOperation: function(card) {
+            var promote = card.doOperation();
+            removeAllCardAppearances(card);
+            if (promote === -1)
+                takiMode = card;
+            if (takiMode !== null)
+                promote = takiCheckerFunc();
+            if (playerCards.length === 1)
+                singleCardCounter++;
+            return promote;
+        },
+
+        pullApproval: function (lastCard){
+            return pullApprovalFunc(playerCards, lastCard);
         }
     }
 }
