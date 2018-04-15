@@ -1,4 +1,4 @@
-var player = function (pullApproval, takiChecker, removeCard) {
+var player = function (pullApproval, takiChecker, removeCard, searchCard) {
     var cards = [];
     var averageTimePlayed;
     var turnsPlayed = 0;
@@ -8,6 +8,7 @@ var player = function (pullApproval, takiChecker, removeCard) {
     var pullApprovalFunc = pullApproval;
     var takiCheckerFunc = takiChecker;
     var removeCardFunc = removeCard;
+    var searchCardFunc = searchCard;
 
 
     /*function setCards(playerHtml) {
@@ -87,6 +88,10 @@ var player = function (pullApproval, takiChecker, removeCard) {
 
         pullApproval: function (lastCard){
             pullApprovalFunc(cards, lastCard);
+        },
+
+        getCard: function (id) {
+            searchCard(cards, id);
         }
     };
 }

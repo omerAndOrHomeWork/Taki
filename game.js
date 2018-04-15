@@ -2,8 +2,8 @@ var game = (function() {
     var stock = stock();
     var gameCards = [];
     var turn = 0;
-    var players = [player(pullApproval, takiModeChecker, removeCard),
-        smartComputer(pullApproval, takiModeChecker, removeCard)];
+    var players = [player(pullApproval, takiModeChecker, removeCard, searchCard),
+        smartComputer(pullApproval, takiModeChecker, removeCard, searchCard)];
     var amountOfCardsToTakeFromStock = 1;
     var statistics = new Statistics();
 
@@ -29,14 +29,56 @@ var game = (function() {
             players[i].setCards(stock.getCards(8));
     }
 
-    /*function addEventListener() {
-        document.getElementById("openCards").
-    }*/
+    function addEventListener() {
+        var drop = document.getElementById("openCards");
+        drop.ondrop = function (event) {
+            event.preventDefault();
+            var id = event.dataTransfer.getData("Text");
+            var card = players[turn].getCard(id);
+            if (card !== null) {
+                dropValidation(players[turn], card, drop);
+            }
+            // var text = data.writeSomthing();
+            // event.target.appendChild(document.getElementById(text));
+            // document.getElementById("demo").innerHTML = "The p element was dropped.";
+        };
+    }
 
-    function dropValidation(player, card) {
-        if (player === players[turn]){
-            if (card.doValidation(gameCards.lastIndexOf(Card))) {
+    function addEventListener() {
+        var click =  document.getElementById("stock");
+        drop.onclick = function(event) {
+            event.preventDefault();
+            var id = event.dataTransfer.getData("Text");
+            var card = players[turn].getCard(id);
+            if(card !== null) {
+                dropValidation(players[turn], card, drop);
+            }
+            // var text = data.writeSomthing();
+            // event.target.appendChild(document.getElementById(text));
+            // document.getElementById("demo").innerHTML = "The p element was dropped.";
+        };
+    }
+
+    /* Events fired on the drop target */
+    /*drop.ondragover = function(event) {
+        event.preventDefault();
+        document.getElementById("demo").innerHTML = "The p element is OVER the droptarget.";
+        event.target.style.border = "4px dotted purple";
+    };
+
+    drop.ondrop = function(event) {
+        event.preventDefault();
+        var data = event.dataTransfer.getData("Text");
+        var text = data.writeSomthing();
+        event.target.appendChild(document.getElementById(text));
+        document.getElementById("demo").innerHTML = "The p element was dropped.";
+    };*/
+
+    function dropValidation(player, card, drop) {
+        //if (player === players[turn]){
+            if (card.doValidation(gameCards.lastIndexOf(card))) {
                 var promote = player.doOperation(card);
+                drop.appendChild(card.getHtmlElement());
                 gameCards.push(card);
                 calcAmountCardsToTake(card);
                 updateStatics();
@@ -44,10 +86,12 @@ var game = (function() {
                     changeTurn(promote);
                 computerOperation();
             }
+       /*
             return true;
         }
         else
             return false;
+            */
     }
 
 
@@ -55,6 +99,7 @@ var game = (function() {
         if(player === players[turn] && player.pullApproval()){
             player.takiMode = null;
             player.pullCardFromStock(stock.getCards(amountOfCardsToTakeFromStock));
+            //TODO: take the cards from the stock. change the cssClass, cut the cards elements from the stock to the player cards element
             gameCards.lastIndexOf(Card).makePassive();
             updateStatistics();
             changeTurn(1);
