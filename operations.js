@@ -124,6 +124,71 @@ var enumCard = (function(){
         enumTypes: Object.freeze({
             STOP: 0, CHANGE_COLOR: 1, PLUS: 2, NUMBER: 3, TAKI: 4,
             SUPER_TAKI: 5, TWO_PLUS: 6
+        }),
+        dives: Object.freeze({
+            PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards", STOCK: "stock"
+        }),
+
+        cssStyle: Object.freeze({
+            OPEN_CARDS: 0, CLOSE_CARDS: 1
         })
     }
 })();
+
+function getUniqueCss(color, type){
+    return color.append(type);
+/*
+var x = Object.freeze({RED: 0, BLUE: 1, GREEN: 2, YELLOW: 3});
+console.log(typeof(Object.keys(x)[0]));
+ */
+}
+
+function getNumberUniqueCss(color, number){
+    return Object.keys(enumCard.enumColor)[color].append(number);
+    /*
+    var x = Object.freeze({RED: 0, BLUE: 1, GREEN: 2, YELLOW: 3});
+    console.log(typeof(Object.keys(x)[0]));
+     */
+}
+
+
+
+
+
+/*function addEvents(player, placeHolderName) {
+    placeHolder  =  document.getElementById(placeHolderName);
+    htmlCard = document.createElement("span");
+    htmlCard.className += sign;
+    htmlCard.className += color;
+    placeHolder.appendChild(htmlCard);
+
+    htmlCard.ondragstart = function (event) {
+        if(player.dragValidation(this)) {
+            htmlCard.draggable = true;
+            event.dataTransfer.setData("Text", id);
+        }
+        else
+            htmlCard.draggable = false;
+    };
+    /*
+    span.addEventListener("ondragstart", function(){
+        if(player.dragValidation(this))
+            span.draggable = true;
+    });
+    */
+    /*  span.ondragstart = function (ev) {
+          if(player.dragValidation(this))
+              span.draggable = true;
+      }*/
+
+
+    /*drag.ondragstart = function(event) {
+        event.dataTransfer.setData("Text", event.target.id);
+    };
+
+    drag.ondrag = function(event) {
+        document.getElementById("demo").innerHTML = "The p element is being dragged.";
+    };*/
+    // span.addEventListener("ondragover", function(){
+    //     span.draggable = false;
+    // })}*/

@@ -10,6 +10,7 @@ var smartComputer = function(pullApproval, takiChecker, removeCard, searchCard) 
     var removeCardFunc = removeCard;
     var singleCardCounter = 0;
     var searchCardFunc = searchCard;
+    var cardsCss = enumCard.cssStyle.CLOSE_CARDS;
 
     function insertColor(playerCard) {
         colorsCards[playerCard.color].push(playerCard);
@@ -409,6 +410,10 @@ var smartComputer = function(pullApproval, takiChecker, removeCard, searchCard) 
 
         getCard: function (id) {
             searchCard(playerCards, id);
+        },
+
+        getCss: function () {
+            return cardsCss;
         }
     }
 }

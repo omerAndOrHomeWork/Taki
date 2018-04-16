@@ -104,6 +104,8 @@ var game = (function() {
             updateStatistics();
             changeTurn(1);
             computerOperation();
+
+            card.changeCss(player.getCss());
         }
     }
 
