@@ -1,4 +1,4 @@
-var card = function(color, sign, validation, operation, theId) {
+var card = function(color, sign, validation, operation, theId, theUniqueCard) {
     this.color = color;
     this.sign = sign;
     this.validation = validation;
@@ -6,23 +6,31 @@ var card = function(color, sign, validation, operation, theId) {
     this.active = false;
     var id = theId;
     var htmlCard;
-    var placeHolder;
+    this.uniqueCard = theUniqueCard;
 
-    function addEvents(player, placeHolderName) {
-        placeHolder  =  document.getElementById(placeHolderName);
-        htmlCard = document.createElement("span");
-        htmlCard.className += sign;
-        htmlCard.className += color;
-        placeHolder.appendChild(htmlCard);
 
-        htmlCard.ondragstart = function (event) {
-            if(player.dragValidation(this)) {
-                htmlCard.draggable = true;
-                event.dataTransfer.setData("Text", id);
-            }
-            else
-                htmlCard.draggable = false;
-        };
+    function setCssClasses(){
+
+    }
+
+
+
+    function setEvents(player){
+        //placeHolder = document.getElementById(placeHolderName);
+        //htmlCard = document.createElement("span");
+        //htmlCard.className += sign;
+        //htmlCard.className += color;
+        //htmlCard.className += open;
+
+
+
+        //
+
+
+
+        //placeHolder.appendChild(htmlCard);
+
+
         /*
         span.addEventListener("ondragstart", function(){
             if(player.dragValidation(this))
@@ -74,9 +82,49 @@ var card = function(color, sign, validation, operation, theId) {
             return id;
         },
 
-        getHtmlElement: function () {
+        /*getHtmlElement: function () {
             document.getElementById("cards").removeChild(htmlCard);
             return htmlCard;
+        },*/
+        /*setHtmlParent: function(newParent) {
+            newParent.appendChild(card.getElement);
+        }*/
+
+        setHtmlElement: function(){
+            htmlCard = document.createElement("span");
+            htmlCard.setAttribute("id", id);
+        },
+
+        setParent: function (parentHolder) {
+            document.getElementById(parentHolder).appendChild(htmlCard);
+            //htmlCard.ondragstart = null;
+        },
+
+        setHtmlEvent: function(player) {
+            htmlCard.ondragstart = function (event) {
+                if(player.dragValidation(this)) {
+                    htmlCard.draggable = true;
+                    event.dataTransfer.setData("Text", id);
+                }
+                else
+                    htmlCard.draggable = false;
+            };
+        },
+
+        setCss: function (theUniqueCard) {//red3
+            uniqueCard = theUniqueCard;
+            htmlCard.className += "closeCardCss";
+        },
+
+        changeCss: function (closeCard){
+          if(closeCard) {
+              htmlCard.className += "closeCardCss";
+              htmlCard.className -= uniqueCard;
+
+          }else{
+              htmlCard.className -= "closeCardCss";
+              htmlCard.className += uniqueCard;
+          }
         }
     }
 };

@@ -2,12 +2,16 @@ var stock = function () {
     var cards = [];
     var twoCardsNumber = [1, 3, 4, 5, 6, 7, 8, 9];
     var id = 0;
+    var css;
     function CreateDeck() {
         for(var number = 0; number < twoCardsNumber.length; ++number){
             for (var color = 0; color < enumCard.enumColor.length; ++color) {
+                css = getNumberUniqueCss(Object.keys(enumCard.enumColor)[i], twoCardsNumber[number].toString());
+
                 cards.push(card(enumCard.enumColor[i], enumCard.enumTypes.NUMBER,
-                    numberValidation, numberOperation, id++));
+                    numberValidation, numberOperation, id++, css));
                 cards[cards.length-1].number = twoCardsNumber[number];
+
                 cards.push(card(enumCard.enumColor[i], enumCard.enumTypes.NUMBER,
                     numberValidation, numberOperation, id++));
                 cards[cards.length-1].number = twoCardsNumber[number];
@@ -15,10 +19,13 @@ var stock = function () {
         }
 
         for (color = 0; color < enumCard.enumColor.length; ++color) {
+            css = getNumberUniqueCss(Object.keys(enumCard.enumColor)[i], enumCard.enumTypes.TAKI);
+            cards.push(card(enumCard.enumColor[i], enumCard.enumTypes.TAKI,
+                takiValidation, takiOperation, id++, css));
+
             cards.push(card(enumCard.enumColor[i], enumCard.enumTypes.TAKI,
                 takiValidation, takiOperation, id++));
-            cards.push(card(enumCard.enumColor[i], enumCard.enumTypes.TAKI,
-                takiValidation, takiOperation, id++));
+
             cards.push(card(enumCard.enumColor[i], enumCard.enumTypes.STOP,
                 stopValidation, stopOperation, id++));
             cards.push(card(enumCard.enumColor[i], enumCard.enumTypes.STOP,
