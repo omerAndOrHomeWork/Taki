@@ -9,7 +9,7 @@ var player = function (pullApproval, takiChecker, removeCard, searchCard) {
     var takiCheckerFunc = takiChecker;
     var removeCardFunc = removeCard;
     var searchCardFunc = searchCard;
-
+    var cardsCss = enumCard.cssStyle.OPEN_CARDS;
 
     /*function setCards(playerHtml) {
 
@@ -92,6 +92,10 @@ var player = function (pullApproval, takiChecker, removeCard, searchCard) {
 
         getCard: function (id) {
             searchCard(cards, id);
+        },
+
+        getCss: function () {
+            return cardsCss;
         }
     };
 }
