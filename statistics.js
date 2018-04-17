@@ -1,8 +1,8 @@
-function Statistics(i_amountOfPlayers,i_playersGame) {
+var statistics = function(i_playersGame) {
     var turnsCounter = 0;
     this.playersGame = i_playersGame;
     var singleCardPlayers = []; // if that correct
-    var htmlGameClock = document.getElementById("gameClock");
+    var htmlGameClock = document.getElementsByClassName("gameClock");
     var gameClock = new clock(document.querySelector(htmlGameClock));
     //TODO: take care gameTime
 

@@ -1,9 +1,9 @@
 var player = function () {
     var cards = [];
-    var averageTimePlayed;
+    var averageTimePlayed = 0;
     var turnsPlayed = 0;
     var singleCardCounter = 0;
-    var takiMode;
+    var takiMode = null;
     var currentTurnTime;
     var cardsCss = enumCard.cssStyle.OPEN_CARDS;
 
@@ -55,8 +55,11 @@ var player = function () {
             currentTurnTime += 1;
         },
 
-        setCards: function (cards) {
-            this.cards = cards;
+        setCards: function (theCards) {
+            cards = theCards;
+            for(var i = 0; i < cards.length; ++i){
+                cards[i].setParent(enumCard.dives.PLAYER_CARDS);
+            }
         },
 
         getSingleCardCounter: function(){
