@@ -96,7 +96,7 @@ var game = (function() {
 
     return{
         startGame: function () {
-            stock.setGame();
+            stock.setGame();//
             partition();
             setEventListener();
             changeTurn(0);

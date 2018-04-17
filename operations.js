@@ -126,7 +126,7 @@ var enumCard = (function(){
             SUPER_TAKI: 5, TWO_PLUS: 6, length: 7
         }),
 
-        // enumColor: ["RED", "BLUE", "GREEN", "YELLOW"],
+        // enumColor: ["RED", "BLUE", "GREEN", "YELLOW"],f
         // enumTypes: ["STOP", "CHANGE_COLOR", "PLUS", "NUMBER", "SUPER_TAKI", "TWO_PLUS"],
         dives: Object.freeze({
             PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards", STOCK: "stock",
