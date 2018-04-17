@@ -1,14 +1,10 @@
-var player = function (pullApproval, takiChecker, removeCard, searchCard) {
+var player = function () {
     var cards = [];
     var averageTimePlayed;
     var turnsPlayed = 0;
     var singleCardCounter = 0;
     var takiMode;
     var currentTurnTime;
-    var pullApprovalFunc = pullApproval;
-    var takiCheckerFunc = takiChecker;
-    var removeCardFunc = removeCard;
-    var searchCardFunc = searchCard;
     var cardsCss = enumCard.cssStyle.OPEN_CARDS;
 
     /*function setCards(playerHtml) {
@@ -45,17 +41,17 @@ var player = function (pullApproval, takiChecker, removeCard, searchCard) {
 
     return {
         calculateAVG: function (currentTurnTime) {
-            avrageTimePlayed *= turnsPlayed;
-            avrageTimePlayed += currentTurnTime;
+            averageTimePlayed *= turnsPlayed;
+            averageTimePlayed += currentTurnTime;
             turnsPlayed++;
-            avrageTimePlayed /= turnsPlayed;
+            averageTimePlayed /= turnsPlayed;
         },
 
         startClock: function () {
             currentTurnTime = 0;
         },
 
-        clacCureentTruen: function () {
+        calcCurrentTurn: function () {
             currentTurnTime += 1;
         },
 
@@ -64,12 +60,12 @@ var player = function (pullApproval, takiChecker, removeCard, searchCard) {
         },
 
         doOperation: function (card) {
-            removeCardFunc(cards, card);
+            removeCard(cards, card);
             var promote = card.doOperation();
             if (promote === -1)
                 takiMode = card;
             if (takiMode !== null)
-                promote = takiCheckerFunc();
+                promote = takiModeChecker(cards);
             if (cards.length === 1)
                 singleCardCounter++;
             return promote;
@@ -87,7 +83,7 @@ var player = function (pullApproval, takiChecker, removeCard, searchCard) {
         },
 
         pullApproval: function (lastCard){
-            pullApprovalFunc(cards, lastCard);
+            pullApproval(cards, lastCard);
         },
 
         getCard: function (id) {
@@ -96,6 +92,8 @@ var player = function (pullApproval, takiChecker, removeCard, searchCard) {
 
         getCss: function () {
             return cardsCss;
-        }
+        },
+
+        singleCard: singleCardCounter
     };
-}
+};

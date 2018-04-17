@@ -1,15 +1,15 @@
-var smartComputer = function(pullApproval, takiChecker, removeCard, searchCard) {
+var smartComputer = function() {
     var colorsCards = [[], [], [], []];//sorting in enumColor sort
     var typesCards = [[], [], [], [], [], [], []];//sorting in enumType sort
     var playerCards = [];
     var takiMode = false;
     var numberOfPlayers;
     var lastCardInTaki = null;
-    var pullApprovalFunc = pullApproval;
+   /* var pullApprovalFunc = pullApproval;
     var takiCheckerFunc = takiChecker;
     var removeCardFunc = removeCard;
+    var searchCardFunc = searchCard;*/
     var singleCardCounter = 0;
-    var searchCardFunc = searchCard;
     var cardsCss = enumCard.cssStyle.CLOSE_CARDS;
 
     function insertColor(playerCard) {
@@ -273,9 +273,9 @@ var smartComputer = function(pullApproval, takiChecker, removeCard, searchCard) 
 
     function removeAllCardAppearances(card) {
         if(card.color !== null)
-            removeCardFunc(colorsCards[card.color], card);
-        removeCardFunc(typesCards[card.type], card);
-        removeCardFunc(playerCards, card);
+            removeCard(colorsCards[card.color], card);
+        removeCard(typesCards[card.type], card);
+        removeCard(playerCards, card);
     }
 
     function firstAvailableCard(lastGameCard) {
@@ -398,14 +398,14 @@ var smartComputer = function(pullApproval, takiChecker, removeCard, searchCard) 
             if (promote === -1)
                 takiMode = card;
             if (takiMode !== null)
-                promote = takiCheckerFunc();
+                promote = takiModeChecker(playerCards);
             if (playerCards.length === 1)
                 singleCardCounter++;
             return promote;
         },
 
         pullApproval: function (lastCard){
-            return pullApprovalFunc(playerCards, lastCard);
+            return pullApproval(playerCards, lastCard);
         },
 
         getCard: function (id) {
