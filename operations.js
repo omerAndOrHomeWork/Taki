@@ -137,6 +137,7 @@ var enumCard = (function(){
 
 function getUniqueCss(color, type){
     return color.concat(type);
+
 /*
 var x = Object.freeze({RED: 0, BLUE: 1, GREEN: 2, YELLOW: 3});
 console.log(typeof(Object.keys(x)[0]));
