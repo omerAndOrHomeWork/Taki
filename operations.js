@@ -120,10 +120,10 @@ function searchCard(cards, id) {
 
 var enumCard = (function(){
     return {
-        enumColor: Object.freeze({RED: 0, BLUE: 1, GREEN: 2, YELLOW: 3, length: 4}),
+        enumColor: Object.freeze({RED: 0, BLUE: 1, GREEN: 2, YELLOW: 3}),
         enumTypes: Object.freeze({
             STOP: 0, CHANGE_COLOR: 1, PLUS: 2, NUMBER: 3, TAKI: 4,
-            SUPER_TAKI: 5, TWO_PLUS: 6, length: 7
+            SUPER_TAKI: 5, TWO_PLUS: 6
         }),
 
         // enumColor: ["RED", "BLUE", "GREEN", "YELLOW"],f

@@ -36,6 +36,9 @@ var game = (function() {
             if (card !== null) {
                 dropValidation(id, card, drop);
             }
+            // var text = data.writeSomthing();
+            // event.target.appendChild(document.getElementById(text));
+            // document.getElementById("demo").innerHTML = "The p element was dropped.";
         };
     }
 
@@ -54,6 +57,20 @@ var game = (function() {
         };
     }
 
+    /* Events fired on the drop target */
+    /*drop.ondragover = function(event) {
+        event.preventDefault();
+        document.getElementById("demo").innerHTML = "The p element is OVER the droptarget.";
+        event.target.style.border = "4px dotted purple";
+    };
+
+    drop.ondrop = function(event) {
+        event.preventDefault();
+        var data = event.dataTransfer.getData("Text");
+        var text = data.writeSomthing();
+        event.target.appendChild(document.getElementById(text));
+        document.getElementById("demo").innerHTML = "The p element was dropped.";
+    };*/
 
     function dropValidation(id, card, drop) {
         if (card.doValidation(gameCards.lastIndexOf(card))) {
@@ -84,7 +101,7 @@ var game = (function() {
     }
 
     function computerOperation(){
-        if(players[turn] instanceof smartComputer){
+        if(players[turn] === Computer){
             var card = players[turn].pickCard(gameCards.lastIndexOf(card));
             if(card == null)
                 pullCardValidation(players[turn]);
@@ -94,13 +111,24 @@ var game = (function() {
         }
     }
 
+    // function setPlayerInPage(player) {
+    //     var players = document.getElementById("players");
+    //     players.children.
+    //         ///players.Add(<li>player</li>);
+    // }
+    //
+    // function makePlayers() {
+    //     players.forEach((player) => {
+    //         setPlayerInPage(player);
+    //     });
+    // }
+
     return{
         startGame: function () {
             stock.setGame();//
             partition();
             setEventListener();
             changeTurn(0);
-            computerOperation();
         }
     }
 
