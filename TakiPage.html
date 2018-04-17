@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Taki Game</title>
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/cards.css">
     <script src="card.js"></script>
     <!--<script src="clock.js"></script>-->
     <script src="operations.js"></script>
@@ -14,7 +15,10 @@
     <script src="stock.js"></script>
     <script src="game.js"></script>
     <script>
-        game.startGame();
+        //game.startGame();
+        function validator() {
+            game.startGame();
+        }
     </script>
 </head>
 <body>
@@ -22,7 +26,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-2">
-            <!--<div><button class="btn btn-primary glyphicon-ok" onclick="validator()">Enter Game</button></div>-->
+            <div><button class="btn btn-primary glyphicon-ok" onclick="validator()">Enter Game</button></div>
             <div id = "sidebar">
                 <h4>Statistics</h4>
                 <div class="clearfix">
