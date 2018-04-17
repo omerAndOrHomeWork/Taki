@@ -59,6 +59,14 @@ var player = function () {
             this.cards = cards;
         },
 
+        getSingleCardCounter: function(){
+            return singleCardCounter;
+        },
+
+        getTurnsPlayed: function(){
+          return turnsPlayed;
+        },
+
         doOperation: function (card) {
             removeCard(cards, card);
             var promote = card.doOperation();

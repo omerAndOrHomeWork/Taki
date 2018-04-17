@@ -1,16 +1,31 @@
-function Statistics() {
-    var turnsCounter;
-    var timeFromStartGame;
+function Statistics(i_amountOfPlayers,i_playersGame) {
+    var turnsCounter = 0;
+    this.playersGame = i_playersGame;
+    var singleCardPlayers = []; // if that correct
+    var htmlGameClock = document.getElementById("gameClock");
+    var gameClock = new clock(document.querySelector(htmlGameClock));
     //TODO: take care gameTime
 
+    var enumColor = Object.freeze({PLAYER1: 0, COMPUTER: 1}); //help for extendable
+    gameClock.run(); // the clock update in intervals
+
+    function showPlayerStatistics(playerKind){
+        for(var i = 0; i < playersGame.length; ++i) {
+            console.log(object.keys(enumColor)[playerKind] + ":" + "<br />");
+            console.log("Amount of turn played: " + playersGame[playerKind].getTurnsPlayed() + "<br />");
+            console.log("Amount of times single card in game: " + playersGame[playerKind].getSingleCardCounter() + "<br /> + \"<br />");
+        }
+    }
+
     return{
-        updateStasics: function (players) {
+        updateStatistics: function (player,playerKind) {
             turnsCounter++;
-            //TODO: GetAVG in loop
-            //TODO: GetSingleCardsInLoop
-            for(var i = 0; i < players.length; ++i){
-                players[i].singleCard
-            }
+            singleCardPlayers[playerKind] = player.getSingleCardCounter();
+            console.log("Amount of turn played total :" + turnsCounter + "<br />");
+            showPlayerStatistics(playerKind);
         }
     };
 }
+
+//TODO: GetAVG in loop
+//TODO: GetSingleCardsInLoop
