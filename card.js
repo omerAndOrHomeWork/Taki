@@ -1,12 +1,12 @@
-var card = function(color, sign, validation, operation, theId, theUniqueCard) {
-    this.color = color;
-    this.sign = sign;
+function card(theColor, theSign, validation, operation, theId) {
+    this.color = theColor;
+    this.sign = theSign;
     this.validation = validation;
     this.operate = operation;
     this.active = false;
     var id = theId;
     var htmlCard;
-    this.uniqueCard = theUniqueCard;
+    this.uniqueCard;
 
 
     function setCssClasses(){
@@ -55,6 +55,10 @@ var card = function(color, sign, validation, operation, theId, theUniqueCard) {
         // });
     }
 
+    function setHtmlElement(){
+        htmlCard = document.createElement("span");
+        htmlCard.setAttribute("id", id);
+    }
 
 /*var ul = document.getElementById("list");
   var li = document.createElement("li");
@@ -90,11 +94,6 @@ var card = function(color, sign, validation, operation, theId, theUniqueCard) {
             newParent.appendChild(card.getElement);
         }*/
 
-        setHtmlElement: function(){
-            htmlCard = document.createElement("span");
-            htmlCard.setAttribute("id", id);
-        },
-
         setParent: function (parentHolder) {
             document.getElementById(parentHolder).appendChild(htmlCard);
             //htmlCard.ondragstart = null;
@@ -112,8 +111,10 @@ var card = function(color, sign, validation, operation, theId, theUniqueCard) {
         },
 
         setCss: function (theUniqueCard) {//red3
-            uniqueCard = theUniqueCard;
-            htmlCard.className += "closeCardCss";
+            this.uniqueCard = theUniqueCard;
+            setHtmlElement();
+            htmlCard.className += theUniqueCard;
+            //htmlCard.className += "closeCardCss";
         },
 
         changeCss: function (closeCard){
@@ -125,9 +126,16 @@ var card = function(color, sign, validation, operation, theId, theUniqueCard) {
               htmlCard.className -= "closeCardCss";
               htmlCard.className += uniqueCard;
           }
+        },
+
+        getSign: function(){
+            return this.sign;
+        },
+        getColor: function () {
+            return this.color;
         }
     }
-};
+}
 
 /*
 function Card() {

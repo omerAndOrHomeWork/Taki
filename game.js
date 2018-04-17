@@ -1,9 +1,9 @@
 var game = (function() {
     var gameCards = [];
     var turn = 0;
-    var players = [player(), smartComputer()];
+    var players = [player(), player()];
     var amountOfCardsToTakeFromStock = 1;
-    var statistics = new Statistics();
+    // var statistics = new Statistics();
 
     function changeTurn(promote) {
         players[turn].calculateAVG(); //TODO calculateAVG
@@ -125,7 +125,7 @@ var game = (function() {
 
     return{
         startGame: function () {
-            stock.setGame();//
+            stock.setGame();
             partition();
             setEventListener();
             changeTurn(0);

@@ -55,8 +55,11 @@ var player = function () {
             currentTurnTime += 1;
         },
 
-        setCards: function (cards) {
-            this.cards = cards;
+        setCards: function (theCards) {
+            cards = theCards;
+            for(var i = 0; i < cards.length; ++i){
+                cards[i].setParent(enumCard.dives.PLAYER_CARDS);
+            }
         },
 
         getSingleCardCounter: function(){
