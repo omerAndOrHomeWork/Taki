@@ -3,7 +3,7 @@ var stock = (function () {
     var twoCardsNumber = [1, 3, 4, 5, 6, 7, 8, 9];
     var id = 0;
     var css;
-    function CreateDeck() {
+    function createDeck() {
         for(var number = 0; number < twoCardsNumber.length; ++number){
             for (var color = 0; color < enumCard.enumColor.length; ++color) {
                 css = getUniqueCss(Object.keys(enumCard.enumColor)[color], twoCardsNumber[number].toString());
@@ -69,7 +69,7 @@ var stock = (function () {
     }
     ////*************************************************
     function randomSort() {
-        CreateDeck();
+        createDeck();
         shuffleDeck(getRandomInt(10, 25));//random number (the numbers not very important),amount of times to make shuffle
     }
 
@@ -82,6 +82,11 @@ var stock = (function () {
         reShuffle: function() {
             randomSort();
             return cards;
+        },
+
+        setGame: function () {
+            createDeck();
+            shuffleDeck(getRandomInt(10, 25));//random number (the numbers not very important),amount of times to make shuffle
         }
     };
 })();
