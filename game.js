@@ -131,13 +131,5 @@ var game = (function() {
         }
     }
 
-    return{
-        startGame: function () {
-            partition();
-            setEventListener();
-            changeTurn(0);
-        }
-    }
-
 
 })();
