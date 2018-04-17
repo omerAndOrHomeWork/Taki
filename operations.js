@@ -126,7 +126,8 @@ var enumCard = (function(){
             SUPER_TAKI: 5, TWO_PLUS: 6
         }),
         dives: Object.freeze({
-            PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards", STOCK: "stock"
+            PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards", STOCK: "stock",
+            OPEN_CARDS: "openCards"
         }),
 
         cssStyle: Object.freeze({
@@ -136,20 +137,7 @@ var enumCard = (function(){
 })();
 
 function getUniqueCss(color, type){
-    return color.concat(type);
-
-/*
-var x = Object.freeze({RED: 0, BLUE: 1, GREEN: 2, YELLOW: 3});
-console.log(typeof(Object.keys(x)[0]));
- */
-}
-
-function getNumberUniqueCss(color, number){
-    return Object.keys(enumCard.enumColor)[color].append(number);
-    /*
-    var x = Object.freeze({RED: 0, BLUE: 1, GREEN: 2, YELLOW: 3});
-    console.log(typeof(Object.keys(x)[0]));
-     */
+    return color.concat("_").concat(type);
 }
 
 
