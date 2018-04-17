@@ -7,7 +7,7 @@ var stock = (function () {
         for(var number = 0; number < twoCardsNumber.length; ++number){
             for (var color = 0; color < enumCard.enumColor.length; ++color) {
                 css = getUniqueCss(Object.keys(enumCard.enumColor)[color], twoCardsNumber[number].toString());
-
+//
                 cards.push(card(enumCard.enumColor[color], enumCard.enumTypes.NUMBER,
                     numberValidation, numberOperation, id++, css));
                 cards[cards.length-1].number = twoCardsNumber[number];
