@@ -1,270 +1,113 @@
-#RED_1{
- background: #cccccc url("../Images/red/red_1.png");
- font-weight: bold;
- font-style: italic;
+.RED1{
+
 }
-#RED_3{
- background: #cccccc url("../Images/red/red_3.png");
- font-weight: bold;
- font-style: italic;
+.RED3{
+
 }
-#RED_4{
- background: #cccccc url("../Images/red/red_4.png");
- font-weight: bold;
- font-style: italic;
+.RED4{
+
  }
-#RED_5{
- background: #cccccc url("../Images/red/red_5.png");
- font-weight: bold;
- font-style: italic;
+.RED5{
+
 }
-#RED_6{
- background: #cccccc url("../Images/red/red_6.png");
- font-weight: bold;
- font-style: italic;
+.RED6{
+
 }
-#RED_7{
- background: #cccccc url("../Images/red/red_7.png");
- font-weight: bold;
- font-style: italic;
+.RED7{
+
 }
-#RED_8{
- background: #cccccc url("../Images/red/red_8.png");
- font-weight: bold;
- font-style: italic;
+.RED8{
+
 }
-#RED_9{
- background: #cccccc url("../Images/red/red_9.png");
- font-weight: bold;
- font-style: italic;
+.RED9{
+
 }
-#RED_CHANGE_COLOR{
- background: #cccccc url("../Images/red/red_color_changer.png");
- font-weight: bold;
- font-style: italic;
+.BLUE1{
+
 }
-#BLUE_1{
- background: #cccccc url("../Images/blue/blue_1.png");
- font-weight: bold;
- font-style: italic;
+.BLUE3{
+
 }
-#BLUE_3{
- background: #cccccc url("../Images/blue/blue_3.png");
- font-weight: bold;
- font-style: italic;
+.BLUE4{
+
 }
-#BLUE_4{
- background: #cccccc url("../Images/blue/blue_4.png");
- font-weight: bold;
- font-style: italic;
+.BLUE5{
+
 }
-#BLUE_5{
- background: #cccccc url("../Images/blue/blue_5.png");
- font-weight: bold;
- font-style: italic;
+.BLUE6{
+
 }
-#BLUE_6{
- background: #cccccc url("../Images/blue/blue_6.png");
- font-weight: bold;
- font-style: italic;
+.BLUE7{
+
 }
-#BLUE_7{
- background: #cccccc url("../Images/blue/blue_7.png");
- font-weight: bold;
- font-style: italic;
+.BLUE8{
+
 }
-#BLUE_8{
- background: #cccccc url("../Images/blue/blue_8.png");
- font-weight: bold;
- font-style: italic;
+.BLUE9{
+
 }
-#BLUE_9{
- background: #cccccc url("../Images/blue/blue_9.png");
- font-weight: bold;
- font-style: italic;
+.GREEN1{
+
 }
-#BLUE_CHANGE_COLOR{
- background: #cccccc url("../Images/blue/blue_color_changer.png");
- font-weight: bold;
- font-style: italic;
+.GREEN3{
+
 }
-#GREEN_1{
- background: #cccccc url("../Images/green/green_1.png");
- font-weight: bold;
- font-style: italic;
+.GREEN4{
+
 }
-#GREEN_3{
- background: #cccccc url("../Images/green/green_3.png");
- font-weight: bold;
- font-style: italic;
+.GREEN5{
+
 }
-#GREEN_4{
- background: #cccccc url("../Images/green/green_4.png");
- font-weight: bold;
- font-style: italic;
+.GREEN6{
+
 }
-#GREEN_5{
- background: #cccccc url("../Images/green/green_5.png");
- font-weight: bold;
- font-style: italic;
+.GREEN7{
+
 }
-#GREEN_6{
- background: #cccccc url("../Images/green/green_6.png");
- font-weight: bold;
- font-style: italic;
+.GREEN8{
+
 }
-#GREEN_7{
- background: #cccccc url("../Images/green/green_7.png");
- font-weight: bold;
- font-style: italic;
+.GREEN9{
+
 }
-#GREEN_8{
- background: #cccccc url("../Images/green/green_8.png");
- font-weight: bold;
- font-style: italic;
+.YELLOW1{
+
 }
-#GREEN_9{
- background: #cccccc url("../Images/green/green_9.png");
- font-weight: bold;
- font-style: italic;
+.YELLOW3{
+
 }
-#GREEN_CHANGE_COLOR{
- background: #cccccc url("../Images/green/green_color_changer.png");
- font-weight: bold;
- font-style: italic;
+.YELLOW4{
+
 }
-#YELLOW_1{
- background: #cccccc url("../Images/yellow/yellow_1.png");
- font-weight: bold;
- font-style: italic;
+.YELLOW5{
+
 }
-#YELLOW_3{
- background: #cccccc url("../Images/yellow/yellow_3.png");
- font-weight: bold;
- font-style: italic;
+.YELLOW6{
+
 }
-#YELLOW_4{
- background: #cccccc url("../Images/yellow/yellow_4.png");
- font-weight: bold;
- font-style: italic;
+.YELLOW7{
+
 }
-#YELLOW_5{
- background: #cccccc url("../Images/yellow/yellow_5.png");
- font-weight: bold;
- font-style: italic;
-}
-#YELLOW_6{
- background: #cccccc url("../Images/yellow/yellow_6.png");
- font-weight: bold;
- font-style: italic;
-}
-#YELLOW_7{
- background: #cccccc url("../Images/yellow/yellow_7.png");
- font-weight: bold;
- font-style: italic;
-}
-#YELLOW_8{
+.YELLOW8{
  background: #cccccc url("../Images/yellow/yellow_8.png");
  font-weight: bold;
  font-style: italic;
 }
-.YELLOW_9{
- background: #cccccc url("../Images/yellow/yellow_9.png");
- font-weight: bold;
- font-style: italic;
+.YELLOW9{
+
 }
-#YELLOW_CHANGE_COLOR{
- background: #cccccc url("../Images/yellow/yellow_color_changer.png");
- font-weight: bold;
- font-style: italic;
+.REDTAKI{
+
 }
-#RED_TAKI{
- background: #cccccc url("../Images/red/red_taki.png");
- font-weight: bold;
- font-style: italic;
+.BLUETAKI{
+
 }
-#BLUE_TAKI{
- background: #cccccc url("../Images/blue/blue_taki.png");
- font-weight: bold;
- font-style: italic;
+.BLUETAKI{
+
 }
-#GREEN_TAKI{
- background: #cccccc url("../Images/green/green_taki.png");
- font-weight: bold;
- font-style: italic;
+.GREENTAKI{
+
 }
-#YELLOW_TAKI{
- background: #cccccc url("../Images/yellow/yellow_taki.png");
- font-weight: bold;
- font-style: italic;
-}
-#RED_STOP{
- background: #cccccc url("../Images/red/red_stop.png");
- font-weight: bold;
- font-style: italic;
-}
-#BLUE_STOP{
- background: #cccccc url("../Images/blue/blue_stop.png");
- font-weight: bold;
- font-style: italic;
-}
-#GREEN_STOP{
- background: #cccccc url("../Images/green/green_stop.png");
- font-weight: bold;
- font-style: italic;
-}
-#YELLOW_STOP{
- background: #cccccc url("../Images/yellow/yellow_stop.png");
- font-weight: bold;
- font-style: italic;
-}
-#RED_TWO_PLUS{
- background: #cccccc url("../Images/red/red_2.png");
- font-weight: bold;
- font-style: italic;
-}
-#BLUE_TWO_PLUS{
- background: #cccccc url("../Images/blue/blue_2.png");
- font-weight: bold;
- font-style: italic;
-}
-#GREEN_TWO_PLUS{
- background: #cccccc url("../Images/green/green_2.png");
- font-weight: bold;
- font-style: italic;
-}
-#YELLOW_TWO_PLUS{
- background: #cccccc url("../Images/yellow/yellow_2.png");
- font-weight: bold;
- font-style: italic;
-}
-#RED_PLUS{
- background: #cccccc url("../Images/red/red_plus.png");
- font-weight: bold;
- font-style: italic;
-}
-#BLUE_PLUS{
- background: #cccccc url("../Images/blue/blue_plus.png");
- font-weight: bold;
- font-style: italic;
-}
-#GREEN_PLUS{
- background: #cccccc url("../Images/green/green_plus.png");
- font-weight: bold;
- font-style: italic;
-}
-#YELLOW_PLUS{
- background: #cccccc url("../Images/yellow/yellow_plus.png");
- font-weight: bold;
- font-style: italic;
-}
-#CHANGE_COLOR{
- background: #cccccc url("../Images/other/select_change_color.png");
- font-weight: bold;
- font-style: italic;
-}
-#SUPER_TAKI{
- background: #cccccc url("../Images/other/select_super_taki.png");
- font-weight: bold;
- font-style: italic;
+.YELLOWTAKI{
+
 }
