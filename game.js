@@ -9,7 +9,7 @@ var game = (function() {
         players[turn].calculateAVG();
         turn = (turn + promote) % players.length;
         players[turn].startClock();
-        setInterval(player.calcCurrentTurn(),1000);
+        setInterval(players[turn].calcCurrentTurn(),1000);
     }
 
     function calcAmountCardsToTake(card){
