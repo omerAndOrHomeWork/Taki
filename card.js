@@ -1,4 +1,4 @@
-function card(theColor, theSign, validation, operation, theId) {
+var card = function(theColor, theSign, validation, operation, theId) {
     this.color = theColor;
     this.sign = theSign;
     this.validation = validation;
@@ -6,7 +6,8 @@ function card(theColor, theSign, validation, operation, theId) {
     this.active = false;
     var id = theId;
     var htmlCard;
-    this.uniqueCard;
+    var uniqueCard;
+
 
 
     function setCssClasses(){
@@ -111,7 +112,7 @@ function card(theColor, theSign, validation, operation, theId) {
         },
 
         setCss: function (theUniqueCard) {//red3
-            this.uniqueCard = theUniqueCard;
+            uniqueCard = theUniqueCard;
             setHtmlElement();
             htmlCard.className += theUniqueCard;
             //htmlCard.className += "closeCardCss";
@@ -135,73 +136,4 @@ function card(theColor, theSign, validation, operation, theId) {
             return this.color;
         }
     }
-}
-
-/*
-function Card() {
-    return{
-        enumColor: Object.freeze({RED:0,BLUE:1, GREEN:2, YELLOW:3}),
-
-        enumTypes: Object.freeze({STOP:0, CHANGE_COLOR:1, PLUS:2, NUMBER:3, TAKI:4,
-            SUPER_TAKI:5, TWO_PLUS:6})
-    }
-}
-*/
-
-/*function Card(color, sign, validation, operation, active) {
-    this.color = color;
-    this.sign = sign;
-    this.validation = validation;
-    this.operate = operation;
-    this.active = active;
-
-    /!*
-    * dragvalidation
-    * dropvalidation
-    * operation
-    *    validation
-    *
-    * *!/
-
-/!*
-    var setColor = function (color)
-    {
-        this.color = color;
-    }
-
-    var setSign = function (sign)
-    {
-        this.sign = sign;
-    }
-*!/
-
-    return{
-        enumColor: Object.freeze({RED:0,BLUE:1, GREEN:2, YELLOW:3}),
-
-        enumTypes: Object.freeze({STOP:0, CHANGE_COLOR:1, PLUS:2, NUMBER:3, TAKI:4,
-            SUPER_TAKI:5, TWO_PLUS:6}),
-
-        doValidation: validation,
-
-        doOperation: operation,
-
-        makePassive: function () {
-            active = false;
-        },
-
-        isActive: this.active
-    }
-}*/
-
-/*function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor;
-    ctor.prototype = Object.create(superCtor.prototype, {
-        constructor: {
-            value: ctor,
-            enumerable: false,
-            writable: true,
-            configurable: true
-        }
-    });
-};*/
-
+};

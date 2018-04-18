@@ -10,12 +10,12 @@ var stock = (function () {
             for (var color = 0; color < colorNumber.length; ++color) {
                 css = getUniqueCss(Object.keys(enumCard.enumColor)[color], twoCardsNumber[number].toString());
 
-                cards.push(new card(colorNumber[color], enumCard.enumTypes.NUMBER,
+                cards.push(card(colorNumber[color], enumCard.enumTypes.NUMBER,
                     numberValidation, numberOperation, id++));
                 cards[cards.length-1].number = twoCardsNumber[number];
                 cards[cards.length-1].setCss(css);
-                /*console.log(cards[number + color].color);
-                console.log(cards[number + color].sign);*/
+                console.log(cards[number + color].color);
+                console.log(cards[number + color].sign);
                 cards.push(new card(colorNumber[color], enumCard.enumTypes.NUMBER,
                     numberValidation, numberOperation, id++));
                 cards[cards.length-1].number = twoCardsNumber[number];
