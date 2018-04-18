@@ -6,9 +6,10 @@ var game = (function() {
     // var statistics = new Statistics();
 
     function changeTurn(promote) {
-        players[turn].calculateAVG(); //TODO calculateAVG
+        players[turn].calculateAVG();
         turn = (turn + promote) % players.length;
-        players[turn].startClock(); //TODO startClock
+        players[turn].startClock();
+        setInterval(player.calcCurrentTurn(),1000);
     }
 
     function calcAmountCardsToTake(card){

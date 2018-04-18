@@ -1,9 +1,9 @@
 var player = function () {
     var cards = [];
-    var averageTimePlayed;
+    var averageTimePlayed = 0;
     var turnsPlayed = 0;
     var singleCardCounter = 0;
-    var takiMode;
+    var takiMode = null;
     var currentTurnTime;
     var cardsCss = enumCard.cssStyle.OPEN_CARDS;
 
