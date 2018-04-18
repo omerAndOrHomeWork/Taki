@@ -1,7 +1,7 @@
 var game = (function() {
     var gameCards = [];
     var turn = 0;
-    var players = [player(), player()]; //why?
+    var players = [player(), smartComputer()];
     var gameStatistics = new statistics(players);
     var amountOfCardsToTakeFromStock = 1;
 
