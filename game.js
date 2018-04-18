@@ -1,6 +1,7 @@
 var game = (function() {
     var gameCards = [];
     var turn = 0;
+    var cssID=0;
     var players = [player(), player()];
     var amountOfCardsToTakeFromStock = 1;
     // var statistics = new Statistics();
@@ -25,7 +26,8 @@ var game = (function() {
     function partition() {
         gameCards.push(stock.getCards(1));
         for(var i=0; i < players.length; ++i)
-            players[i].setCards(stock.getCards(8));
+          //  players[i].setCssIDPlayer(cssID);
+            players[i].setCards(stock.getCards(8),players.length);
     }
 
     function setEventListener() {

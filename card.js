@@ -57,7 +57,7 @@ var card = function(theColor, theSign, validation, operation, theId) {
     }
 
     function setHtmlElement(){
-        htmlCard = document.createElement("span");
+        htmlCard = document.createElement("div");
         htmlCard.setAttribute("id", id);
     }
 

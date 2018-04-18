@@ -6,6 +6,7 @@ var player = function () {
     var takiMode = null;
     var currentTurnTime;
     var cardsCss = enumCard.cssStyle.OPEN_CARDS;
+   // var htmlPlayer = document.getElementsByClassName("player");
 
     /*function setCards(playerHtml) {
 
@@ -46,7 +47,11 @@ var player = function () {
             turnsPlayed++;
             averageTimePlayed /= turnsPlayed;
         },
-
+/*
+        setCssIDPlayer: function(cssID){
+            htmlPlayer.id += Object.keys(enumCard.enumPlayer)[cssID];
+        },
+*/
         startClock: function () {
             currentTurnTime = 0;
         },
