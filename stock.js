@@ -14,8 +14,8 @@ var stock = (function () {
                     numberValidation, numberOperation, id++));
                 cards[cards.length-1].number = twoCardsNumber[number];
                 cards[cards.length-1].setCss(css);
-                console.log(cards[number + color].color);
-                console.log(cards[number + color].sign);
+                console.log(cards[number + color].getColor());
+                console.log(cards[number + color].getSign());
                 cards.push(new card(colorNumber[color], enumCard.enumTypes.NUMBER,
                     numberValidation, numberOperation, id++));
                 cards[cards.length-1].number = twoCardsNumber[number];

@@ -64,6 +64,7 @@ var player = function () {
             cards = theCards;
             for(var i = 0; i < cards.length; ++i){
                 cards[i].setParent(enumCard.dives.PLAYER_CARDS);
+                cards[i].changeCss(true);
             }
         },
 
@@ -87,8 +88,8 @@ var player = function () {
             return promote;
         },
 
-        pullCardFromStock: function (card) {
-            player.getCards.push(card);
+        pullCardFromStock: function (cardsToSet) {
+            setCards(cards, cardsToSet);
         },
 
         //optional that player can drag his cards only in his turn
@@ -110,6 +111,10 @@ var player = function () {
             return cardsCss;
         },
 
-        singleCard: singleCardCounter
+        singleCard: singleCardCounter,
+
+        isComputer: function () {
+            return false;
+        }
     };
 };
