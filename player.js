@@ -65,6 +65,7 @@ var player = function () {
             for(var i = 0; i < cards.length; ++i){
                 cards[i].setParent(enumCard.dives.PLAYER_CARDS);
                 cards[i].changeCss(true);
+                cards[i].setHtmlEvent(this);
             }
         },
 

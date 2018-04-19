@@ -112,7 +112,7 @@ function removeCard(cards, card) {
 function searchCard(cards, id) {
     for (var i = 0; i < cards.length; ++i) {
         if (cards[i].getId() === id) {
-            return card;
+            return cards[i];
         }
     }
     return null;

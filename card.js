@@ -41,12 +41,14 @@ var card = function(theColor, theSign, validation, operation, theId) {
 
         setHtmlEvent: function(player) {
             htmlCard.ondragstart = function (event) {
-                if(player.dragValidation(this)) {
-                    htmlCard.draggable = true;
-                    event.dataTransfer.setData("Text", id);
-                }
-                else
-                    htmlCard.draggable = false;
+                htmlCard.draggable = true;
+                event.dataTransfer.setData("Text", id);
+                // if(player.dragValidation(player.getCard(id))) {
+                //     htmlCard.draggable = true;
+                //     event.dataTransfer.setData("Text", id);
+                // }
+                // else
+                //     htmlCard.draggable = false;
             };
         },
 
