@@ -125,6 +125,7 @@ var enumCard = (function(){
             STOP: 0, CHANGE_COLOR: 1, PLUS: 2, NUMBER: 3, TAKI: 4,
             SUPER_TAKI: 5, TWO_PLUS: 6
         }),
+        enumPlayer: Object.freeze({PLAYER1: 0, COMPUTER: 1}), //help for extendable
 
         // enumColor: ["RED", "BLUE", "GREEN", "YELLOW"]
         // enumTypes: ["STOP", "CHANGE_COLOR", "PLUS", "NUMBER", "SUPER_TAKI", "TWO_PLUS"],
@@ -139,8 +140,8 @@ var enumCard = (function(){
     }
 })();
 
-function getUniqueCss(color, type){
-    return color.concat("_").concat(type);
+function getUniqueCss(color,type,separator){
+    return color.concat(separator).concat(type);
 }
 
 

@@ -6,7 +6,6 @@ var statistics = function(i_playersGame) {
     var gameClock = new clock(document.querySelector(htmlGameClock));
     //TODO: take care gameTime
 
-    var enumColor = Object.freeze({PLAYER1: 0, COMPUTER: 1}); //help for extendable
     gameClock.run(); // the clock update in intervals
 
     function showPlayerStatistics(playerKind){
