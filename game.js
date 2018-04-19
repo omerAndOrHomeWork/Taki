@@ -2,15 +2,15 @@ var game = (function() {
     var gameCards = [];
     var turn = 0;
     var cssID=0;
-    var players = [player(), player()];
+    var players = [player(), smartComputer()];
     var amountOfCardsToTakeFromStock = 1;
     // var statistics = new Statistics();
 
     function changeTurn(promote) {
-        players[turn].calculateAVG();
+        //players[turn].calculateAVG();
         turn = (turn + promote) % players.length;
-        players[turn].startClock();
-        setInterval(players[turn].calcCurrentTurn(),1000);
+        //players[turn].startClock();
+        //setInterval(players[turn].calcCurrentTurn(),1000);
     }
 
     function calcAmountCardsToTake(card){
@@ -24,10 +24,11 @@ var game = (function() {
     }
 
     function partition() {
-        gameCards.push(stock.getCards(1));
+        setCards(gameCards, stock.getCards(1));
+        gameCards[0].setParent(enumCard.dives.OPEN_CARDS);
         for(var i=0; i < players.length; ++i)
           //  players[i].setCssIDPlayer(cssID);
-            players[i].setCards(stock.getCards(8),players.length);
+            players[i].setCards(stock.getCards(8), players.length);
     }
 
     function setEventListener() {
@@ -39,9 +40,6 @@ var game = (function() {
             if (card !== null) {
                 dropValidation(id, card, drop);
             }
-            // var text = data.writeSomthing();
-            // event.target.appendChild(document.getElementById(text));
-            // document.getElementById("demo").innerHTML = "The p element was dropped.";
         };
     }
 
@@ -54,9 +52,6 @@ var game = (function() {
             if(card !== null) {
                 dropValidation(players[turn], card, drop);
             }
-            // var text = data.writeSomthing();
-            // event.target.appendChild(document.getElementById(text));
-            // document.getElementById("demo").innerHTML = "The p element was dropped.";
         };
     }
 
@@ -104,8 +99,8 @@ var game = (function() {
     }
 
     function computerOperation(){
-        if(players[turn] === Computer){
-            var card = players[turn].pickCard(gameCards.lastIndexOf(card));
+        if(players[turn].isComputer()){
+            var card = players[turn].pickCard(gameCards[gameCards.length - 1]);
             if(card == null)
                 pullCardValidation(players[turn]);
             else {
@@ -131,7 +126,8 @@ var game = (function() {
             stock.setGame();
             partition();
             setEventListener();
-            changeTurn(0);
+            changeTurn(1);
+            computerOperation();
         }
     }
 

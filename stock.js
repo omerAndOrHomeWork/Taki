@@ -4,8 +4,14 @@ var stock = (function () {
     var colorNumber = [enumCard.enumColor.RED, enumCard.enumColor.BLUE,
         enumCard.enumColor.GREEN, enumCard.enumColor.YELLOW];
     var id = 0;
+    var htmlID = "stockCards"
     var css;
+    var htmlStock;
+
     function createDeck() {
+        htmlStock = document.createElement("div");
+        htmlStock.setAttribute("id", htmlID);
+        document.getElementById(enumCard.dives.STOCK).appendChild(htmlStock);
         for(var number = 0; number < twoCardsNumber.length; ++number){
             for (var color = 0; color < colorNumber.length; ++color) {
                 css = getUniqueCss(Object.keys(enumCard.enumColor)[color], twoCardsNumber[number].toString(),'_');
@@ -13,13 +19,13 @@ var stock = (function () {
                 cards.push(card(colorNumber[color], enumCard.enumTypes.NUMBER,
                     numberValidation, numberOperation, id++));
                 cards[cards.length-1].number = twoCardsNumber[number];
-                cards[cards.length-1].setCss(css);
-                console.log(cards[number + color].color);
-                console.log(cards[number + color].sign);
+                cards[cards.length-1].setCss(css,htmlID);
+                console.log(cards[number + color].getColor());
+                console.log(cards[number + color].getSign());
                 cards.push(new card(colorNumber[color], enumCard.enumTypes.NUMBER,
                     numberValidation, numberOperation, id++));
                 cards[cards.length-1].number = twoCardsNumber[number];
-                cards[cards.length-1].setCss(css);
+                cards[cards.length-1].setCss(css,htmlID);
 
             }
         }
@@ -28,39 +34,39 @@ var stock = (function () {
             css = getUniqueCss(Object.keys(enumCard.enumColor)[color], Object.keys(enumCard.enumTypes)[4],'_');
             cards.push(new card(colorNumber[color], enumCard.enumTypes.TAKI,
                 takiValidation, takiOperation, id++));
-            cards[cards.length-1].setCss(css);
+            cards[cards.length-1].setCss(css,htmlID);
             cards.push(new card(colorNumber[color], enumCard.enumTypes.TAKI,
                 takiValidation, takiOperation, id++));
-            cards[cards.length-1].setCss(css);
+            cards[cards.length-1].setCss(css,htmlID);
 
             css = getUniqueCss(Object.keys(enumCard.enumColor)[color], Object.keys(enumCard.enumTypes)[0],'_');
             cards.push(new card(colorNumber[color], enumCard.enumTypes.STOP,
                 stopValidation, stopOperation, id++));
-            cards[cards.length-1].setCss(css);
+            cards[cards.length-1].setCss(css,htmlID);
             cards.push(new card(colorNumber[color], enumCard.enumTypes.STOP,
                 stopValidation, stopOperation, id++));
-            cards[cards.length-1].setCss(css);
+            cards[cards.length-1].setCss(css,htmlID);
 
             css = getUniqueCss(Object.keys(enumCard.enumColor)[color], Object.keys(enumCard.enumTypes)[6],'_');
             cards.push(new card(colorNumber[color], enumCard.enumTypes.TWO_PLUS,
                 twoPlusValidation, twoPlusOperation, id++));
-            cards[cards.length-1].setCss(css);
+            cards[cards.length-1].setCss(css,htmlID);
             cards.push(new card(colorNumber[color], enumCard.enumTypes.TWO_PLUS,
                 twoPlusValidation, twoPlusOperation, id++));
-            cards[cards.length-1].setCss(css);
+            cards[cards.length-1].setCss(css,htmlID);
 
             css = getUniqueCss(Object.keys(enumCard.enumColor)[color], Object.keys(enumCard.enumTypes)[2],'_');
             cards.push(new card(colorNumber[color], enumCard.enumTypes.PLUS,
                 plusValidation, plusOperation, id++));
-            cards[cards.length-1].setCss(css);
+            cards[cards.length-1].setCss(css,htmlID);
             cards.push(new card(colorNumber[color], enumCard.enumTypes.PLUS,
                 plusValidation, plusOperation, id++));
-            cards[cards.length-1].setCss(css);
+            cards[cards.length-1].setCss(css,htmlID);
 
             css = getUniqueCss('', Object.keys(enumCard.enumTypes)[1],'');
             cards.push(new card(null, enumCard.enumTypes.CHANGE_COLOR,
                 changeColorValidation, changeColorOperation, id++));
-            cards[cards.length-1].setCss(css);
+            cards[cards.length-1].setCss(css,htmlID);
 
         }
 
@@ -68,7 +74,7 @@ var stock = (function () {
         for(var color = 0; color < 2; ++color){
             cards.push(new card(null, enumCard.enumTypes.SUPER_TAKI,
                 superTakiValidation, superTakiOperation, id++));
-            cards[cards.length-1].setCss(css);
+            cards[cards.length-1].setCss(css,htmlID);
         }
     }
 

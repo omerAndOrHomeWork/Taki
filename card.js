@@ -1,70 +1,18 @@
 var card = function(theColor, theSign, validation, operation, theId) {
-    this.color = theColor;
-    this.sign = theSign;
+    var color = theColor;
+    var sign = theSign;
     this.validation = validation;
     this.operate = operation;
-    this.active = false;
+    var active = false;
     var id = theId;
     var htmlCard;
     var uniqueCard;
-
-
-
-    function setCssClasses(){
-
-    }
-
-
-
-    function setEvents(player){
-        //placeHolder = document.getElementById(placeHolderName);
-        //htmlCard = document.createElement("span");
-        //htmlCard.className += sign;
-        //htmlCard.className += color;
-        //htmlCard.className += open;
-
-
-
-        //
-
-
-
-        //placeHolder.appendChild(htmlCard);
-
-
-        /*
-        span.addEventListener("ondragstart", function(){
-            if(player.dragValidation(this))
-                span.draggable = true;
-        });
-        */
-      /*  span.ondragstart = function (ev) {
-            if(player.dragValidation(this))
-                span.draggable = true;
-        }*/
-
-
-        /*drag.ondragstart = function(event) {
-            event.dataTransfer.setData("Text", event.target.id);
-        };
-
-        drag.ondrag = function(event) {
-            document.getElementById("demo").innerHTML = "The p element is being dragged.";
-        };*/
-        // span.addEventListener("ondragover", function(){
-        //     span.draggable = false;
-        // });
-    }
 
     function setHtmlElement(){
         htmlCard = document.createElement("div");
         htmlCard.setAttribute("id", id);
     }
 
-/*var ul = document.getElementById("list");
-  var li = document.createElement("li");
-  li.appendChild(document.createTextNode("Element 4"));
-* */
     return{
 
         doValidation: function(){
@@ -76,28 +24,19 @@ var card = function(theColor, theSign, validation, operation, theId) {
         },
 
         makePassive: function () {
-            this.active = false;
+            active = false;
         },
 
         isActive: function (){
-            return this.active;
+            return active;
         },
 
         getId: function () {
             return id;
         },
 
-        /*getHtmlElement: function () {
-            document.getElementById("cards").removeChild(htmlCard);
-            return htmlCard;
-        },*/
-        /*setHtmlParent: function(newParent) {
-            newParent.appendChild(card.getElement);
-        }*/
-
         setParent: function (parentHolder) {
             document.getElementById(parentHolder).appendChild(htmlCard);
-            //htmlCard.ondragstart = null;
         },
 
         setHtmlEvent: function(player) {
@@ -111,29 +50,29 @@ var card = function(theColor, theSign, validation, operation, theId) {
             };
         },
 
-        setCss: function (theUniqueCard) {//red3
+        setCss: function (theUniqueCard,htmlStockID) {
             uniqueCard = theUniqueCard;
             setHtmlElement();
-            htmlCard.className += theUniqueCard;
-            //htmlCard.className += "closeCardCss";
+            //element.classList.add("mystyle");
+            htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
+            document.getElementById(htmlStockID).appendChild(htmlCard);
         },
 
-        changeCss: function (closeCard){
-          if(closeCard) {
-              htmlCard.className += "closeCardCss";
-              htmlCard.className -= uniqueCard;
-
+        changeCss: function (openCard){
+          if(openCard) {
+              htmlCard.classList.remove(enumCard.cssStyle.CLOSE_CARD);
+              htmlCard.classList.add(uniqueCard);
           }else{
-              htmlCard.className -= "closeCardCss";
-              htmlCard.className += uniqueCard;
+              htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
+              htmlCard.classList.remove(uniqueCard);
           }
         },
 
         getSign: function(){
-            return this.sign;
+            return sign;
         },
         getColor: function () {
-            return this.color;
+            return color;
         }
     }
 };

@@ -130,12 +130,12 @@ var enumCard = (function(){
         // enumColor: ["RED", "BLUE", "GREEN", "YELLOW"]
         // enumTypes: ["STOP", "CHANGE_COLOR", "PLUS", "NUMBER", "SUPER_TAKI", "TWO_PLUS"],
         dives: Object.freeze({
-            PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards", STOCK: "stock",
-            OPEN_CARDS: "openCards"
+            PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards",
+            STOCK: "stock", OPEN_CARDS: "openCards"
         }),
 
         cssStyle: Object.freeze({
-            OPEN_CARDS: 0, CLOSE_CARDS: 1
+            OPEN_CARDS: 0, CLOSE_CARD: "closeCard"
         })
     }
 })();
@@ -144,44 +144,9 @@ function getUniqueCss(color,type,separator){
     return color.concat(separator).concat(type);
 }
 
-
-
-
-
-/*function addEvents(player, placeHolderName) {
-    placeHolder  =  document.getElementById(placeHolderName);
-    htmlCard = document.createElement("span");
-    htmlCard.className += sign;
-    htmlCard.className += color;
-    placeHolder.appendChild(htmlCard);
-
-    htmlCard.ondragstart = function (event) {
-        if(player.dragValidation(this)) {
-            htmlCard.draggable = true;
-            event.dataTransfer.setData("Text", id);
-        }
-        else
-            htmlCard.draggable = false;
-    };
-    /*
-    span.addEventListener("ondragstart", function(){
-        if(player.dragValidation(this))
-            span.draggable = true;
-    });
-    */
-    /*  span.ondragstart = function (ev) {
-          if(player.dragValidation(this))
-              span.draggable = true;
-      }*/
-
-
-    /*drag.ondragstart = function(event) {
-        event.dataTransfer.setData("Text", event.target.id);
-    };
-
-    drag.ondrag = function(event) {
-        document.getElementById("demo").innerHTML = "The p element is being dragged.";
-    };*/
-    // span.addEventListener("ondragover", function(){
-    //     span.draggable = false;
-    // })}*/
+function setCards(stock, cards) {
+    for(var i = 0; i < cards.length; ++i){
+        stock.push(cards[i]);
+        cards[i].changeCss(true);
+    }
+}
