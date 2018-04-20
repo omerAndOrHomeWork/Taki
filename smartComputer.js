@@ -384,10 +384,12 @@ var smartComputer = function() {
 
     function addCard(cardsToAdd) {
         for(var i = 0; i < cardsToAdd.length; ++i){
-            if(card.getColor() !== null)
+            if(cardsToAdd[i].getColor() !== null)
                 insertColor(cardsToAdd[i]);
             insertType(cardsToAdd[i]);
             playerCards.push(cardsToAdd[i]);
+            cardsToAdd[i].setParent(enumCard.dives.COMPUTER_CARDS);
+            cardsToAdd[i].changeCss(false);
         }
     }
 

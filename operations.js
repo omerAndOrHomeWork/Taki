@@ -18,8 +18,8 @@ function numberOperation() {
     return 1;
 }
 
-function numberValidation(card) {
-    return !card.active && (card.color === this.color || card.sign === this.sign);
+function numberValidation(playerCard,lastCard) {
+    return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 
 }
 
@@ -27,16 +27,16 @@ function plusOperation() {
     return 1;
 }
 
-function plusValidation(card) {
-    return !card.active && (card.color === this.color || card.sign === this.sign);
+function plusValidation(lastCard,playerCard) {
+    return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
 function stopOperation() {
     return 2;
 }
 
-function stopValidation(card) {
-    return !card.active && (card.color === this.color || card.sign === this.sign);
+function stopValidation(lastCard,playerCard) {
+    return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
 /**
@@ -63,21 +63,21 @@ function takiOperation() {
 /**
  * @return {boolean}
  */
-function takiValidation(card) {
-    return !card.active && (card.color === this.color || card.sign === this.sign);
+function takiValidation(lastCard,playerCard) {
+    return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
 function twoPlusOperation() {
     return 1;
 }
 
-function twoPlusValidation(card) {
-    return (card.color === this.color || card.sign === this.sign);
+function twoPlusValidation(lastCard,playerCard) {
+    return (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
 function pullApproval(cards, lastCard) {
-    for(var i = 0; i < lastCard.length; ++i){
-        if(lastCard[i].doValidation(lastCard))
+    for(var i = 0; i < cards.length; ++i){
+        if(cards[i].doValidation(lastCard))
             return false;
     }
     return true;

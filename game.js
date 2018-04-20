@@ -85,16 +85,19 @@ var game = (function() {
 
 
     function pullCardValidation(player) {
-        if(player === players[turn] && player.pullApproval()){
+        if(player === players[turn] && player.pullApproval(gameCards[gameCards.length-1])){
             player.takiMode = null;
-            player.pullCardFromStock(stock.getCards(amountOfCardsToTakeFromStock));
+            var cardsFromStock = stock.getCards(amountOfCardsToTakeFromStock);
+            player.pullCardFromStock(cardsFromStock);
+            if(player.isSmartComputer()){
+               for(var i = 0; i<amountOfCardsToTakeFromStock; ++i)
+                   cardsFromStock[i].changeCss(player.getCss());
+            }
             //TODO: take the cards from the stock. change the cssClass, cut the cards elements from the stock to the player cards element
-            gameCards.lastIndexOf(Card).makePassive();
-            updateStatistics();
+           // gameCards.lastIndexOf(Card).makePassive(); why we need that?
+            //updateStatistics();
             changeTurn(1);
             computerOperation();
-
-            card.changeCss(player.getCss());
         }
     }
 

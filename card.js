@@ -15,8 +15,8 @@ var card = function(theColor, theSign, validation, operation, theId) {
 
     return{
 
-        doValidation: function(){
-            validation();
+        doValidation: function(lastCard){
+            validation(lastCard,this);
         },
 
         doOperation: function(){
