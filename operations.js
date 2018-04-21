@@ -23,7 +23,7 @@ function numberValidation(playerCard, lastCard) {
 }
 
 function plusOperation() {
-    return 1;
+    return 0;
 }
 
 function plusValidation(playerCard, lastCard) {
@@ -90,6 +90,7 @@ function takiModeChecker(cards, takiMode) {
             break;
         }
     }
+
     return foundColor;
 }
 
