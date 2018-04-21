@@ -15,8 +15,8 @@ var card = function(theColor, theSign, validation, operation, theId) {
 
     return{
 
-        doValidation: function(){
-            validation();
+        doValidation: function(lastCard){
+            validation(lastCard,this);
         },
 
         doOperation: function(){
@@ -50,12 +50,12 @@ var card = function(theColor, theSign, validation, operation, theId) {
             };
         },
 
-        setCss: function (theUniqueCard) {
+        setCss: function (theUniqueCard,htmlStockID) {
             uniqueCard = theUniqueCard;
             setHtmlElement();
             //element.classList.add("mystyle");
             htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
-            document.getElementById(enumCard.dives.STOCK).appendChild(htmlCard);
+            document.getElementById(htmlStockID).appendChild(htmlCard);
         },
 
         changeCss: function (openCard){

@@ -438,14 +438,40 @@ body {
  font-weight: bold;
  font-style: italic;
 }
-#PLAYER1{
+
+#playerCards{
+ bottom: 2%;
+ left: 22%;
  position: absolute;
- bootom: 10px;
- margin: 50px;
+
 }
 
-#PLAYER2{
+#computerCards{
  position: absolute;
- top: 10px;
- margin: 50px;
+ top: 2%;
+ left: 22%;
+ margin: auto;
+}
+
+#openCards{
+    position: absolute;
+    top:35%;
+    left: 40%;
+}
+
+#stockCards{
+    position: absolute;
+     height: 140px;
+     width: 90px;
+    top:35%;
+    left: 55%;
+    background: #cccccc url("../Images/other/close_card.png");
+}
+
+
+#computerCards .closeCard{
+ height: 140px;
+ width: 90px;
+ float: left;
+ background: #cccccc url("../Images/other/close_card.png");
 }
