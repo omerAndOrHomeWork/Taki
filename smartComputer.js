@@ -399,7 +399,7 @@ var smartComputer = function() {
             setAllCards(cards);
             for(var i = 0; i < cards.length; ++i){
                 cards[i].setParent(enumCard.dives.COMPUTER_CARDS);
-                cards[i].changeCss(false);
+                cards[i].changeCss(true);
             }
         },
 
