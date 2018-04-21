@@ -86,7 +86,7 @@ var player = function () {
                     promote = 0;
                 else{
                     takiMode = undefined;
-                    if(promote === -1)//if taki is the last color card
+                    if(promote === -1)
                         promote = 1;
                 }
             }
@@ -118,8 +118,8 @@ var player = function () {
             return htmlPlayerDiv;
         },
 
-        isDraggable: function () {
-          return true;
+        isDraggable: function(){
+            return true;
         },
 
         singleCard: singleCardCounter,

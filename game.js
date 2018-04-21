@@ -27,7 +27,6 @@ var game = (function() {
         setCards(gameCards, stock.getCards(1));
         gameCards[0].setParent(enumCard.dives.OPEN_CARDS, false);
         for(var i=0; i < players.length; ++i)
-          //  players[i].setCssIDPlayer(cssID);
             players[i].setCards(stock.getCards(8), players.length);
     }
 
@@ -35,6 +34,9 @@ var game = (function() {
         var drop = document.getElementById(enumCard.dives.OPEN_CARDS);
         drop.draggable = false;
         drop.ondragover = function (ev) {
+            event.preventDefault();
+        };
+        drop.ondrop = function (event) {
             event.preventDefault();
         };
         drop.ondrop = function (event) {
@@ -97,7 +99,7 @@ var game = (function() {
             // updateStatistics();
             changeTurn(1);
             computerOperation();
-        }
+     //   }
     }
 
     function computerOperation(){
