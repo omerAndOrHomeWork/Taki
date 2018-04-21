@@ -19,8 +19,7 @@ function numberOperation() {
 }
 
 function numberValidation(playerCard, lastCard) {
-    return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
-
+    return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.number === playerCard.number);
 }
 
 function plusOperation() {
@@ -84,19 +83,14 @@ function pullApproval(cards, lastCard) {
 }
 
 function takiModeChecker(cards, takiMode) {
-    var promote;
     var foundColor = false;
     for (var i = 0; i < cards.length; ++i) {
         if (cards[i].getColor() === takiMode.getColor()) {
-            promote = 0;
             foundColor = true;
             break;
         }
     }
-    if (!foundColor) {
-        promote = 1;
-    }
-    return promote;
+    return foundColor;
 }
 
 

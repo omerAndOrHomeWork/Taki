@@ -5,7 +5,7 @@ var player = function () {
     var singleCardCounter = 0;
     var takiMode = undefined;
     var currentTurnTime;
-    var cardsCss = enumCard.cssStyle.OPEN_CARDS;
+    var htmlPlayerDiv = enumCard.dives.PLAYER_CARDS;
    // var htmlPlayer = document.getElementsByClassName("player");
 
     /*function setCards(playerHtml) {
@@ -82,9 +82,13 @@ var player = function () {
             if (promote === -1)
                 takiMode = card;
             if (takiMode !== undefined) {
-                promote = takiModeChecker(cards, takiMode);
-                if(promote === 1)
+                if(takiModeChecker(cards, takiMode))
+                    promote = 0;
+                else{
                     takiMode = undefined;
+                    if(promote === -1)
+                        promote = 1;
+                }
             }
             if (cards.length === 1)
                 singleCardCounter++;
@@ -110,8 +114,12 @@ var player = function () {
             return searchCard(cards, id);
         },
 
-        getCss: function () {
-            return cardsCss;
+        getHtmlDiv: function () {
+            return htmlPlayerDiv;
+        },
+
+        isDraggable: function(){
+            return true;
         },
 
         singleCard: singleCardCounter,
