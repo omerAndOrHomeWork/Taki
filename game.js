@@ -2,7 +2,7 @@ var game = (function() {
     var gameCards = [];
     var turn = 0;
     var cssID=0;
-    var players = [smartComputer(), player()];
+    var players = [player(), smartComputer()];
     var amountOfCardsToTakeFromStock = 1;
     // var statistics = new Statistics();
 
@@ -25,7 +25,7 @@ var game = (function() {
 
     function partition() {
         setCards(gameCards, stock.getCards(1));
-        gameCards[0].setParent(enumCard.dives.OPEN_CARDS);
+        gameCards[0].setParent(enumCard.dives.OPEN_CARDS, false);
         for(var i=0; i < players.length; ++i)
           //  players[i].setCssIDPlayer(cssID);
             players[i].setCards(stock.getCards(8), players.length);
@@ -33,25 +33,24 @@ var game = (function() {
 
     function setEventListener() {
         var drop = document.getElementById(enumCard.dives.OPEN_CARDS);
-        drop.ondrop = function (event) {
+        drop.draggable = false;
+        drop.ondragover = function (ev) {
             event.preventDefault();
+        };
+        drop.ondrop = function (event) {
             var id = event.dataTransfer.getData("Text");
             var card = players[turn].getCard(id);
-            if (card !== null) {
-                dropValidation(id, card, drop);
+            if (card !== undefined) {
+                dropValidation(id, card);
             }
         };
     }
 
     function addEventListener() {
-        var click =  document.getElementById("stock");
-        drop.onclick = function(event) {
+        var click =  document.getElementById(enumCard.dives.STOCK);
+        click.onclick = function(event) {
             event.preventDefault();
-            var id = event.dataTransfer.getData("Text");
-            var card = players[turn].getCard(id);
-            if(card !== null) {
-                dropValidation(players[turn], card, drop);
-            }
+            pullCardValidation(players[turn]);
         };
     }
 
@@ -70,13 +69,14 @@ var game = (function() {
         document.getElementById("demo").innerHTML = "The p element was dropped.";
     };*/
 
-    function dropValidation(id, card, drop) {
-        if (card.doValidation(gameCards.lastIndexOf(card))) {
-            var promote = player.doOperation(card);
-            drop.appendChild(document.getElementById(id));
+    function dropValidation(id, card) {
+        if (card.doValidation(gameCards[gameCards.length - 1])){
+            var promote = players[turn].doOperation(card);
+            document.getElementById(enumCard.dives.OPEN_CARDS).removeChild(gameCards[gameCards.length - 1].getElement());
+            card.setParent(enumCard.dives.OPEN_CARDS, false);
             gameCards.push(card);
             calcAmountCardsToTake(card);
-            updateStatics();
+            // updateStatics();
             if(promote !== -1)
                 changeTurn(promote);
             computerOperation();
@@ -86,7 +86,7 @@ var game = (function() {
 
     function pullCardValidation(player) {
         if(player === players[turn] && player.pullApproval(gameCards[gameCards.length-1])){
-            player.takiMode = null;
+            player.takiMode = undefined;
             var cardsFromStock = stock.getCards(amountOfCardsToTakeFromStock);
             player.pullCardFromStock(cardsFromStock);
             if(player.isSmartComputer()){
@@ -104,7 +104,7 @@ var game = (function() {
     function computerOperation(){
         if(players[turn].isComputer()){
             var card = players[turn].pickCard(gameCards[gameCards.length - 1]);
-            if(card == null)
+            if(card === undefined)
                 pullCardValidation(players[turn]);
             else {
                 dropValidation(players[turn], card);
@@ -129,7 +129,8 @@ var game = (function() {
             stock.setGame();
             partition();
             setEventListener();
-            changeTurn(1);
+            addEventListener();
+            changeTurn(0);
             computerOperation();
         }
     }
