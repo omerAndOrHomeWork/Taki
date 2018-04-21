@@ -90,7 +90,6 @@ var player = function () {
                         promote = 1;
                 }
             }
-
             if (cards.length === 1)
                 singleCardCounter++;
             return promote;

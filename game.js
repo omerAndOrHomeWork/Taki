@@ -38,6 +38,8 @@ var game = (function() {
         };
         drop.ondrop = function (event) {
             event.preventDefault();
+        };
+        drop.ondrop = function (event) {
             var id = event.dataTransfer.getData("Text");
             var card = players[turn].getCard(id);
             if (card !== undefined) {
@@ -85,7 +87,7 @@ var game = (function() {
 
 
     function pullCardValidation(player) {
-     //   if(player === players[turn] && player.pullApproval(gameCards[gameCards.length-1])){
+        if(player === players[turn] && player.pullApproval(gameCards[gameCards.length-1])){
             player.takiMode = undefined;
             var cardsFromStock = stock.getCards(amountOfCardsToTakeFromStock);
             player.pullCardFromStock(cardsFromStock);
