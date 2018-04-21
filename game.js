@@ -2,7 +2,7 @@ var game = (function() {
     var gameCards = [];
     var turn = 0;
     var cssID=0;
-    var players = [player(), smartComputer()];
+    var players = [smartComputer(), player()];
     var amountOfCardsToTakeFromStock = 1;
     // var statistics = new Statistics();
 
