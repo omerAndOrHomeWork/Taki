@@ -1,26 +1,47 @@
-var card = function(theColor, theSign, validation, operation, theId) {
+var card = function(theColor, theSign, theValidation, theOperation, theId) {
     var color = theColor;
     var sign = theSign;
-    this.validation = validation;
-    this.operate = operation;
+    var validation = theValidation;
+    var operation = theOperation;
     var active = false;
     var id = theId;
     var htmlCard;
-    var uniqueCard;
+    var uniqueCardImage;
+    var closeCardImage;
 
-    function setHtmlElement(){
-        htmlCard = document.createElement("div");
+    function setHtmlElement(imgName) {
+        htmlCard = document.createElement("a");
         htmlCard.setAttribute("id", id);
+        closeCardImage =  document.createElement("img");
+        closeCardImage.src = enumCard.images.CLOSE_CARD;
+        uniqueCardImage = document.createElement("img");
+        var colorName;
+        if( color !== undefined)
+            colorName = Object.keys(enumCard.enumColor)[color].toLowerCase();
+        else
+            colorName = "other";
+        uniqueCardImage.src = "../Taki/Images/" + colorName + "/" + imgName.toLowerCase() + ".png";
+        // htmlCard.appendChild(img);
+    }
+
+
+    function setHtmlEvent(dragable) {
+        htmlCard.ondragstart = function (event) {
+            if(!dragable)
+                return false;
+            htmlCard.draggable = true;
+            event.dataTransfer.setData("Text", id);
+        };
     }
 
     return{
 
         doValidation: function(lastCard){
-            validation(lastCard,this);
+            return validation(this, lastCard);
         },
 
         doOperation: function(){
-            operation();
+            return operation();
         },
 
         makePassive: function () {
@@ -35,38 +56,32 @@ var card = function(theColor, theSign, validation, operation, theId) {
             return id;
         },
 
-        setParent: function (parentHolder) {
+        setParent: function (parentHolder, dragable) {
             document.getElementById(parentHolder).appendChild(htmlCard);
+            setHtmlEvent(dragable);
         },
 
-        setHtmlEvent: function(player) {
-            htmlCard.ondragstart = function (event) {
-                htmlCard.draggable = true;
-                event.dataTransfer.setData("Text", id);
-                // if(player.dragValidation(player.getCard(id))) {
-                //     htmlCard.draggable = true;
-                //     event.dataTransfer.setData("Text", id);
-                // }
-                // else
-                //     htmlCard.draggable = false;
-            };
-        },
 
-        setCss: function (theUniqueCard,htmlStockID) {
-            uniqueCard = theUniqueCard;
-            setHtmlElement();
-            //element.classList.add("mystyle");
-            htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
-            document.getElementById(htmlStockID).appendChild(htmlCard);
+        setElement: function (theUniqueCard) {
+            //uniqueCardImage = theUniqueCard;
+            setHtmlElement(theUniqueCard);
+            // htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
+            setHtmlEvent(false);
+            // htmlCard.appendChild(closeCardImage);
+            document.getElementById(enumCard.dives.STOCK).appendChild(htmlCard);
         },
 
         changeCss: function (openCard){
           if(openCard) {
-              htmlCard.classList.remove(enumCard.cssStyle.CLOSE_CARD);
-              htmlCard.classList.add(uniqueCard);
+              // htmlCard.classList.remove(enumCard.cssStyle.CLOSE_CARD);
+              // htmlCard.classList.add(enumCard.cssStyle.OPEN_CARD);
+              // htmlCard.removeChild(closeCardImage);
+              htmlCard.appendChild(uniqueCardImage);
           }else{
-              htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
-              htmlCard.classList.remove(uniqueCard);
+              // htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
+              // htmlCard.classList.remove(enumCard.cssStyle.OPEN_CARD);
+              htmlCard.removeChild(uniqueCardImage);
+              // htmlCard.appendChild(closeCardImage);
           }
         },
 
@@ -75,6 +90,11 @@ var card = function(theColor, theSign, validation, operation, theId) {
         },
         getColor: function () {
             return color;
+        },
+
+        getElement: function () {
+            return htmlCard;
         }
+
     }
 };

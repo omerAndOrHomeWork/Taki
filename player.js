@@ -3,7 +3,7 @@ var player = function () {
     var averageTimePlayed = 0;
     var turnsPlayed = 0;
     var singleCardCounter = 0;
-    var takiMode = null;
+    var takiMode = undefined;
     var currentTurnTime;
     var cardsCss = enumCard.cssStyle.OPEN_CARDS;
    // var htmlPlayer = document.getElementsByClassName("player");
@@ -25,7 +25,7 @@ var player = function () {
             }
         }
         if (!foundColor) {
-            takiMode = null;
+            takiMode = undefined;
             promote = 1;
         }
         return promote;
@@ -63,10 +63,8 @@ var player = function () {
         setCards: function (theCards) {
             cards = theCards;
             for(var i = 0; i < cards.length; ++i){
-                cards[i].setParent(enumCard.dives.PLAYER_CARDS);
-                cards[i].setHtmlEvent(this);
+                cards[i].setParent(enumCard.dives.PLAYER_CARDS, true);
                 cards[i].changeCss(true);
-                cards[i].setHtmlEvent(this);
             }
         },
 
@@ -83,8 +81,11 @@ var player = function () {
             var promote = card.doOperation();
             if (promote === -1)
                 takiMode = card;
-            if (takiMode !== null)
-                promote = takiModeChecker(cards);
+            if (takiMode !== undefined) {
+                promote = takiModeChecker(cards, takiMode);
+                if(promote === 1)
+                    takiMode = undefined;
+            }
             if (cards.length === 1)
                 singleCardCounter++;
             return promote;
@@ -102,11 +103,11 @@ var player = function () {
         },
 
         pullApproval: function (lastCard){
-            pullApproval(cards, lastCard);
+            return pullApproval(cards, lastCard);
         },
 
         getCard: function (id) {
-            searchCard(cards, id);
+            return searchCard(cards, id);
         },
 
         getCss: function () {

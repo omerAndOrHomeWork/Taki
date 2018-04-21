@@ -10,15 +10,15 @@ function changeColorOperation() {
 /**
  * @return {boolean}
  */
-function changeColorValidation(card) {
-    return !card.isActive();
+function changeColorValidation(playerCard, lastCard) { //TODO:: CHECK IF WE CAN WITH ONE INPUT ELEMENT
+    return !lastCard.isActive();
 }
 
 function numberOperation() {
     return 1;
 }
 
-function numberValidation(playerCard,lastCard) {
+function numberValidation(playerCard, lastCard) {
     return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 
 }
@@ -27,7 +27,7 @@ function plusOperation() {
     return 1;
 }
 
-function plusValidation(lastCard,playerCard) {
+function plusValidation(playerCard, lastCard) {
     return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
@@ -35,7 +35,7 @@ function stopOperation() {
     return 2;
 }
 
-function stopValidation(lastCard,playerCard) {
+function stopValidation(playerCard, lastCard) {
     return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
@@ -49,8 +49,8 @@ function superTakiOperation() {
 /**
  * @return {boolean}
  */
-function superTakiValidation(card) {
-    return !card.active;
+function superTakiValidation(playerCard, lastCard) {
+    return !lastCard.active;
 }
 
 /**
@@ -63,7 +63,7 @@ function takiOperation() {
 /**
  * @return {boolean}
  */
-function takiValidation(lastCard,playerCard) {
+function takiValidation(playerCard, lastCard) {
     return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
@@ -71,7 +71,7 @@ function twoPlusOperation() {
     return 1;
 }
 
-function twoPlusValidation(lastCard,playerCard) {
+function twoPlusValidation(playerCard, lastCard) {
     return (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
@@ -83,18 +83,17 @@ function pullApproval(cards, lastCard) {
     return true;
 }
 
-function takiModeChecker(cards) {
+function takiModeChecker(cards, takiMode) {
     var promote;
     var foundColor = false;
     for (var i = 0; i < cards.length; ++i) {
-        if (cards[i].color === this.takiMode.color) {
+        if (cards[i].getColor() === takiMode.getColor()) {
             promote = 0;
             foundColor = true;
             break;
         }
     }
     if (!foundColor) {
-        this.takiMode = null;
         promote = 1;
     }
     return promote;
@@ -111,11 +110,11 @@ function removeCard(cards, card) {
 
 function searchCard(cards, id) {
     for (var i = 0; i < cards.length; ++i) {
-        if (cards[i].getId() === id) {
+        if (cards[i].getId().toString() === id) {
             return cards[i];
         }
     }
-    return null;
+    return undefined;
 }
 
 var enumCard = (function(){
@@ -127,15 +126,17 @@ var enumCard = (function(){
         }),
         enumPlayer: Object.freeze({PLAYER1: 0, COMPUTER: 1}), //help for extendable
 
-        // enumColor: ["RED", "BLUE", "GREEN", "YELLOW"]
-        // enumTypes: ["STOP", "CHANGE_COLOR", "PLUS", "NUMBER", "SUPER_TAKI", "TWO_PLUS"],
         dives: Object.freeze({
             PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards",
-            STOCK: "stock", OPEN_CARDS: "openCards"
+            STOCK: "stockCards", OPEN_CARDS: "openCards", STOCK_PARENT: "stock"
         }),
 
         cssStyle: Object.freeze({
-            OPEN_CARDS: 0, CLOSE_CARD: "closeCard"
+            OPEN_CARD: "openCard", CLOSE_CARD: "closeCard"
+        }),
+
+        images: Object.freeze({
+            CLOSE_CARD: "../Taki/Images/other/close_card.png"
         })
     }
 })();
