@@ -7,10 +7,10 @@ var game = (function() {
     var gameStatistics;
 
     function changeTurn(promote) {
-        //players[turn].calculateAVG();
+        players[turn].increasePlayerTurns();
+        players[turn].calculateAVG();
         turn = (turn + promote) % players.length;
-        //players[turn].startClock();
-        //setInterval(players[turn].calcCurrentTurn(),1000);
+        gameStatistics.updateStatistics();
     }
 
     function calcAmountCardsToTake(card){
@@ -81,7 +81,7 @@ var game = (function() {
             gameCards.push(card);
             calcAmountCardsToTake(card);
             // updateStatics();
-            if(promote !== -1)
+            if(promote !== enumCard.enumResult.PLAYER_TURN_AGAIN)
                 changeTurn(promote);
             computerOperation();
         }
@@ -130,10 +130,11 @@ var game = (function() {
         startGame: function () {
             stock.setGame();
             partition();
-            gameStatistics = new statistics(players.length);
+            gameStatistics = new statistics(players);
+            gameStatistics.setStatistics();
+            gameStatistics.updateStatistics();
             setEventListener();
             addEventListener();
-            changeTurn(0);
             computerOperation();
         }
     }

@@ -2,11 +2,15 @@
  * @return {number}
  */
 function changeColorOperation(player, playerCard) {
+
+    return player.selectAndPickColorOperation(playerCard);
+/*
     var pickedColor = player.pickColor();
     playerCard.setColor(pickedColor);
     playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
         Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
     return enumCard.enumResult.SINGLE;
+*/
 }
 
 /**
@@ -48,7 +52,7 @@ function superTakiOperation(player, playerCard, lastCard) {
     playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[playerCard.getColor()],
         Object.keys(enumCard.enumTypes)[enumCard.enumTypes.TAKI],'_'));
     player.setTakiMode(card);
-    return enumCard.enumResult.CONTINUE_PLAYER_TURN;
+    return enumCard.enumResult.PLAYER_TURN_AGAIN;
 }
 
 /**
@@ -63,7 +67,7 @@ function superTakiValidation(lastCard) {
  */
 function takiOperation(player) {
     player.setTakiMode(card);
-    return enumCard.enumResult.CONTINUE_PLAYER_TURN;
+    return enumCard.enumResult.PLAYER_TURN_AGAIN;
 }
 
 /**
@@ -142,7 +146,7 @@ var enumCard = (function(){
             CLOSE_CARD: "../Taki/Images/other/close_card.png"
         }),
 
-        enumResult: Object.freeze({CONTINUE_PLAYER_TURN: 0,SINGLE: 1, DOUBLE: 2, TAKI: 3, PICK_COLOR: 4})
+        enumResult: Object.freeze({CONTINUE_PLAYER_TURN: 0,SINGLE: 1, DOUBLE: 2, PLAYER_TURN_AGAIN: 3})
     }
 })();
 

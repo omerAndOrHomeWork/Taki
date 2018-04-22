@@ -12,7 +12,6 @@ var clock = function() {
         var hours = cur_date.getHours();
         var minutes = cur_date.getMinutes();
         var seconds = cur_date.getSeconds();
-        var htmlClock;
 
 return {
     run: function()
