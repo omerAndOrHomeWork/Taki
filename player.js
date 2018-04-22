@@ -78,11 +78,11 @@ var player = function () {
         getTurnsPlayed: function(){
           return turnsPlayed;
         },
-
+      
         increasePlayerTurns: function () {
             turnsPlayed += 1;
         },
-
+      
         doOperation: function (card, lastCard) {
             removeCard(cards, card);
             var promote = card.doOperation(this, lastCard);
@@ -140,7 +140,7 @@ var player = function () {
                 Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
       //      return enumCard.enumResult.PLAYER_TURN_AGAIN;
         },
-
+      
         pickColor: function () {
             var picker;
             var pickColorId = document.getElementById("pickColor");

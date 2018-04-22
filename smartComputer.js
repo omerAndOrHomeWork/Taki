@@ -432,7 +432,6 @@ var smartComputer = function() {
         getAverageTimePlayed: function(){
             return 0;
         },
-
         doOperation: function(card, lastCard) {
             var promote = card.doOperation(this, lastCard);
             removeAllCardAppearances(card);
@@ -475,7 +474,7 @@ var smartComputer = function() {
         getTurnsPlayed: function(){
             return turnsPlayed;
         },
-
+      
         pickColor: function () {
             for(var i = 0; i < playerCards.length; ++i){
                 if(playerCards[i].getColor() !== undefined)

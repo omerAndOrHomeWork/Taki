@@ -2,7 +2,15 @@
  * @return {number}
  */
 function changeColorOperation(player, playerCard) {
+
     return player.selectAndPickColorOperation(playerCard);
+/*
+    var pickedColor = player.pickColor();
+    playerCard.setColor(pickedColor);
+    playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
+        Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
+    return enumCard.enumResult.SINGLE;
+*/
 }
 
 /**
