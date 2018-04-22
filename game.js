@@ -24,7 +24,8 @@ var game = (function() {
     }
 
     function partition() {
-        setCards(gameCards, stock.getCards(1));
+        var gameStartCard = stock.getValidOpenCard();
+        setCards(gameCards, gameStartCard);
         gameCards[0].setParent(enumCard.dives.OPEN_CARDS, false);
         for(var i=0; i < players.length; ++i)
             players[i].setCards(stock.getCards(8), players.length);
@@ -74,7 +75,7 @@ var game = (function() {
 
     function dropValidation(id, card) {
         if (card.doValidation(gameCards[gameCards.length - 1])){
-            var promote = players[turn].doOperation(card);
+            var promote = players[turn].doOperation(card, gameCards[gameCards.length - 1]);
             document.getElementById(enumCard.dives.OPEN_CARDS).removeChild(gameCards[gameCards.length - 1].getElement());
             card.setParent(enumCard.dives.OPEN_CARDS, false);
             gameCards.push(card);

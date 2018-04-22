@@ -420,11 +420,9 @@ var smartComputer = function() {
             numberOfPlayers = numberOfPlayers - 1;
         },
 
-        doOperation: function(card) {
-            var promote = card.doOperation();
+        doOperation: function(card, lastCard) {
+            var promote = card.doOperation(this, lastCard);
             removeAllCardAppearances(card);
-            if (promote === -1)
-                takiMode = card;
             if (takiMode !== undefined) {
                 if(takiModeChecker(playerCards, takiMode))
                     promote = 0;
@@ -456,6 +454,17 @@ var smartComputer = function() {
 
         isDraggable: function () {
             return false;
+        },
+        pickColor: function () {
+            for(var i = 0; i < playerCards.length; ++i){
+                if(playerCards[i].getColor() !== undefined)
+                    return playerCards[i];
+            }
+            //TODO: LOGIC
+        },
+
+        setTakiMode: function (card) {
+            takiMode = card;
         }
     }
 };

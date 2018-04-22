@@ -1,76 +1,84 @@
 /**
  * @return {number}
  */
-function changeColorOperation() {
-    //hide = false
-    //TODO: create 4 buttons and connect it to game(functionally)
-    return 1;
+function changeColorOperation(player, playerCard) {
+    var pickedColor = player.pickColor();
+    playerCard.setColor(pickedColor);
+    playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
+        Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
+    return enumCard.enumResult.SINGLE;
 }
 
 /**
  * @return {boolean}
  */
-function changeColorValidation(playerCard, lastCard) { //TODO:: CHECK IF WE CAN WITH ONE INPUT ELEMENT
-    return !lastCard.isActive();
+function changeColorValidation(lastCard) { //TODO:: CHECK IF WE CAN WITH ONE INPUT ELEMENT
+   return !lastCard.isActive();
 }
 
 function numberOperation() {
-    return 1;
+    return enumCard.enumResult.SINGLE;
 }
 
-function numberValidation(playerCard, lastCard) {
+function numberValidation(lastCard, playerCard) {
     return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.number === playerCard.number);
 }
 
 function plusOperation() {
-    return 0;
+    return enumCard.enumResult.CONTINUE_PLAYER_TURN;
 }
 
-function plusValidation(playerCard, lastCard) {
+function plusValidation(lastCard, playerCard) {
     return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
 function stopOperation() {
-    return 2;
+    return enumCard.enumResult.DOUBLE;
 }
 
-function stopValidation(playerCard, lastCard) {
+function stopValidation(lastCard, playerCard) {
     return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
 /**
  * @return {number}
  */
-function superTakiOperation() {
-    return -1;
+function superTakiOperation(player, playerCard, lastCard) {
+    playerCard.setColor(lastCard.getColor());
+    playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[playerCard.getColor()],
+        Object.keys(enumCard.enumTypes)[enumCard.enumTypes.TAKI],'_'));
+    player.setTakiMode(card);
+    return enumCard.enumResult.CONTINUE_PLAYER_TURN;
 }
 
 /**
  * @return {boolean}
  */
-function superTakiValidation(playerCard, lastCard) {
-    return !lastCard.active;
+function superTakiValidation(lastCard) {
+    return !lastCard.isActive();
 }
 
 /**
  * @return {number}
  */
-function takiOperation() {
-    return -1;
+function takiOperation(player) {
+    player.setTakiMode(card);
+    return enumCard.enumResult.CONTINUE_PLAYER_TURN;
 }
 
 /**
  * @return {boolean}
  */
-function takiValidation(playerCard, lastCard) {
+function takiValidation(lastCard, playerCard) {
     return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
-function twoPlusOperation() {
-    return 1;
+function twoPlusOperation(player, playerCard) {
+    playerCard.setActive(true);
+    return enumCard.enumResult.SINGLE;
 }
 
-function twoPlusValidation(playerCard, lastCard) {
+function twoPlusValidation(lastCard, playerCard) {
     return (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
@@ -132,7 +140,9 @@ var enumCard = (function(){
 
         images: Object.freeze({
             CLOSE_CARD: "../Taki/Images/other/close_card.png"
-        })
+        }),
+
+        enumResult: Object.freeze({CONTINUE_PLAYER_TURN: 0,SINGLE: 1, DOUBLE: 2, TAKI: 3, PICK_COLOR: 4})
     }
 })();
 

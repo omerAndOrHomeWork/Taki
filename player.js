@@ -75,11 +75,9 @@ var player = function () {
           return turnsPlayed;
         },
 
-        doOperation: function (card) {
+        doOperation: function (card, lastCard) {
             removeCard(cards, card);
-            var promote = card.doOperation();
-            if (promote === -1)
-                takiMode = card;
+            var promote = card.doOperation(this, lastCard);
             if (takiMode !== undefined) {
                 if(takiModeChecker(cards, takiMode))
                     promote = 0;
@@ -125,6 +123,41 @@ var player = function () {
 
         isComputer: function () {
             return false;
+        },
+
+        pickColor: function () {
+            var picker;
+            var pickColorId = document.getElementById("pickColor");
+            pickColorId.visibility = "visible";
+            var blue = pickColorId.getElementById("bluePicker");
+            blue.onclick = function (ev) {
+                ev.preventDefault();
+                picker = enumCard.enumColor.BLUE;
+                pickColorId.visibility = "hidden";
+            }
+            var green = pickColorId.getElementById("greenPicker");
+            green.onclick = function (ev) {
+                ev.preventDefault();
+                picker = enumCard.enumColor.GREEN;
+                pickColorId.visibility = "hidden";
+            }
+            var red = pickColorId.getElementById("redPicker");
+            red.onclick = function (ev) {
+                ev.preventDefault();
+                picker = enumCard.enumColor.RED;
+                pickColorId.visibility = "hidden";
+            }
+            var yellow = pickColorId.getElementById("yellowPicker");
+            yellow.onclick = function (ev) {
+                ev.preventDefault();
+                picker = enumCard.enumColor.YELLOW;
+                pickColorId.visibility = "hidden";
+            }
+            //TODO: HTML_OPERATION
+        },
+
+        setTakiMode: function (card) {
+            takiMode = card;
         }
     };
 };
