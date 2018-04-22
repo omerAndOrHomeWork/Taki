@@ -43,6 +43,14 @@ var player = function () {
         }
     }*/
 
+    function colorPicked(event, pickedColor, playerCard) {
+        event.preventDefault();
+        playerCard.setColor(pickedColor);
+        playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
+            Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
+        document.getElementById("pickColor").visibility = "hidden";
+    }
+
     return {
         calculateAVG: function () {
             averageTimePlayed *= turnsPlayed;
@@ -88,11 +96,11 @@ var player = function () {
             var promote = card.doOperation(this, lastCard);
             if (takiMode !== undefined) {
                 if(takiModeChecker(cards, takiMode))
-                    promote = 0;
+                    promote = enumCard.enumResult.PLAYER_TURN_AGAIN;
                 else{
                     takiMode = undefined;
-                    if(promote === -1)
-                        promote = 1;
+                    if(promote === enumCard.enumResult.PLAYER_TURN_AGAIN)
+                        promote = enumCard.enumResult.SINGLE;
                 }
             }
             if (cards.length === 1)
@@ -132,44 +140,32 @@ var player = function () {
         isComputer: function () {
             return false;
         },
-
-        selectAndPickColorOperation: function(){
-            var pickedColor = player.pickColor();
-            playerCard.setColor(pickedColor);
-            playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
-                Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
-      //      return enumCard.enumResult.PLAYER_TURN_AGAIN;
-        },
       
-        pickColor: function () {
+        pickColor: function (playerCard) {
             var picker;
-            var pickColorId = document.getElementById("pickColor");
+            var pickColorId = document.getElementById(enumCard.dives.PICK_COLOR);
             pickColorId.visibility = "visible";
-            var blue = pickColorId.getElementById("bluePicker");
-            blue.onclick = function (ev) {
-                ev.preventDefault();
-                picker = enumCard.enumColor.BLUE;
-                pickColorId.visibility = "hidden";
-            };
-            var green = pickColorId.getElementById("greenPicker");
-            green.onclick = function (ev) {
-                ev.preventDefault();
-                picker = enumCard.enumColor.GREEN;
-                pickColorId.visibility = "hidden";
-            };
-            var red = pickColorId.getElementById("redPicker");
-            red.onclick = function (ev) {
-                ev.preventDefault();
-                picker = enumCard.enumColor.RED;
-                pickColorId.visibility = "hidden";
-            };
-            var yellow = pickColorId.getElementById("yellowPicker");
-            yellow.onclick = function (ev) {
-                ev.preventDefault();
-                picker = enumCard.enumColor.YELLOW;
-                pickColorId.visibility = "hidden";
-            };
-            //TODO: HTML_OPERATION
+            var blue = pickColorId.getElementById(enumCard.dives.BLUE_PICK);
+            blue.addEventListener("onclick", function (ev) {
+                colorPicked(ev, enumCard.enumColor.BLUE, playerCard);
+            }, false);
+
+            var green = pickColorId.getElementById(enumCard.dives.GREEN_PICK);
+            green.addEventListener("onclick", function (ev) {
+                colorPicked(ev, enumCard.enumColor.GREEN, playerCard);
+            }, false);
+
+            var red = pickColorId.getElementById(enumCard.dives.RED_PICK);
+            red.addEventListener("onclick", function (ev) {
+                colorPicked(ev, enumCard.enumColor.RED, playerCard);
+            }, false);
+
+            var yellow = pickColorId.getElementById(enumCard.dives.YELLOW_PICK);
+            yellow.addEventListener("onclick", function (ev) {
+                colorPicked(ev, enumCard.enumColor.YELLOW, playerCard);
+            }, false);
+
+            return enumCard.enumResult.CONTINUE_PLAYER_TURN;
         },
 
         setTakiMode: function (card) {

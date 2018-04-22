@@ -33,7 +33,8 @@ var card = function(theColor, theSign, theValidation, theOperation, theId) {
 
     function setHtmlEvent(dragable) {
         htmlCard.ondragstart = function (event) {
-            if(!dragable)
+            var pickColorId = document.getElementById(enumCard.dives.PICK_COLOR);
+            if(!dragable || pickColorId.visibility === "visible")
                 return false;
             htmlCard.draggable = true;
             event.dataTransfer.setData("Text", id);
@@ -116,6 +117,10 @@ var card = function(theColor, theSign, theValidation, theOperation, theId) {
 
         setImage: function (imgName) {
             setUniqueImage(imgName);
+        },
+
+        setActive: function (activeness) {
+            active = activeness;
         }
 
     }
