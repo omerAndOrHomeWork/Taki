@@ -4,7 +4,7 @@ var game = (function() {
     var cssID=0;
     var players = [player(), smartComputer()];
     var amountOfCardsToTakeFromStock = 1;
-    // var statistics = new Statistics();
+    var gameStatistics;
 
     function changeTurn(promote) {
         //players[turn].calculateAVG();
@@ -14,7 +14,7 @@ var game = (function() {
     }
 
     function calcAmountCardsToTake(card){
-        if(card.sign === enumCard.enumTypes.TWO_PLUS) {
+        if(card.getSign() === enumCard.enumTypes.TWO_PLUS) {
             if (amountOfCardsToTakeFromStock % 2 === 0)
                 amountOfCardsToTakeFromStock += 2;
             else
@@ -40,6 +40,7 @@ var game = (function() {
             event.preventDefault();
         };
         drop.ondrop = function (event) {
+            event.preventDefault();
             var id = event.dataTransfer.getData("Text");
             var card = players[turn].getCard(id);
             if (card !== undefined) {
@@ -91,14 +92,14 @@ var game = (function() {
             player.takiMode = undefined;
             var cardsFromStock = stock.getCards(amountOfCardsToTakeFromStock);
             player.pullCardFromStock(cardsFromStock);
-            for(var i = 0; i<amountOfCardsToTakeFromStock; ++i)
-               cardsFromStock[i].setParent(player.getHtmlDiv(),player.isDraggable());
+           for(var i = 0; i<amountOfCardsToTakeFromStock; ++i)
+               cardsFromStock[i].setParent(player.getHtmlDiv(), player.isDraggable());
             //TODO: take the cards from the stock. change the cssClass, cut the cards elements from the stock to the player cards element
-           // gameCards.lastIndexOf(Card).makePassive(); why we need that?
-            //updateStatistics();
+            // gameCards.lastIndexOf(Card).makePassive(); why we need that?
+            // updateStatistics();
             changeTurn(1);
             computerOperation();
-     //   }
+        }
     }
 
     function computerOperation(){
@@ -128,6 +129,7 @@ var game = (function() {
         startGame: function () {
             stock.setGame();
             partition();
+            gameStatistics = new statistics(players.length);
             setEventListener();
             addEventListener();
             changeTurn(0);

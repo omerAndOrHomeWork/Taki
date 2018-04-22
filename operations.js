@@ -23,7 +23,7 @@ function numberValidation(playerCard, lastCard) {
 }
 
 function plusOperation() {
-    return 1;
+    return 0;
 }
 
 function plusValidation(playerCard, lastCard) {
@@ -90,6 +90,7 @@ function takiModeChecker(cards, takiMode) {
             break;
         }
     }
+
     return foundColor;
 }
 
@@ -122,7 +123,7 @@ var enumCard = (function(){
 
         dives: Object.freeze({
             PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards",
-            STOCK: "stockCards", OPEN_CARDS: "openCards", STOCK_PARENT: "stock"
+            STOCK: "stockCards", OPEN_CARDS: "openCards", STOCK_PARENT: "stock",STATISTICS: "statistics",CLOCK:"gameClock"
         }),
 
         cssStyle: Object.freeze({
@@ -142,6 +143,6 @@ function getUniqueCss(color,type,separator){
 function setCards(stock, cards) {
     for(var i = 0; i < cards.length; ++i){
         stock.push(cards[i]);
-        cards[i].changeCss(true);
+        cards[i].changeImage(true);
     }
 }

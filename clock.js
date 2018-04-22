@@ -7,44 +7,42 @@
 
     <script>
 */
-function clock(display)
+var clock = function() {
+        var cur_date = new Date(0,0);
+        var hours = cur_date.getHours();
+        var minutes = cur_date.getMinutes();
+        var seconds = cur_date.getSeconds();
+        var htmlClock;
+
+return {
+    run: function()
     {
-        this.cur_date = new Date(0,0);
-        this.hours = this.cur_date.getHours();
-        this.minutes = this.cur_date.getMinutes();
-        this.seconds = this.cur_date.getSeconds();
-        this.display = display;
+        setInterval(this.update.bind(this), 1000);
+    },
+
+    update: function() {
+        var clockHtmlFormat = "Game clock: " + hours + ":" + minutes + ":" + seconds;
+        document.getElementById(enumCard.dives.CLOCK).innerHTML = clockHtmlFormat;
+        this.updateTime(1);
+
+    },
+    updateTime : function (secs) {
+        seconds += secs;
+        if (seconds >= 60) {
+            minutes++;
+            seconds = 0;
+        }
+
+        if (minutes >= 60) {
+            hours++;
+            minutes = 0;
+        }
+        if (hours >= 24) {
+            hours = 0;
+        }
     }
-clock.prototype.run = function ()
-{
-    setInterval(this.update.bind(this), 1000);
+}
 };
-clock.prototype.update = function ()
-{
-    this.updateTime(1);
-    this.display.innerText = (this.hours + ":" + this.minutes + ":" + this.seconds);
-};
-clock.prototype.updateTime = function (secs)
-{
-    this.seconds+= secs;
-    if (this.seconds >= 60)
-    {
-        this.minutes++;
-        this.seconds= 0;
-    }
-    if (this.minutes >= 60)
-    {
-        this.hours++;
-        this.minutes=0;
-    }
-    if (this.hours >= 24)
-    {
-        this.hours = 0;
-    }
-};
-var gameClock = new clock(
-    document.querySelector('.clock'));
-gameClock.run();
 /*
 </script>
 
