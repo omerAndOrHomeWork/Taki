@@ -106,6 +106,15 @@ var stock = (function () {
         setGame: function () {
             createDeck();
             shuffleDeck(getRandomInt(10, 25));//random number (the numbers not very important),amount of times to make shuffle
+        },
+
+        getValidOpenCard: function () {
+            for(var i = 0; i < cards.length; ++i){
+                if(cards[i].getSign() === enumCard.enumTypes.NUMBER){
+                    return cards.splice(i, 1);
+                }
+            }
+            return undefined;
         }
     };
 })();

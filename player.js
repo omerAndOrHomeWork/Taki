@@ -4,9 +4,13 @@ var player = function () {
     var turnsPlayed = 0;
     var singleCardCounter = 0;
     var takiMode = undefined;
-    var currentTurnTime;
+    var currentTurnTime = 0;
     var htmlPlayerDiv = enumCard.dives.PLAYER_CARDS;
 
+
+    function calcCurrentTurn() {
+        currentTurnTime += 1;
+    }
     /*function setCards(playerHtml) {
 
         //playerHtml.add(<li>card</li>)
@@ -40,10 +44,9 @@ var player = function () {
     }*/
 
     return {
-        calculateAVG: function (currentTurnTime) {
+        calculateAVG: function () {
             averageTimePlayed *= turnsPlayed;
             averageTimePlayed += currentTurnTime;
-            turnsPlayed++;
             averageTimePlayed /= turnsPlayed;
         },
 /*
@@ -55,12 +58,13 @@ var player = function () {
             currentTurnTime = 0;
         },
 
-        calcCurrentTurn: function () {
-            currentTurnTime += 1;
+        getAverageTimePlayed: function(){
+            return averageTimePlayed;
         },
 
         setCards: function (theCards) {
             cards = theCards;
+            setInterval(calcCurrentTurn(),1000);
             for(var i = 0; i < cards.length; ++i){
                 cards[i].setParent(enumCard.dives.PLAYER_CARDS, true);
                 cards[i].changeImage(true);
@@ -75,11 +79,13 @@ var player = function () {
           return turnsPlayed;
         },
 
-        doOperation: function (card) {
+        increasePlayerTurns: function () {
+            turnsPlayed += 1;
+        },
+
+        doOperation: function (card, lastCard) {
             removeCard(cards, card);
-            var promote = card.doOperation();
-            if (promote === -1)
-                takiMode = card;
+            var promote = card.doOperation(this, lastCard);
             if (takiMode !== undefined) {
                 if(takiModeChecker(cards, takiMode))
                     promote = 0;
@@ -125,6 +131,49 @@ var player = function () {
 
         isComputer: function () {
             return false;
+        },
+
+        selectAndPickColorOperation: function(){
+            var pickedColor = player.pickColor();
+            playerCard.setColor(pickedColor);
+            playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
+                Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
+      //      return enumCard.enumResult.PLAYER_TURN_AGAIN;
+        },
+
+        pickColor: function () {
+            var picker;
+            var pickColorId = document.getElementById("pickColor");
+            pickColorId.visibility = "visible";
+            var blue = pickColorId.getElementById("bluePicker");
+            blue.onclick = function (ev) {
+                ev.preventDefault();
+                picker = enumCard.enumColor.BLUE;
+                pickColorId.visibility = "hidden";
+            };
+            var green = pickColorId.getElementById("greenPicker");
+            green.onclick = function (ev) {
+                ev.preventDefault();
+                picker = enumCard.enumColor.GREEN;
+                pickColorId.visibility = "hidden";
+            };
+            var red = pickColorId.getElementById("redPicker");
+            red.onclick = function (ev) {
+                ev.preventDefault();
+                picker = enumCard.enumColor.RED;
+                pickColorId.visibility = "hidden";
+            };
+            var yellow = pickColorId.getElementById("yellowPicker");
+            yellow.onclick = function (ev) {
+                ev.preventDefault();
+                picker = enumCard.enumColor.YELLOW;
+                pickColorId.visibility = "hidden";
+            };
+            //TODO: HTML_OPERATION
+        },
+
+        setTakiMode: function (card) {
+            takiMode = card;
         }
     };
 };

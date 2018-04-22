@@ -9,19 +9,25 @@ var card = function(theColor, theSign, theValidation, theOperation, theId) {
     var uniqueCardImage;
     var closeCardImage;
 
-    function setHtmlElement(imgName) {
-        htmlCard = document.createElement("a");
-        htmlCard.setAttribute("id", id);
-        closeCardImage =  document.createElement("img");
-        closeCardImage.src = enumCard.images.CLOSE_CARD;
-        uniqueCardImage = document.createElement("img");
+
+    function setUniqueImage(imgName) {
         var colorName;
         if( color !== undefined)
             colorName = Object.keys(enumCard.enumColor)[color].toLowerCase();
         else
             colorName = "other";
         uniqueCardImage.src = "../Taki/Images/" + colorName + "/" + imgName.toLowerCase() + ".png";
-        // htmlCard.appendChild(img);
+
+    }
+
+    function setHtmlElement(imgName) {
+        htmlCard = document.createElement("a");
+        htmlCard.setAttribute("id", id);
+        closeCardImage =  document.createElement("img");
+        closeCardImage.src = enumCard.images.CLOSE_CARD;
+        uniqueCardImage = document.createElement("img");
+                // htmlCard.appendChild(img);
+        setUniqueImage(imgName);
     }
 
 
@@ -37,11 +43,11 @@ var card = function(theColor, theSign, theValidation, theOperation, theId) {
     return{
 
         doValidation: function(lastCard){
-            return validation(this, lastCard);
+            return validation(lastCard, this);
         },
 
-        doOperation: function(){
-            return operation();
+        doOperation: function(player, lastCard){
+            return operation(player, this, lastCard);
         },
 
         makePassive: function () {
@@ -72,18 +78,25 @@ var card = function(theColor, theSign, theValidation, theOperation, theId) {
         },
 
         changeImage: function (openCard){
-
-            while(htmlCard.firstChild)
+            while (htmlCard.firstChild) {
                 htmlCard.removeChild(htmlCard.firstChild);
+            }
             if(openCard)
-              htmlCard.appendChild(uniqueCardImage);
+                htmlCard.appendChild(uniqueCardImage);
             else
-              htmlCard.appendChild(closeCardImage);
-            /*
+                htmlCard.appendChild(closeCardImage);
+            /*if(openCard) {
+
+                // htmlCard.classList.remove(enumCard.cssStyle.CLOSE_CARD);
+                // htmlCard.classList.add(enumCard.cssStyle.OPEN_CARD);
+                // htmlCard.removeChild(closeCardImage);
+                htmlCard.appendChild(uniqueCardImage);
+            }else{
+                htmlCard.appendChild(closeCardImage);
                 // htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
                 // htmlCard.classList.remove(enumCard.cssStyle.OPEN_CARD);
                 // htmlCard.appendChild(closeCardImage);
-            */
+            }*/
         },
 
         getSign: function(){
@@ -95,6 +108,14 @@ var card = function(theColor, theSign, theValidation, theOperation, theId) {
 
         getElement: function () {
             return htmlCard;
+        },
+
+        setColor: function (theColor) {
+          color = theColor;
+        },
+
+        setImage: function (imgName) {
+            setUniqueImage(imgName);
         }
 
     }

@@ -6,6 +6,7 @@ var smartComputer = function() {
     var numberOfPlayers;
     var lastCardInTaki = undefined;
     var singleCardCounter = 0;
+    var turnsPlayed = 0;
     var htmlPlayerDiv = enumCard.dives.COMPUTER_CARDS;
 
     function insertColor(playerCard) {
@@ -420,11 +421,21 @@ var smartComputer = function() {
             numberOfPlayers = numberOfPlayers - 1;
         },
 
-        doOperation: function(card) {
-            var promote = card.doOperation();
+        increasePlayerTurns: function () {
+            turnsPlayed += 1;
+        },
+
+        calculateAVG: function () {
+            return 0;
+        },
+
+        getAverageTimePlayed: function(){
+            return 0;
+        },
+
+        doOperation: function(card, lastCard) {
+            var promote = card.doOperation(this, lastCard);
             removeAllCardAppearances(card);
-            if (promote === -1)
-                takiMode = card;
             if (takiMode !== undefined) {
                 if(takiModeChecker(playerCards, takiMode))
                     promote = 0;
@@ -453,9 +464,28 @@ var smartComputer = function() {
         isComputer: function () {
             return true;
         },
+        getSingleCardCounter: function() {
+            return singleCardCounter;
+        },
 
         isDraggable: function () {
             return false;
+        },
+
+        getTurnsPlayed: function(){
+            return turnsPlayed;
+        },
+
+        pickColor: function () {
+            for(var i = 0; i < playerCards.length; ++i){
+                if(playerCards[i].getColor() !== undefined)
+                    return playerCards[i];
+            }
+            //TODO: LOGIC
+        },
+
+        setTakiMode: function (card) {
+            takiMode = card;
         }
     }
 };

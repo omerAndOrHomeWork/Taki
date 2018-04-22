@@ -1,25 +1,32 @@
 var statistics = function(i_playersGame) {
-    var turnsCounter = 0;
-    this.playersGame = i_playersGame;
+    var turnsCounter = -1;
+    var playersGame = i_playersGame;
     var singleCardPlayers = []; // if that correct
-   // var htmlStatistics = document.getElementsByClassName(enumCard.dives.STATISTICS);
+    var htmlDivsPlayers = new Array(playersGame.length);
     var gameClock = new clock();
     gameClock.run(); // the clock update in intervals
 
-    function showPlayerStatistics(playerKind){
-        for(var i = 0; i < playersGame.length; ++i) {
-            console.log(object.keys(enumColor)[playerKind] + ":" + "<br />");
-            console.log("Amount of turn played: " + playersGame[playerKind].getTurnsPlayed() + "<br />");
-            console.log("Amount of times single card in game: " + playersGame[playerKind].getSingleCardCounter() + "<br /> + \"<br />");
-        }
-    }
-
     return{
-        updateStatistics: function (player,playerKind) {
+        setStatistics:function(){
+            for(var i = 0; i <htmlDivsPlayers.length;++i){
+                htmlDivsPlayers[i] = document.createElement("div");
+                htmlDivsPlayers[i].setAttribute("id",Object.keys(enumCard.enumPlayer)[i]);
+                document.getElementById(enumCard.dives.STATISTICS).appendChild(htmlDivsPlayers[i]);
+            }
+        },
+
+        updateStatistics: function () {
             turnsCounter++;
-            singleCardPlayers[playerKind] = player.getSingleCardCounter();
-            console.log("Amount of turn played total :" + turnsCounter + "<br />");
-            showPlayerStatistics(playerKind);
+            for(var i = 0; i < playersGame.length; ++i) {
+                singleCardPlayers[i] = playersGame[i].getSingleCardCounter();
+                var playerLocal = Object.keys(enumCard.enumPlayer)[i] + ":\n";
+                playerLocal += "turns played: " + playersGame[i].getTurnsPlayed() + "\n";
+                playerLocal += "single cards times: " + playersGame[i].getSingleCardCounter() + "\n\n";
+                playerLocal += "average turn time: " + playersGame[i].getAverageTimePlayed() + "\n\n";
+                htmlDivsPlayers[i].innerText = playerLocal;
+            }
+            var gameTurns = "turns played totally :" + turnsCounter + "<br />";
+            htmlDivsPlayers[htmlDivsPlayers.length - 1].innerHTML +=gameTurns;
         }
     };
 }
