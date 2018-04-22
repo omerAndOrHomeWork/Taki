@@ -46,3 +46,23 @@ body {
  float: left;
  /*background: #cccccc url("../Images/other/close_card.png");*/
 }
+/*
+<style>
+.blue{
+width:20px;
+height:20px;
+    background: #2e6da4;
+
+}
+.yellow{
+    background: yellow;
+}</style>
+
+<div>
+  <button class="blue"></button>
+  <button class="yellow"></button>
+  <button value="opel"></button>
+  <button value="audi"></button>
+  </div>
+
+ */
