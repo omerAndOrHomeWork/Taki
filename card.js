@@ -72,18 +72,25 @@ var card = function(theColor, theSign, theValidation, theOperation, theId) {
         },
 
         changeImage: function (openCard){
-
-            while(htmlCard.firstChild)
+            while (htmlCard.firstChild) {
                 htmlCard.removeChild(htmlCard.firstChild);
+            }
             if(openCard)
-              htmlCard.appendChild(uniqueCardImage);
+                htmlCard.appendChild(uniqueCardImage);
             else
-              htmlCard.appendChild(closeCardImage);
-            /*
+                htmlCard.appendChild(closeCardImage);
+            /*if(openCard) {
+
+                // htmlCard.classList.remove(enumCard.cssStyle.CLOSE_CARD);
+                // htmlCard.classList.add(enumCard.cssStyle.OPEN_CARD);
+                // htmlCard.removeChild(closeCardImage);
+                htmlCard.appendChild(uniqueCardImage);
+            }else{
+                htmlCard.appendChild(closeCardImage);
                 // htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
                 // htmlCard.classList.remove(enumCard.cssStyle.OPEN_CARD);
                 // htmlCard.appendChild(closeCardImage);
-            */
+            }*/
         },
 
         getSign: function(){
