@@ -4,7 +4,7 @@ var game = (function() {
     var cssID=0;
     var players = [player(), smartComputer()];
     var amountOfCardsToTakeFromStock = 1;
-    // var statistics = new Statistics();
+    var gameStatistics;
 
     function changeTurn(promote) {
         //players[turn].calculateAVG();
@@ -14,7 +14,7 @@ var game = (function() {
     }
 
     function calcAmountCardsToTake(card){
-        if(card.sign === enumCard.enumTypes.TWO_PLUS) {
+        if(card.getSign() === enumCard.enumTypes.TWO_PLUS) {
             if (amountOfCardsToTakeFromStock % 2 === 0)
                 amountOfCardsToTakeFromStock += 2;
             else
@@ -27,7 +27,6 @@ var game = (function() {
         setCards(gameCards, stock.getCards(1));
         gameCards[0].setParent(enumCard.dives.OPEN_CARDS, false);
         for(var i=0; i < players.length; ++i)
-          //  players[i].setCssIDPlayer(cssID);
             players[i].setCards(stock.getCards(8), players.length);
     }
 
@@ -35,6 +34,9 @@ var game = (function() {
         var drop = document.getElementById(enumCard.dives.OPEN_CARDS);
         drop.draggable = false;
         drop.ondragover = function (ev) {
+            event.preventDefault();
+        };
+        drop.ondrop = function (event) {
             event.preventDefault();
         };
         drop.ondrop = function (event) {
@@ -127,6 +129,7 @@ var game = (function() {
         startGame: function () {
             stock.setGame();
             partition();
+            gameStatistics = new statistics(players.length);
             setEventListener();
             addEventListener();
             changeTurn(0);

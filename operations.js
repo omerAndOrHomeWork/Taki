@@ -123,7 +123,7 @@ var enumCard = (function(){
 
         dives: Object.freeze({
             PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards",
-            STOCK: "stockCards", OPEN_CARDS: "openCards", STOCK_PARENT: "stock"
+            STOCK: "stockCards", OPEN_CARDS: "openCards", STOCK_PARENT: "stock",STATISTICS: "statistics",CLOCK:"gameClock"
         }),
 
         cssStyle: Object.freeze({
