@@ -394,7 +394,7 @@ var smartComputer = function() {
             insertType(cardsToAdd[i]);
             playerCards.push(cardsToAdd[i]);
             cardsToAdd[i].setParent(enumCard.dives.COMPUTER_CARDS, false);
-            cardsToAdd[i].changeCss(false);
+            cardsToAdd[i].changeImage(false);
         }
     }
 
@@ -404,7 +404,7 @@ var smartComputer = function() {
             setAllCards(cards);
             for(var i = 0; i < cards.length; ++i){
                 cards[i].setParent(enumCard.dives.COMPUTER_CARDS, false);
-                cards[i].changeCss(true);
+                cards[i].changeImage(true);
             }
         },
 

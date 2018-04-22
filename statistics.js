@@ -2,10 +2,8 @@ var statistics = function(i_playersGame) {
     var turnsCounter = 0;
     this.playersGame = i_playersGame;
     var singleCardPlayers = []; // if that correct
-    var htmlGameClock = document.getElementsByClassName("gameClock");
-    var gameClock = new clock(document.querySelector(htmlGameClock));
-    //TODO: take care gameTime
-
+   // var htmlStatistics = document.getElementsByClassName(enumCard.dives.STATISTICS);
+    var gameClock = new clock();
     gameClock.run(); // the clock update in intervals
 
     function showPlayerStatistics(playerKind){

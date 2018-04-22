@@ -6,7 +6,6 @@ var player = function () {
     var takiMode = undefined;
     var currentTurnTime;
     var htmlPlayerDiv = enumCard.dives.PLAYER_CARDS;
-   // var htmlPlayer = document.getElementsByClassName("player");
 
     /*function setCards(playerHtml) {
 
@@ -64,7 +63,7 @@ var player = function () {
             cards = theCards;
             for(var i = 0; i < cards.length; ++i){
                 cards[i].setParent(enumCard.dives.PLAYER_CARDS, true);
-                cards[i].changeCss(true);
+                cards[i].changeImage(true);
             }
         },
 

@@ -71,18 +71,19 @@ var card = function(theColor, theSign, theValidation, theOperation, theId) {
             document.getElementById(enumCard.dives.STOCK).appendChild(htmlCard);
         },
 
-        changeCss: function (openCard){
-          if(openCard) {
-              // htmlCard.classList.remove(enumCard.cssStyle.CLOSE_CARD);
-              // htmlCard.classList.add(enumCard.cssStyle.OPEN_CARD);
-              // htmlCard.removeChild(closeCardImage);
+        changeImage: function (openCard){
+
+            while(htmlCard.firstChild)
+                htmlCard.removeChild(htmlCard.firstChild);
+            if(openCard)
               htmlCard.appendChild(uniqueCardImage);
-          }else{
-              // htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
-              // htmlCard.classList.remove(enumCard.cssStyle.OPEN_CARD);
-              htmlCard.removeChild(uniqueCardImage);
-              // htmlCard.appendChild(closeCardImage);
-          }
+            else
+              htmlCard.appendChild(closeCardImage);
+            /*
+                // htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
+                // htmlCard.classList.remove(enumCard.cssStyle.OPEN_CARD);
+                // htmlCard.appendChild(closeCardImage);
+            */
         },
 
         getSign: function(){
