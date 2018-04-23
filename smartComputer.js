@@ -492,3 +492,4 @@ var smartComputer = function() {
         }
     }
 };
+//stam
