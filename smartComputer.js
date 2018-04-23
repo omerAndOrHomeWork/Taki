@@ -425,6 +425,10 @@ var smartComputer = function() {
             turnsPlayed += 1;
         },
 
+        resetPlayerClock: function(){
+            return 0;
+        },
+
         calculateAVG: function () {
             return 0;
         },

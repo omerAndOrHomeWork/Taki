@@ -8,9 +8,7 @@ var player = function () {
     var htmlPlayerDiv = enumCard.dives.PLAYER_CARDS;
 
 
-    function calcCurrentTurn() {
-        currentTurnTime += 1;
-    }
+
     /*function setCards(playerHtml) {
 
         //playerHtml.add(<li>card</li>)
@@ -52,8 +50,12 @@ var player = function () {
     }
 
     return {
+        calcCurrentTurn: function () {
+                currentTurnTime += 1;
+         },
+
         calculateAVG: function () {
-            averageTimePlayed *= turnsPlayed;
+            averageTimePlayed *= (turnsPlayed - 1);
             averageTimePlayed += currentTurnTime;
             averageTimePlayed /= turnsPlayed;
         },
@@ -62,7 +64,7 @@ var player = function () {
             htmlPlayer.id += Object.keys(enumCard.enumPlayer)[cssID];
         },
 */
-        startClock: function () {
+        resetPlayerClock: function () {
             currentTurnTime = 0;
         },
 
@@ -72,7 +74,7 @@ var player = function () {
 
         setCards: function (theCards) {
             cards = theCards;
-            setInterval(calcCurrentTurn(),1000);
+            setInterval(this.calcCurrentTurn.bind(this),1000);
             for(var i = 0; i < cards.length; ++i){
                 cards[i].setParent(enumCard.dives.PLAYER_CARDS, true);
                 cards[i].changeImage(true);

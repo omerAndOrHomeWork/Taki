@@ -9,6 +9,7 @@ var game = (function() {
     function changeTurn(promote) {
         players[turn].increasePlayerTurns();
         players[turn].calculateAVG();
+        players[turn].resetPlayerClock();
         turn = (turn + promote) % players.length;
         gameStatistics.updateStatistics();
     }
