@@ -425,6 +425,10 @@ var smartComputer = function() {
             turnsPlayed += 1;
         },
 
+        resetPlayerClock: function(){
+            return 0;
+        },
+
         calculateAVG: function () {
             return 0;
         },
@@ -437,11 +441,11 @@ var smartComputer = function() {
             removeAllCardAppearances(card);
             if (takiMode !== undefined) {
                 if(takiModeChecker(playerCards, takiMode))
-                    promote = 0;
+                    promote = enumCard.enumResult.PLAYER_TURN_AGAIN;
                 else{
                     takiMode = undefined;
-                    if(promote === -1)
-                        promote = 1;
+                    if(promote === enumCard.enumResult.PLAYER_TURN_AGAIN)
+                        promote = enumCard.enumResult.SINGLE;
                 }
             }
             if (playerCards.length === 1)
