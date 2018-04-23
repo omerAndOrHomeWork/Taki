@@ -31,32 +31,62 @@ var game = (function() {
             players[i].setCards(stock.getCards(8), players.length);
     }
 
-    function setEventListener() {
+    function setEventsListener() {
         var drop = document.getElementById(enumCard.dives.OPEN_CARDS);
         drop.draggable = false;
         drop.ondragover = function (ev) {
             event.preventDefault();
         };
+
         drop.ondrop = function (event) {
             event.preventDefault();
-        };
-        drop.ondrop = function (event) {
-            event.preventDefault();
+            var pickColorId = document.getElementById(enumCard.dives.PICK_COLOR);
+            if(pickColorId.visibility === "visible")
+                return false;
             var id = event.dataTransfer.getData("Text");
             var card = players[turn].getCard(id);
             if (card !== undefined) {
                 dropValidation(id, card);
             }
         };
-    }
 
-    function addEventListener() {
         var click =  document.getElementById(enumCard.dives.STOCK);
         click.onclick = function(event) {
             event.preventDefault();
+            var pickColorId = document.getElementById(enumCard.dives.PICK_COLOR);
+            if(pickColorId.visibility === "visible")
+                return false;
             pullCardValidation(players[turn]);
         };
+
+        var pickColorId = document.getElementById(enumCard.dives.PICK_COLOR);
+        var blue = pickColorId.getElementById(enumCard.dives.BLUE_PICK);
+        blue.addEventListener("onclick", function (ev) {
+            changeTurn(enumCard.enumResult.SINGLE);
+            computerOperation();
+        }, false);
+
+        var green = pickColorId.getElementById(enumCard.dives.GREEN_PICK);
+        green.addEventListener("onclick", function (ev) {
+            changeTurn(enumCard.enumResult.SINGLE);
+            computerOperation();
+        }, false);
+
+        var red = pickColorId.getElementById(enumCard.dives.RED_PICK);
+        red.addEventListener("onclick", function (ev) {
+            changeTurn(enumCard.enumResult.SINGLE);
+            computerOperation();
+
+        }, false);
+
+        var yellow = pickColorId.getElementById(enumCard.dives.YELLOW_PICK);
+        yellow.addEventListener("onclick", function (ev) {
+            changeTurn(enumCard.enumResult.SINGLE);
+            computerOperation();
+        }, false);
+
     }
+
 
     /* Events fired on the drop target */
     /*drop.ondragover = function(event) {
@@ -78,6 +108,7 @@ var game = (function() {
             var promote = players[turn].doOperation(card, gameCards[gameCards.length - 1]);
             document.getElementById(enumCard.dives.OPEN_CARDS).removeChild(gameCards[gameCards.length - 1].getElement());
             card.setParent(enumCard.dives.OPEN_CARDS, false);
+            gameCards[gameCards.length - 1].setActive(false);
             gameCards.push(card);
             calcAmountCardsToTake(card);
             // updateStatics();
@@ -133,8 +164,7 @@ var game = (function() {
             gameStatistics = new statistics(players);
             gameStatistics.setStatistics();
             gameStatistics.updateStatistics();
-            setEventListener();
-            addEventListener();
+            setEventsListener();
             computerOperation();
         }
     }

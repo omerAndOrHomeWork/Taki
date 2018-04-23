@@ -3,7 +3,7 @@
  */
 function changeColorOperation(player, playerCard) {
 
-    return player.selectAndPickColorOperation(playerCard);
+    return player.pickColor(playerCard);
 /*
     var pickedColor = player.pickColor();
     playerCard.setColor(pickedColor);
@@ -135,7 +135,9 @@ var enumCard = (function(){
 
         dives: Object.freeze({
             PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards",
-            STOCK: "stockCards", OPEN_CARDS: "openCards", STOCK_PARENT: "stock",STATISTICS: "statistics",CLOCK:"gameClock"
+            STOCK: "stockCards", OPEN_CARDS: "openCards", STOCK_PARENT: "stock", STATISTICS: "statistics",
+            CLOCK:"gameClock", PICK_COLOR: "pickColor", BLUE_PICK: "bluePicker", GREEN_PICK: "greenPicker",
+            RED_PICK: "redPicker", YELLOW_PICK: "yellowPicker"
         }),
 
         cssStyle: Object.freeze({
@@ -146,7 +148,8 @@ var enumCard = (function(){
             CLOSE_CARD: "../Taki/Images/other/close_card.png"
         }),
 
-        enumResult: Object.freeze({CONTINUE_PLAYER_TURN: 0,SINGLE: 1, DOUBLE: 2, PLAYER_TURN_AGAIN: 3})
+        enumResult: Object.freeze({CONTINUE_PLAYER_TURN: 0,SINGLE: 1, DOUBLE: 2,
+            PLAYER_TURN_AGAIN: 3})
     }
 })();
 
