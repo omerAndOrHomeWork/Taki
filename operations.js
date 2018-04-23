@@ -163,3 +163,4 @@ function setCards(stock, cards) {
         cards[i].changeImage(true);
     }
 }
+//stam

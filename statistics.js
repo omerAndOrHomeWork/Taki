@@ -33,3 +33,4 @@ var statistics = function(i_playersGame) {
 
 //TODO: GetAVG in loop
 //TODO: GetSingleCardsInLoop
+//stam

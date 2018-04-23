@@ -1,4 +1,4 @@
-var card = function(theColor, theSign, theValidation, theOperation, theId) {
+function Card(theColor, theSign, theValidation, theOperation, theId) {
     var color = theColor;
     var sign = theSign;
     var validation = theValidation;
@@ -86,18 +86,18 @@ var card = function(theColor, theSign, theValidation, theOperation, theId) {
                 htmlCard.appendChild(uniqueCardImage);
             else
                 htmlCard.appendChild(closeCardImage);
-            /*if(openCard) {
-
-                // htmlCard.classList.remove(enumCard.cssStyle.CLOSE_CARD);
-                // htmlCard.classList.add(enumCard.cssStyle.OPEN_CARD);
-                // htmlCard.removeChild(closeCardImage);
-                htmlCard.appendChild(uniqueCardImage);
-            }else{
-                htmlCard.appendChild(closeCardImage);
-                // htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
-                // htmlCard.classList.remove(enumCard.cssStyle.OPEN_CARD);
-                // htmlCard.appendChild(closeCardImage);
-            }*/
+            // if(openCard) {
+            //
+            //     // htmlCard.classList.remove(enumCard.cssStyle.CLOSE_CARD);
+            //     // htmlCard.classList.add(enumCard.cssStyle.OPEN_CARD);
+            //     // htmlCard.removeChild(closeCardImage);
+            //     htmlCard.appendChild(uniqueCardImage);
+            // }else{
+            //     htmlCard.appendChild(closeCardImage);
+            //     // htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
+            //     // htmlCard.classList.remove(enumCard.cssStyle.OPEN_CARD);
+            //     // htmlCard.appendChild(closeCardImage);
+            // }
         },
 
         getSign: function(){
@@ -124,4 +124,5 @@ var card = function(theColor, theSign, theValidation, theOperation, theId) {
         }
 
     }
-};
+}
+//stam
