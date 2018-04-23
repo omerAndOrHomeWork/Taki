@@ -149,7 +149,7 @@ var enumCard = (function(){
         }),
 
         enumResult: Object.freeze({CONTINUE_PLAYER_TURN: 0,SINGLE: 1, DOUBLE: 2,
-            PLAYER_TURN_AGAIN: 3})
+            PLAYER_TURN_AGAIN: 3}) //to change
     }
 })();
 
