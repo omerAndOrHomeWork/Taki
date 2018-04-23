@@ -41,13 +41,7 @@ var player = function () {
         }
     }*/
 
-    function colorPicked(event, pickedColor, playerCard) {
-        event.preventDefault();
-        playerCard.setColor(pickedColor);
-        playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
-            Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
-        document.getElementById("pickColor").visibility = "hidden";
-    }
+
 
     return {
         calcCurrentTurn: function () {
@@ -147,25 +141,7 @@ var player = function () {
             var picker;
             var pickColorId = document.getElementById(enumCard.dives.PICK_COLOR);
             pickColorId.visibility = "visible";
-            var blue = pickColorId.getElementById(enumCard.dives.BLUE_PICK);
-            blue.addEventListener("onclick", function (ev) {
-                colorPicked(ev, enumCard.enumColor.BLUE, playerCard);
-            }, false);
 
-            var green = pickColorId.getElementById(enumCard.dives.GREEN_PICK);
-            green.addEventListener("onclick", function (ev) {
-                colorPicked(ev, enumCard.enumColor.GREEN, playerCard);
-            }, false);
-
-            var red = pickColorId.getElementById(enumCard.dives.RED_PICK);
-            red.addEventListener("onclick", function (ev) {
-                colorPicked(ev, enumCard.enumColor.RED, playerCard);
-            }, false);
-
-            var yellow = pickColorId.getElementById(enumCard.dives.YELLOW_PICK);
-            yellow.addEventListener("onclick", function (ev) {
-                colorPicked(ev, enumCard.enumColor.YELLOW, playerCard);
-            }, false);
 
             return enumCard.enumResult.CONTINUE_PLAYER_TURN;
         },
@@ -175,3 +151,4 @@ var player = function () {
         }
     };
 };
+//stam
