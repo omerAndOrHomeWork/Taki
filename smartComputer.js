@@ -399,6 +399,104 @@ var smartComputer = function() {
         }
     }
 
+    function takiWithConnection() {
+        var color, tempCard;
+        for (var i = 0; i < typesCards[enumCard.enumTypes.TAKI].length; ++i) {
+            color = typesCards[enumCard.enumTypes.TAKI][i].getColor();
+            if (typeAndColorMatch(enumCard.enumTypes.PLUS, color, different) !== undefined) {
+                tempCard = typeAndColorMatch(enumCard.enumTypes.PLUS, color, equal);
+                if (tempCard !== undefined)
+                    return color;
+            } else if (numberOfPlayers === 2) {
+                if (typeAndColorMatch(enumCard.enumTypes.STOP, color, different) !== undefined) {
+                    tempCard = typeAndColorMatch(enumCard.enumTypes.STOP, color, equal);
+                    if (tempCard !== undefined)
+                        return color;
+                }
+            }
+        }
+    }
+
+    function takiWithNumberConnection() {
+        var color, tempCard;
+        for (var i = 0; i < typesCards[enumCard.enumTypes.TAKI].length; ++i) {
+            color = typesCards[enumCard.enumTypes.TAKI][i].getColor();
+            tempCard = connectionNumber(color, different);
+            if (tempCard !== undefined)
+                return color;
+        }
+    }
+
+    function colorWithConnection(){
+        var color, tempCard;
+        for (var i = 0; i < colorsCards.length; ++i) {
+            if(colorsCards[i].length === 0)
+                continue;
+            color = i;
+            if (typeAndColorMatch(enumCard.enumTypes.PLUS, color, different) !== undefined) {
+                tempCard = typeAndColorMatch(enumCard.enumTypes.PLUS, color, equal);
+                if (tempCard !== undefined)
+                    return color;
+            } else if (numberOfPlayers === 2) {
+                if (typeAndColorMatch(enumCard.enumTypes.STOP, color, different) !== undefined) {
+                    tempCard = typeAndColorMatch(enumCard.enumTypes.STOP, color, equal);
+                    if (tempCard !== undefined)
+                        return color;
+                }
+            }
+        }
+
+        return undefined;
+    }
+
+    function colorWithNumberConnection() {
+        var color, tempCard;
+        for (var i = 0; i < colorsCards.length; ++i) {
+            if(colorsCards[i].length === 0)
+                continue;
+            color = i;
+            tempCard = connectionNumber(color, different);
+            if (tempCard !== undefined)
+                return color;
+        }
+        return undefined;
+    }
+
+    function minimumCardsInColor() {
+        var minimumLength;
+        for (var i = 0; i < colorsCards.length; ++i) {
+            if (colorsCards[i].length === 0)
+                continue;
+            if(minimumLength === undefined)
+                minimumLength = i;
+            else if(colorsCards[minimumLength].length > colorsCards[i].length)
+                minimumLength = i;
+        }
+
+        return minimumLength;
+    }
+
+    function getColorToChange() {
+        var color, tempCard;
+        color = takiWithConnection();
+        if(color !== undefined)
+            return color;
+        color = takiWithNumberConnection();
+        if(color !== undefined)
+            return color;
+        if (typesCards[enumCard.enumTypes.TAKI].length > 0) {
+            return typesCards[enumCard.enumTypes.TAKI][0].getColor();
+        }
+        color = colorWithConnection();
+        if(color !== undefined)
+            return color;
+        color = colorWithNumberConnection();
+        if(color !== undefined)
+            return color;
+        return minimumCardsInColor();
+
+    }
+
     return{
         setCards: function(cards, playersAmount){
             numberOfPlayers = playersAmount;
@@ -479,12 +577,12 @@ var smartComputer = function() {
             return turnsPlayed;
         },
       
-        pickColor: function () {
-            for(var i = 0; i < playerCards.length; ++i){
-                if(playerCards[i].getColor() !== undefined)
-                    return playerCards[i];
-            }
-            //TODO: LOGIC
+        pickColor: function (playerCard) {
+            var pickedColor = getColorToChange();
+            playerCard.setColor(pickedColor);
+            playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
+                Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
+            return enumCard.enumResult.SINGLE;
         },
 
         setTakiMode: function (card) {
