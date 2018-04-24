@@ -91,12 +91,14 @@ var player = function () {
             removeCard(cards, card);
             var promote = card.doOperation(this, lastCard);
             if (takiMode !== undefined) {
-                if(takiModeChecker(cards, takiMode))
-                    promote = enumCard.enumResult.PLAYER_TURN_AGAIN;
+                if(takiModeChecker(cards, takiMode)) {
+                    promote = enumCard.enumResult.CONTINUE_TURN;
+                    lastCard.setActive(false);
+                }
                 else{
                     takiMode = undefined;
-                    if(promote === enumCard.enumResult.PLAYER_TURN_AGAIN)
-                        promote = enumCard.enumResult.SINGLE;
+                    if(promote === enumCard.enumResult.CONTINUE_TURN)
+                        promote = enumCard.enumResult.NEXT_TURN;
                 }
             }
             if (cards.length === 1)
@@ -131,7 +133,9 @@ var player = function () {
             return true;
         },
 
-        singleCard: singleCardCounter,
+        getAmountOfCards: function(){
+            return cards.length;
+        },
 
         isComputer: function () {
             return false;
@@ -140,10 +144,10 @@ var player = function () {
         pickColor: function (playerCard) {
             var picker;
             var pickColorId = document.getElementById(enumCard.dives.PICK_COLOR);
-            pickColorId.visibility = "visible";
+            pickColorId.style.visibility = "visible";
 
 
-            return enumCard.enumResult.CONTINUE_PLAYER_TURN;
+            return enumCard.enumResult.CONTINUE_TURN;
         },
 
         setTakiMode: function (card) {

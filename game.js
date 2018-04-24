@@ -37,9 +37,9 @@ var game = (function() {
         gameCards[gameCards.length - 1].setColor(pickedColor);
         gameCards[gameCards.length - 1].setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
             Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
-        document.getElementById("pickColor").visibility = "hidden";
-        changeTurn(enumCard.enumResult.SINGLE);
-        computerOperation();
+        document.getElementById(enumCard.dives.PICK_COLOR).style.visibility = "hidden";
+        changeTurn(enumCard.enumResult.NEXT_TURN);
+        setTimeout(computerOperation,2000);
     }
 
     function setEventsListener() {
@@ -52,7 +52,7 @@ var game = (function() {
         drop.ondrop = function (event) {
             event.preventDefault();
             var pickColorId = document.getElementById(enumCard.dives.PICK_COLOR);
-            if(pickColorId.visibility === "visible")
+            if(pickColorId.style.visibility === "visible")
                 return false;
             var id = event.dataTransfer.getData("Text");
             var card = players[turn].getCard(id);
@@ -62,35 +62,34 @@ var game = (function() {
         };
 
         var click =  document.getElementById(enumCard.dives.STOCK);
-        click.onclick = function(event) {
+        click.onclick = function(event) {//TODO: MAKE IT RESICD FOR CLICKING OUT OF TURN
             event.preventDefault();
             var pickColorId = document.getElementById(enumCard.dives.PICK_COLOR);
-            if(pickColorId.visibility === "visible")
+            if(pickColorId.style.visibility === "visible")
                 return false;
             pullCardValidation(players[turn]);
         };
 
-        var pickColorId = document.getElementById(enumCard.dives.PICK_COLOR);
 
-        var blue = pickColorId.getElementById(enumCard.dives.BLUE_PICK);
+        var blue = document.getElementById(enumCard.dives.BLUE_PICK);
         blue.onclick = function (ev) {
             colorPicked(ev, enumCard.enumColor.BLUE);
         };
 
-        var green = pickColorId.getElementById(enumCard.dives.GREEN_PICK);
+        var green = document.getElementById(enumCard.dives.GREEN_PICK);
         green.onclick = function (ev) {
             colorPicked(ev, enumCard.enumColor.GREEN);
         };
 
-        var red = pickColorId.getElementById(enumCard.dives.RED_PICK);
+        var red = document.getElementById(enumCard.dives.RED_PICK);
         red.onclick = function (ev) {
             colorPicked(ev, enumCard.enumColor.RED);
         };
 
-        var yellow = pickColorId.getElementById(enumCard.dives.YELLOW_PICK);
+        var yellow = document.getElementById(enumCard.dives.YELLOW_PICK);
         yellow.onclick = function (ev) {
             colorPicked(ev, enumCard.enumColor.YELLOW);
-        };
+        };//work checked!
     }
 
     function dropValidation(id, card) {
@@ -102,30 +101,36 @@ var game = (function() {
             gameCards.push(card);
             calcAmountCardsToTake(card);
             // updateStatics();
-            if(promote !== enumCard.enumResult.PLAYER_TURN_AGAIN)
+            if(players[turn].getAmountOfCards() === 0){ //change
+                alert(Object.keys(enumCard.enumPlayer)[turn] + " wins!");
+            }
+            if(promote !== enumCard.enumResult.CONTINUE_TURN)
                 changeTurn(promote);
-            computerOperation();
+            setTimeout(computerOperation,2000);
         }
     }
 
 
     function pullCardValidation(player) {
         if(player === players[turn] && player.pullApproval(gameCards[gameCards.length-1])){
-            player.takiMode = undefined;
+            gameCards[gameCards.length - 1].setActive(false);
+            player.setTakiMode(undefined);
             var cardsFromStock = stock.getCards(amountOfCardsToTakeFromStock);
+            amountOfCardsToTakeFromStock = 1;
             player.pullCardFromStock(cardsFromStock);
-           for(var i = 0; i<amountOfCardsToTakeFromStock; ++i)
+           for(var i = 0; i < cardsFromStock.length; ++i)
                cardsFromStock[i].setParent(player.getHtmlDiv(), player.isDraggable());
             //TODO: take the cards from the stock. change the cssClass, cut the cards elements from the stock to the player cards element
             // gameCards.lastIndexOf(Card).makePassive(); why we need that?
             // updateStatistics();
-            changeTurn(1);
-            computerOperation();
+            changeTurn(enumCard.enumResult.NEXT_TURN);
+            setTimeout(computerOperation,2000);
         }
     }
 
     function computerOperation(){
         if(players[turn].isComputer()){
+
             var card = players[turn].pickCard(gameCards[gameCards.length - 1]);
             if(card === undefined)
                 pullCardValidation(players[turn]);
@@ -149,13 +154,14 @@ var game = (function() {
 
     return{
         startGame: function () {
+            document.getElementById("Enter_Game").style.visibility = "hidden";
             stock.setGame();
             partition();
             gameStatistics = new statistics(players);
             gameStatistics.setStatistics();
             gameStatistics.updateStatistics();
             setEventsListener();
-            computerOperation();
+            setTimeout(computerOperation,2000);
         }
     }
 

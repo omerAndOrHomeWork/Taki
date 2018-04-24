@@ -16,7 +16,7 @@ function Card(theColor, theSign, theValidation, theOperation, theId) {
             colorName = Object.keys(enumCard.enumColor)[color].toLowerCase();
         else
             colorName = "other";
-        uniqueCardImage.src = "../Taki/Images/" + colorName + "/" + imgName.toLowerCase() + ".png";
+        uniqueCardImage.setAttribute("src", "../Taki/Images/" + colorName + "/" + imgName.toLowerCase() + ".png");
 
     }
 
@@ -31,10 +31,10 @@ function Card(theColor, theSign, theValidation, theOperation, theId) {
     }
 
 
-    function setHtmlEvent(dragable) {
+    function setHtmlEvent(draggable) {
         htmlCard.ondragstart = function (event) {
             var pickColorId = document.getElementById(enumCard.dives.PICK_COLOR);
-            if(!dragable || pickColorId.visibility === "visible")
+            if(!draggable || pickColorId.style.visibility === "visible")
                 return false;
             htmlCard.draggable = true;
             event.dataTransfer.setData("Text", id);
@@ -63,9 +63,9 @@ function Card(theColor, theSign, theValidation, theOperation, theId) {
             return id;
         },
 
-        setParent: function (parentHolder, dragable) {
+        setParent: function (parentHolder, draggable) {
             document.getElementById(parentHolder).appendChild(htmlCard);
-            setHtmlEvent(dragable);
+            setHtmlEvent(draggable);
         },
 
 
