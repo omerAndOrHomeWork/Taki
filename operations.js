@@ -9,7 +9,7 @@ function changeColorOperation(player, playerCard) {
     playerCard.setColor(pickedColor);
     playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
         Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
-    return enumCard.enumResult.SINGLE;
+    return enumCard.enumResult.NEXT_TURN;
 */
 }
 
@@ -21,7 +21,7 @@ function changeColorValidation(lastCard) { //TODO:: CHECK IF WE CAN WITH ONE INP
 }
 
 function numberOperation() {
-    return enumCard.enumResult.SINGLE;
+    return enumCard.enumResult.NEXT_TURN;
 }
 
 function numberValidation(lastCard, playerCard) {
@@ -29,7 +29,7 @@ function numberValidation(lastCard, playerCard) {
 }
 
 function plusOperation() {
-    return enumCard.enumResult.CONTINUE_PLAYER_TURN;
+    return enumCard.enumResult.CONTINUE_TURN;
 }
 
 function plusValidation(lastCard, playerCard) {
@@ -37,7 +37,7 @@ function plusValidation(lastCard, playerCard) {
 }
 
 function stopOperation() {
-    return enumCard.enumResult.DOUBLE;
+    return enumCard.enumResult.JUMP_TURN;
 }
 
 function stopValidation(lastCard, playerCard) {
@@ -51,8 +51,8 @@ function superTakiOperation(player, playerCard, lastCard) {
     playerCard.setColor(lastCard.getColor());
     playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[playerCard.getColor()],
         Object.keys(enumCard.enumTypes)[enumCard.enumTypes.TAKI],'_'));
-    player.setTakiMode(card);
-    return enumCard.enumResult.PLAYER_TURN_AGAIN;
+    player.setTakiMode(playerCard);
+    return enumCard.enumResult.EXTRA_TURN;
 }
 
 /**
@@ -65,9 +65,9 @@ function superTakiValidation(lastCard) {
 /**
  * @return {number}
  */
-function takiOperation(player) {
-    player.setTakiMode(card);
-    return enumCard.enumResult.PLAYER_TURN_AGAIN;
+function takiOperation(player, playerCard) {
+    player.setTakiMode(playerCard);
+    return enumCard.enumResult.EXTRA_TURN;
 }
 
 /**
@@ -79,7 +79,7 @@ function takiValidation(lastCard, playerCard) {
 
 function twoPlusOperation(player, playerCard) {
     playerCard.setActive(true);
-    return enumCard.enumResult.SINGLE;
+    return enumCard.enumResult.NEXT_TURN;
 }
 
 function twoPlusValidation(lastCard, playerCard) {
@@ -148,8 +148,8 @@ var enumCard = (function(){
             CLOSE_CARD: "../Taki/Images/other/close_card.png"
         }),
 
-        enumResult: Object.freeze({CONTINUE_PLAYER_TURN: 0,SINGLE: 1, DOUBLE: 2,
-            PLAYER_TURN_AGAIN: 3}) //to change
+        enumResult: Object.freeze({EXTRA_TURN: 0,NEXT_TURN: 1, JUMP_TURN: 2,
+            CONTINUE_TURN: 3})
     }
 })();
 
@@ -163,4 +163,3 @@ function setCards(stock, cards) {
         cards[i].changeImage(true);
     }
 }
-//stam

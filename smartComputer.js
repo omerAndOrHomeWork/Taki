@@ -71,7 +71,7 @@ var smartComputer = function() {
         if( pickedCard === undefined && type === lastGameCard.getSign()){
             return typeCardWithLeastSameColorInHand(type);
         }
-        return undefined;
+        return pickedCard;
     }
 
 
@@ -208,13 +208,14 @@ var smartComputer = function() {
         }
         pickedCard = typeOrColorMatch(enumCard.enumTypes.PLUS, lastGameCard, equal);
         if(pickedCard !== undefined)
-            return pickedCard;
+            return pickedCard;//checked!! work good!
         pickedCard = typeOrColorMatch(enumCard.enumTypes.STOP, lastGameCard, equal);
         if(pickedCard !== undefined)
             return pickedCard;
         return typeOrColorMatch(enumCard.enumTypes.TWO_PLUS, lastGameCard, equal);
     }
 
+    //checked! work good!
     function colorCardInTaki(lastGameCard) {
         var currentCard;
         for(var i = 0; i < colorsCards[lastGameCard.getColor()].length; ++i){
@@ -239,12 +240,12 @@ var smartComputer = function() {
             lastCardInTaki = typeAndColorMatch(enumCard.enumTypes.PLUS, lastGameCard.getColor(), equal);
             if(lastCardInTaki !== undefined)
                 return;
-        }
+        }//checked! work good!
         if(typeAndColorMatch(enumCard.enumTypes.STOP, lastGameCard.getColor(), different) !== undefined){
             lastCardInTaki = typeAndColorMatch(enumCard.enumTypes.STOP, lastGameCard.getColor(), equal);
             if(lastCardInTaki !== undefined)
                 return;
-        }
+        }//checked! work good!
         lastCardInTaki = connectionNumber(lastGameCard.getColor(), different);
         if(lastCardInTaki !== undefined)
             return;
@@ -350,7 +351,7 @@ var smartComputer = function() {
                 else if (numberOfPlayers > 2)
                     takiOperationWithMorePlayers(lastGameCard);
             }
-            pickedCard = colorCardInTaki(lastGameCard);
+            pickedCard = colorCardInTaki(lastGameCard);//checked! work good!
         }else{
             pickedCard = typeAndColorMatch(enumCard.enumTypes.TAKI, lastGameCard.getColor(), equal);
             /*if(pickedCard !== undefined && pickedCard.doOperation()){
@@ -370,7 +371,9 @@ var smartComputer = function() {
     function operation(lastGameCard){
         var pickedCard;
         pickedCard = plusTwoOperation(lastGameCard);
-        if(pickedCard === undefined)
+        if(pickedCard === undefined && lastGameCard.isActive())
+            return undefined;
+        else if(pickedCard === undefined)
             pickedCard = takiOperation(lastGameCard);
         if(pickedCard === undefined)
             pickedCard = superTakiExecute(lastGameCard);
@@ -395,7 +398,7 @@ var smartComputer = function() {
             insertType(cardsToAdd[i]);
             playerCards.push(cardsToAdd[i]);
             cardsToAdd[i].setParent(enumCard.dives.COMPUTER_CARDS, false);
-            cardsToAdd[i].changeImage(false);
+            cardsToAdd[i].changeImage(true);//TODO: CHANGE TO FALSE
         }
     }
 
@@ -538,12 +541,14 @@ var smartComputer = function() {
             var promote = card.doOperation(this, lastCard);
             removeAllCardAppearances(card);
             if (takiMode !== undefined) {
-                if(takiModeChecker(playerCards, takiMode))
-                    promote = enumCard.enumResult.PLAYER_TURN_AGAIN;
+                if(takiModeChecker(playerCards, takiMode)) {
+                    promote = enumCard.enumResult.EXTRA_TURN;
+                    lastCard.setActive(false);
+                }
                 else{
                     takiMode = undefined;
-                    if(promote === enumCard.enumResult.PLAYER_TURN_AGAIN)
-                        promote = enumCard.enumResult.SINGLE;
+                    if(promote === enumCard.enumResult.EXTRA_TURN)
+                        promote = enumCard.enumResult.NEXT_TURN;
                 }
             }
             if (playerCards.length === 1)
@@ -582,7 +587,7 @@ var smartComputer = function() {
             playerCard.setColor(pickedColor);
             playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
                 Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
-            return enumCard.enumResult.SINGLE;
+            return enumCard.enumResult.NEXT_TURN;
         },
 
         setTakiMode: function (card) {
