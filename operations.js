@@ -29,7 +29,6 @@ function numberValidation(lastCard, playerCard) {
 }
 
 function plusOperation() {
-
     return enumCard.enumResult.EXTRA_TURN;
 }
 
@@ -53,7 +52,6 @@ function superTakiOperation(player, playerCard, lastCard) {
     playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[playerCard.getColor()],
         Object.keys(enumCard.enumTypes)[enumCard.enumTypes.TAKI],'_'));
     player.setTakiMode(playerCard);
-
     return enumCard.enumResult.CONTINUE_TURN;
 }
 
