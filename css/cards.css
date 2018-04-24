@@ -37,7 +37,6 @@ body {
     height: 30px;
     width: 30px;
     background: yellow;
-    visibility: hidden;
 }
 
 #redPicker{
@@ -47,7 +46,6 @@ body {
     height: 30px;
     width: 30px;
     background: #FF0000;
-    visibility: hidden;
 }
 
 #bluePicker{
@@ -57,7 +55,6 @@ body {
     height: 30px;
     width: 30px;
     background:	#000080;
-    visibility: hidden;
 }
 
 #greenPicker{
@@ -67,8 +64,11 @@ body {
     height: 30px;
     width: 30px;
     background: #008000;
-    visibility: hidden;
 
+}
+
+#pickColor{
+    visibility: hidden;
 }
 
 /*#stockCards.closeCard{
