@@ -12,7 +12,9 @@ var clock = function() {
         var hours = cur_date.getHours();
         var minutes = cur_date.getMinutes();
         var seconds = cur_date.getSeconds();
-
+        var clockHtml = document.createElement("div");
+        clockHtml.setAttribute("id",enumCard.dives.CLOCK);
+        document.getElementById(enumCard.dives.STATISTICS).appendChild(clockHtml);
 return {
     run: function()
     {
@@ -21,7 +23,7 @@ return {
 
     update: function() {
         var clockHtmlFormat = "Game clock: " + hours + ":" + minutes + ":" + seconds;
-        document.getElementById(enumCard.dives.CLOCK).innerHTML = clockHtmlFormat;
+        clockHtml.innerHTML = clockHtmlFormat;
         this.updateTime(1);
 
     },

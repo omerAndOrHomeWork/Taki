@@ -1,7 +1,7 @@
 var smartComputer = function() {
     var colorsCards = [[], [], [], []];//sorting in enumColor sort
     var typesCards = [[], [], [], [], [], [], []];//sorting in enumType sort
-    var playerCards = [];
+    var allCards = [];
     var takiMode = undefined;
     var numberOfPlayers;
     var lastCardInTaki = undefined;
@@ -22,7 +22,7 @@ var smartComputer = function() {
             if(cards[i].getColor() !== undefined)
                 insertColor(cards[i]);
             insertType(cards[i]);
-            playerCards.push(cards[i]);
+            allCards.push(cards[i]);
         }
     }
 
@@ -294,13 +294,13 @@ var smartComputer = function() {
         if(card.getColor() !== undefined)
             removeCard(colorsCards[card.getColor()], card);
         removeCard(typesCards[card.getSign()], card);
-        removeCard(playerCards, card);
+        removeCard(allCards, card);
     }
 
     function firstAvailableCard(lastGameCard) {
-        for(var i = 0; i < playerCards.length; ++i){
-            if(playerCards[i].doValidation(lastGameCard))
-                return playerCards[i];
+        for(var i = 0; i < allCards.length; ++i){
+            if(allCards[i].doValidation(lastGameCard))
+                return allCards[i];
         }
         return undefined;
     }
@@ -368,6 +368,7 @@ var smartComputer = function() {
             return undefined;
     }
 
+    //TODO: BUG in taki, the last card does not operate, insted took two from my own +2
     function operation(lastGameCard){
         var pickedCard;
         pickedCard = plusTwoOperation(lastGameCard);
@@ -396,7 +397,7 @@ var smartComputer = function() {
             if(cardsToAdd[i].getColor() !== undefined)
                 insertColor(cardsToAdd[i]);
             insertType(cardsToAdd[i]);
-            playerCards.push(cardsToAdd[i]);
+            allCards.push(cardsToAdd[i]);
             cardsToAdd[i].setParent(enumCard.dives.COMPUTER_CARDS, false);
             cardsToAdd[i].changeImage(true);//TODO: CHANGE TO FALSE
         }
@@ -535,7 +536,7 @@ var smartComputer = function() {
         },
 
         getAmountOfCards: function(){
-            return playerCards.length;
+            return allCards.length;
         },
 
         getAverageTimePlayed: function(){
@@ -545,7 +546,7 @@ var smartComputer = function() {
             var promote = card.doOperation(this, lastCard);
             removeAllCardAppearances(card);
             if (takiMode !== undefined) {
-                if(takiModeChecker(playerCards, takiMode)) {
+                if(takiModeChecker(allCards, takiMode)) {
                     promote = enumCard.enumResult.EXTRA_TURN;
                     lastCard.setActive(false);
                 }
@@ -555,17 +556,17 @@ var smartComputer = function() {
                         promote = enumCard.enumResult.NEXT_TURN;
                 }
             }
-            if (playerCards.length === 1)
+            if (allCards.length === 1)
                 singleCardCounter++;
             return promote;
         },
 
         pullApproval: function (lastCard){
-            return pullApproval(playerCards, lastCard);
+            return pullApproval(allCards, lastCard);
         },
 
         getCard: function (id) {
-            searchCard(playerCards, id);
+            searchCard(allCards, id);
         },
 
         getHtmlDiv: function () {
@@ -596,6 +597,10 @@ var smartComputer = function() {
 
         setTakiMode: function (card) {
             takiMode = card;
+        },
+
+        getAllCards: function(){
+            return allCards;
         }
     }
 };

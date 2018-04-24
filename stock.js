@@ -10,7 +10,7 @@ var stock = (function () {
     function createDeck() {
         htmlStock = document.createElement("div");
         htmlStock.setAttribute("id", enumCard.dives.STOCK);
-        document.getElementById(enumCard.dives.STOCK_PARENT).appendChild(htmlStock);
+        document.getElementById(enumCard.dives.STOCK_AND_OPEN_CARDS).appendChild(htmlStock);
         for(var number = 0; number < twoCardsNumber.length; ++number){
             for (var color = 0; color < colorNumber.length; ++color) {
                 css = getUniqueCss(Object.keys(enumCard.enumColor)[color], twoCardsNumber[number].toString(),'_');
@@ -84,6 +84,8 @@ var stock = (function () {
         yellow_change_color.src = "../Taki/Images/yellow/yellow_change_color.png";
     }
 
+
+
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -124,6 +126,24 @@ var stock = (function () {
                 }
             }
             return undefined;
+        },
+
+        makeStockAgain: function(allCards) {
+            var css;
+            for(var i = 0; i < allCards.length; ++ i){
+                if(allCards[i].getSign() === enumCard.enumTypes.CHANGE_COLOR || allCards[i].getSign() === enumCard.enumTypes.SUPER_TAKI) {
+                    allCards[i].setColor(undefined);
+                    css = getUniqueCss("", Object.keys(enumCard.enumTypes)[allCards[i].getSign()], '');
+                }
+                else if(allCards[i].number === undefined)
+                    css = getUniqueCss(Object.keys(enumCard.enumColor)[allCards[i].getColor()], Object.keys(enumCard.enumTypes)[allCards[i].getSign()],'_');
+                else
+                    css = getUniqueCss(Object.keys(enumCard.enumColor)[allCards[i].getColor()], allCards[i].number,'_');
+                allCards[i].setElement(css);
+
+                cards.push(allCards[i]);
+            }
+            shuffleDeck(getRandomInt(10, 25));//random number (the numbers not very important),amount of times to make shuffle
         }
     };
 })();
