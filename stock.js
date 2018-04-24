@@ -74,6 +74,14 @@ var stock = (function () {
                 superTakiValidation, superTakiOperation, id++));
             cards[cards.length-1].setElement(css);
         }
+        var blue_change_color = document.createElement("img");
+        var green_change_color = document.createElement("img");
+        var red_change_color = document.createElement("img");
+        var yellow_change_color = document.createElement("img");
+        blue_change_color.src = "../Taki/Images/blue/blue_change_color.png";
+        green_change_color.src = "../Taki/Images/green/green_change_color.png";
+        red_change_color.src = "../Taki/Images/red/red_change_color.png";
+        yellow_change_color.src = "../Taki/Images/yellow/yellow_change_color.png";
     }
 
     function getRandomInt(min, max) {
