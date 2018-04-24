@@ -87,6 +87,20 @@ body {
  float: left;
  /*background: #cccccc url("../Images/other/close_card.png");*/
 }
+
+#Enter_Game{
+    background: #32CD32;
+    font-size: 15px;
+    color: white;
+}
+
+#Restart{
+    background: #32CD32;
+    font-size: 15px;
+    color: white;
+    visibility: hidden;
+    display: block;
+}
 /*
 <style>
 .blue{
