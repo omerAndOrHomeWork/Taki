@@ -3,7 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Taki Game</title>
-    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="css/cards.css">
     <!--<link href="Images">-->
     <script src="operations.js"></script>
@@ -23,9 +22,9 @@
 <body>
 <div class="container-fluid">
             <h1 align="left"> Taki</h1>
-            <div><button class="btn btn-primary glyphicon-ok" onclick=" validator()">Enter Game</button></div>
+            <div><button id="Enter_Game" type="button" onclick="validator()">Enter Game</button></div>
             <div id = "sidebar">
-                <h4>Statistics Game:</h4>
+                <h3>Statistics Game:</h3>
                 <div id="statistics">
                     <div id="gameClock"></div>
                     <div class="clearfix">
@@ -59,12 +58,7 @@
 
 <!--TODO:  debug smartComputer algoritem(see if working),onDrag,onDrop-->
 <!--TODO:  debug player onClick,onDrop(SecondTime)-->
-<!--TODO:  debug start gameCard-->
-<!--TODO:  cards operations-->
-<!--TODO:  clock,statistics-->
 <!--TODO: resshufel, check how the images act-->
-
-<!--TODO: adding change color and super taki color picker-->
-<!--TODO: make two plus active and then passive-->
+<!--TODO: photos for stock -->
 <!--TODO: change "enter game" button and reClicking-->
 <!--TO  DO: bonus -> restart game -->

@@ -92,12 +92,12 @@ var player = function () {
             var promote = card.doOperation(this, lastCard);
             if (takiMode !== undefined) {
                 if(takiModeChecker(cards, takiMode)) {
-                    promote = enumCard.enumResult.EXTRA_TURN;
+                    promote = enumCard.enumResult.CONTINUE_TURN;
                     lastCard.setActive(false);
                 }
                 else{
                     takiMode = undefined;
-                    if(promote === enumCard.enumResult.EXTRA_TURN)
+                    if(promote === enumCard.enumResult.CONTINUE_TURN)
                         promote = enumCard.enumResult.NEXT_TURN;
                 }
             }
@@ -133,7 +133,9 @@ var player = function () {
             return true;
         },
 
-        singleCard: singleCardCounter,
+        getAmountOfCards: function(){
+            return cards.length;
+        },
 
         isComputer: function () {
             return false;

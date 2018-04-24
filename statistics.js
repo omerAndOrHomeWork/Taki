@@ -20,12 +20,12 @@ var statistics = function(i_playersGame) {
             for(var i = 0; i < playersGame.length; ++i) {
                 singleCardPlayers[i] = playersGame[i].getSingleCardCounter();
                 var playerLocal = Object.keys(enumCard.enumPlayer)[i] + ":\n";
-                playerLocal += "turns played: " + playersGame[i].getTurnsPlayed() + "\n";
-                playerLocal += "single cards times: " + playersGame[i].getSingleCardCounter() + "\n\n";
-                playerLocal += "average turn time: " + playersGame[i].getAverageTimePlayed() + "\n\n";
+                playerLocal += "Turns played: " + playersGame[i].getTurnsPlayed() + "\n";
+                playerLocal += "Single cards times: " + playersGame[i].getSingleCardCounter() + "\n\n";
+                playerLocal += "Average turn time: " + playersGame[i].getAverageTimePlayed() + "\n\n";
                 htmlDivsPlayers[i].innerText = playerLocal;
             }
-            var gameTurns = "turns played totally :" + turnsCounter + "<br />";
+            var gameTurns = "Turns played totally :" + turnsCounter + "<br />";
             htmlDivsPlayers[htmlDivsPlayers.length - 1].innerHTML +=gameTurns;
         }
     };

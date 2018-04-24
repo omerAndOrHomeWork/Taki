@@ -534,6 +534,10 @@ var smartComputer = function() {
             return 0;
         },
 
+        getAmountOfCards: function(){
+            return playerCards.length;
+        },
+
         getAverageTimePlayed: function(){
             return 0;
         },

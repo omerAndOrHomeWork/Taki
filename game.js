@@ -37,7 +37,7 @@ var game = (function() {
         gameCards[gameCards.length - 1].setColor(pickedColor);
         gameCards[gameCards.length - 1].setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
             Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
-        document.getElementById("pickColor").style.visibility = "hidden";
+        document.getElementById(enumCard.dives.PICK_COLOR).style.visibility = "hidden";
         changeTurn(enumCard.enumResult.NEXT_TURN);
         setTimeout(computerOperation,2000);
     }
@@ -101,8 +101,10 @@ var game = (function() {
             gameCards.push(card);
             calcAmountCardsToTake(card);
             // updateStatics();
-            if(promote !== enumCard.enumResult.EXTRA_TURN &&
-                promote !== enumCard.enumResult.CONTINUE_TURN)
+            if(players[turn].getAmountOfCards() === 0){ //change
+                alert(Object.keys(enumCard.enumPlayer)[turn] + " wins!");
+            }
+            if(promote !== enumCard.enumResult.CONTINUE_TURN)
                 changeTurn(promote);
             setTimeout(computerOperation,2000);
         }
@@ -152,6 +154,7 @@ var game = (function() {
 
     return{
         startGame: function () {
+            document.getElementById("Enter_Game").style.visibility = "hidden";
             stock.setGame();
             partition();
             gameStatistics = new statistics(players);
