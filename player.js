@@ -152,6 +152,10 @@ var player = function () {
 
         setTakiMode: function (card) {
             takiMode = card;
+        },
+
+        getAllCards: function(){
+            return cards;
         }
     };
 };

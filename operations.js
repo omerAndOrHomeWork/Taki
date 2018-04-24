@@ -126,6 +126,19 @@ function searchCard(cards, id) {
     return undefined;
 }
 
+function removeAllCards(placeHOlder) {
+    var deleteElement = document.getElementById(placeHOlder);
+
+    while (deleteElement.hasChildNodes()) {
+        deleteElement.removeChild(deleteElement.childNodes[0]);
+    }
+}
+
+/*function makeAllCardsNotDraggable(playerCards) {
+    for(var i= 0; i < playerCards.length; ++i)
+        playerCards[i].changeImage(false);
+}*/
+
 var enumCard = (function(){
     return {
         enumColor: Object.freeze({RED: 0, BLUE: 1, GREEN: 2, YELLOW: 3}),
@@ -137,9 +150,10 @@ var enumCard = (function(){
 
         dives: Object.freeze({
             PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards",
-            STOCK: "stockCards", OPEN_CARDS: "openCards", STOCK_PARENT: "stock", STATISTICS: "statistics",
+            STOCK: "stockCards", OPEN_CARDS: "openCards", STOCK_AND_OPEN_CARDS: "stockAndOpenCards", STATISTICS: "statistics",
             CLOCK:"gameClock", PICK_COLOR: "pickColor", BLUE_PICK: "bluePicker", GREEN_PICK: "greenPicker",
-            RED_PICK: "redPicker", YELLOW_PICK: "yellowPicker"
+            RED_PICK: "redPicker", YELLOW_PICK: "yellowPicker", END_GAME_MODE: "endGameMode",
+            MASSAGE: "massage", RESTART_GAME: "restartGame", END_GAME: "endGame"
         }),
 
         cssStyle: Object.freeze({
@@ -163,5 +177,11 @@ function setCards(stock, cards) {
     for(var i = 0; i < cards.length; ++i){
         stock.push(cards[i]);
         cards[i].changeImage(true);
+    }
+}
+
+function takeCards(stock, cardsToTake) {
+    for(var i = 0; i < cardsToTake.length; ++i){
+        stock.push(cardsToTake[i]);
     }
 }
