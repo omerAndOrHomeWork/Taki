@@ -69,7 +69,12 @@ var game = (function() {
                 return false;
             pullCardValidation(players[turn]);
         };
+        var restart = document.getElementById("Restart");
 
+        restart.onclick = function(event){
+            event.preventDefault();
+            location.reload();
+        };
 
         var blue = document.getElementById(enumCard.dives.BLUE_PICK);
         blue.onclick = function (ev) {
@@ -102,6 +107,8 @@ var game = (function() {
             calcAmountCardsToTake(card);
             // updateStatics();
             if(players[turn].getAmountOfCards() === 0){ //change
+                var restart = document.getElementById("Restart");
+                restart.style.visibility = "visible";
                 alert(Object.keys(enumCard.enumPlayer)[turn] + " wins!");
             }
             if(promote !== enumCard.enumResult.CONTINUE_TURN)
@@ -162,7 +169,38 @@ var game = (function() {
             gameStatistics.updateStatistics();
             setEventsListener();
             setTimeout(computerOperation,2000);
+        },
+        /*
+        restartGame:function(){
+
+            location.reload();
+            document.getElementById(enumCard.dives.CLOCK).innerHTML= '';
+            var deleteElement = document.getElementById("myList");
+
+            while (list.hasChildNodes()) {
+                list.removeChild(list.childNodes[0]);
+            }
+
+            var list = document.getElementById("myList");
+
+            while (list.hasChildNodes()) {
+                list.removeChild(list.childNodes[0]);
+            }
+
+            var list = document.getElementById("myList");
+
+            while (list.hasChildNodes()) {
+                list.removeChild(list.childNodes[0]);
+            }
+
+            var list = document.getElementById("myList");
+
+            while (list.hasChildNodes()) {
+                list.removeChild(list.childNodes[0]);
+            }
+
         }
+        */
     }
 
 
