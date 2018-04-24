@@ -23,8 +23,8 @@ body {
 
 #stockCards{
     position: absolute;
-     height: 140px;
-     width: 90px;
+    height: 140px;
+    width: 90px;
     top:35%;
     left: 55%;
     background: #cccccc url("../Images/other/close_card.png");
@@ -71,21 +71,10 @@ body {
     visibility: hidden;
 }
 
-/*#stockCards.closeCard{
- position: absolute;
- !*height: 140px;*!
- !*width: 90px;*!
- top: 200px;
- left: 40px;
- !*background: #cccccc url("../Images/other/close_card.png");*!
-}*/
-
-
 #computerCards .closeCard{
  height: 140px;
  width: 90px;
  float: left;
- /*background: #cccccc url("../Images/other/close_card.png");*/
 }
 
 #Enter_Game{
@@ -94,30 +83,25 @@ body {
     color: white;
 }
 
-#Restart{
-    background: #32CD32;
+#massage{
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    font-size:30px;
+}
+#restartGame{
+    position: absolute;
     font-size: 15px;
+    background: #32CD32;
     color: white;
-    visibility: hidden;
-    display: block;
+    top: 35%;
+    left: 40%;
 }
-/*
-<style>
-.blue{
-width:20px;
-height:20px;
-    background: #2e6da4;
-
+#endGame{
+    position: absolute;
+    font-size: 15px;
+    background: #32CD32;
+    color: white;
+    top:35%;
+    left: 55%;
 }
-.yellow{
-    background: yellow;
-}</style>
-
-<div>
-  <button class="blue"></button>
-  <button class="yellow"></button>
-  <button value="opel"></button>
-  <button value="audi"></button>
-  </div>
-
- */
