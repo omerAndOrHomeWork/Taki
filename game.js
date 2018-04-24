@@ -1,11 +1,10 @@
 var game = (function() {
     var gameCards = [];
     var turn = 0;
-    var cssID=0;
     var players = [player(), smartComputer()];
     var amountOfCardsToTakeFromStock = 1;
     var gameStatistics;
-
+    var endGame = false;
     function changeTurn(promote) {
         players[turn].increasePlayerTurns();
         players[turn].calculateAVG();
@@ -69,12 +68,7 @@ var game = (function() {
                 return false;
             pullCardValidation(players[turn]);
         };
-        var restart = document.getElementById("Restart");
-
-        restart.onclick = function(event){
-            event.preventDefault();
-            location.reload();
-        };
+        var restart = document.getElementById(enumCard.dives.RESTART_GAME);
 
         var blue = document.getElementById(enumCard.dives.BLUE_PICK);
         blue.onclick = function (ev) {
@@ -97,6 +91,14 @@ var game = (function() {
         };//work checked!
     }
 
+    function endGameMode() {
+        endGame = true;
+        document.getElementById(enumCard.dives.PICK_COLOR).style.visibility = "hidden";
+        document.getElementById(enumCard.dives.END_GAME_MODE).style.visibility = "visible";
+        document.getElementById(enumCard.dives.STOCK_AND_OPEN_CARDS).style.visibility = "hidden";
+        document.getElementById(enumCard.dives.MASSAGE).innerText = Object.keys(enumCard.enumPlayer)[turn] + " wins!";
+    }
+
     function dropValidation(id, card) {
         if (card.doValidation(gameCards[gameCards.length - 1])){
             var promote = players[turn].doOperation(card, gameCards[gameCards.length - 1]);
@@ -106,10 +108,8 @@ var game = (function() {
             gameCards.push(card);
             calcAmountCardsToTake(card);
             // updateStatics();
-            if(players[turn].getAmountOfCards() === 0){ //change
-                var restart = document.getElementById("Restart");
-                restart.style.visibility = "visible";
-                alert(Object.keys(enumCard.enumPlayer)[turn] + " wins!");
+            if(players[turn].getAmountOfCards() === 0){
+                endGameMode();
             }
             if(promote !== enumCard.enumResult.CONTINUE_TURN)
                 changeTurn(promote);
@@ -136,7 +136,7 @@ var game = (function() {
     }
 
     function computerOperation(){
-        if(players[turn].isComputer()){
+        if(!endGame && players[turn].isComputer()){
 
             var card = players[turn].pickCard(gameCards[gameCards.length - 1]);
             if(card === undefined)
@@ -170,6 +170,39 @@ var game = (function() {
             setEventsListener();
             setTimeout(computerOperation,2000);
         },
+
+        restartGame: function(){
+            event.preventDefault();
+            removeAllCards(enumCard.dives.COMPUTER_CARDS);
+            removeAllCards(enumCard.dives.PLAYER_CARDS);
+            removeAllCards(enumCard.dives.OPEN_CARDS);
+            endGame = false;
+            document.getElementById(enumCard.dives.END_GAME_MODE).style.visibility = "hidden";
+            document.getElementById(enumCard.dives.STOCK_AND_OPEN_CARDS).style.visibility = "visible";
+            document.getElementById(enumCard.dives.MASSAGE).innerText = '';
+            var allCards = [];
+            takeCards(allCards, players[0].getAllCards());
+            takeCards(allCards, players[1].getAllCards());
+            takeCards(allCards, gameCards);
+            players[0] = undefined;
+            players[1] = undefined;
+            gameCards = undefined;
+            players = undefined;
+            gameCards = [];
+            stock.makeStockAgain(allCards);
+            players = [player(), smartComputer()];
+            partition();
+
+            gameStatistics = new statistics(players);
+            gameStatistics.setStatistics();
+            gameStatistics.updateStatistics();
+            setEventsListener();
+            setTimeout(computerOperation,2000);
+        },
+
+        endGame: function(){
+
+        }
         /*
         restartGame:function(){
 
