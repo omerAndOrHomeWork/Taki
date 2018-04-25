@@ -11,10 +11,9 @@ var stock = (function () {
         htmlStock = document.createElement("div");
         htmlStock.setAttribute("id", enumCard.dives.STOCK);
         document.getElementById(enumCard.dives.STOCK_AND_OPEN_CARDS).appendChild(htmlStock);
-        for(var number = 0; number < twoCardsNumber.length; ++number){
+         for(var number = 0; number < twoCardsNumber.length; ++number){
             for (var color = 0; color < colorNumber.length; ++color) {
                 css = getUniqueCss(Object.keys(enumCard.enumColor)[color], twoCardsNumber[number].toString(),'_');
-
 
                 cards.push(new Card(colorNumber[color], enumCard.enumTypes.NUMBER,
                     numberValidation, numberOperation, id++));
@@ -74,6 +73,7 @@ var stock = (function () {
                 superTakiValidation, superTakiOperation, id++));
             cards[cards.length-1].setElement(css);
         }
+
         var blue_change_color = document.createElement("img");
         var green_change_color = document.createElement("img");
         var red_change_color = document.createElement("img");
@@ -99,19 +99,9 @@ var stock = (function () {
         }
     }
 
-    function randomSort() {
-        createDeck();
-        shuffleDeck(getRandomInt(10, 25));//random number (the numbers not very important),amount of times to make shuffle
-    }
-
     return{
         getCards: function(number) {
             return cards.splice(0, number);
-        },
-
-        reShuffle: function() {
-            randomSort();
-            return cards;
         },
 
         setGame: function () {
@@ -144,7 +134,10 @@ var stock = (function () {
                 cards.push(allCards[i]);
             }
             shuffleDeck(getRandomInt(10, 25));//random number (the numbers not very important),amount of times to make shuffle
+        },
+
+        getLength: function () {
+            return cards.length;
         }
     };
 })();
-//stam
