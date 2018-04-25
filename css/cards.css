@@ -9,6 +9,8 @@ body {
 }
 
 #computerCards{
+    /*width: 700px;*/
+    /*height: 200px;*/
  position: absolute;
  top: 2%;
  left: 22%;

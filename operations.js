@@ -74,7 +74,7 @@ function takiOperation(player, playerCard) {
  * @return {boolean}
  */
 function takiValidation(lastCard, playerCard) {
-    return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
+    return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() && lastCard.getSign() !== playerCard.getSign());
 }
 
 function twoPlusOperation(player, playerCard) {
@@ -146,7 +146,7 @@ var enumCard = (function(){
             STOP: 0, CHANGE_COLOR: 1, PLUS: 2, NUMBER: 3, TAKI: 4,
             SUPER_TAKI: 5, TWO_PLUS: 6
         }),
-        enumPlayer: Object.freeze({PLAYER1: 0, COMPUTER: 1}), //help for extendable
+        enumPlayer: Object.freeze({PLAYER: 0, COMPUTER: 1}), //help for extendable
 
         dives: Object.freeze({
             PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards",
@@ -184,4 +184,9 @@ function takeCards(stock, cardsToTake) {
     for(var i = 0; i < cardsToTake.length; ++i){
         stock.push(cardsToTake[i]);
     }
+}
+
+function takiPermission(player, card) {
+    var taki = player.getTakiMode();
+    return ( taki === undefined || (taki !== undefined && taki.getColor() === card.getColor()));
 }

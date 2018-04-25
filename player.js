@@ -93,7 +93,7 @@ var player = function () {
             if (takiMode !== undefined) {
                 if(takiModeChecker(cards, takiMode)) {
                     promote = enumCard.enumResult.CONTINUE_TURN;
-                    lastCard.setActive(false);
+                    card.setActive(false);
                 }
                 else{
                     takiMode = undefined;
@@ -156,6 +156,10 @@ var player = function () {
 
         getAllCards: function(){
             return cards;
+        },
+
+        getTakiMode: function () {
+            return takiMode;
         }
     };
 };

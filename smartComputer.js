@@ -8,6 +8,7 @@ var smartComputer = function() {
     var singleCardCounter = 0;
     var turnsPlayed = 0;
     var htmlPlayerDiv = enumCard.dives.COMPUTER_CARDS;
+    var pickColor = false;
 
     function insertColor(playerCard) {
         colorsCards[playerCard.getColor()].push(playerCard);
@@ -516,7 +517,7 @@ var smartComputer = function() {
         },
 
         pickCard: function(lastGameCard){
-            return operation(lastGameCard);
+           return operation(lastGameCard);
         },
 
         reducePlayer: function(){
@@ -547,12 +548,12 @@ var smartComputer = function() {
             removeAllCardAppearances(card);
             if (takiMode !== undefined) {
                 if(takiModeChecker(allCards, takiMode)) {
-                    promote = enumCard.enumResult.EXTRA_TURN;
-                    lastCard.setActive(false);
+                    promote = enumCard.enumResult.CONTINUE_TURN;
+                    card.setActive(false);
                 }
                 else{
                     takiMode = undefined;
-                    if(promote === enumCard.enumResult.EXTRA_TURN)
+                    if(promote === enumCard.enumResult.CONTINUE_TURN)
                         promote = enumCard.enumResult.NEXT_TURN;
                 }
             }
@@ -588,11 +589,13 @@ var smartComputer = function() {
         },
       
         pickColor: function (playerCard) {
-            var pickedColor = getColorToChange();
-            playerCard.setColor(pickedColor);
-            playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
-                Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
-            return enumCard.enumResult.NEXT_TURN;
+            pickColor = true;
+            return enumCard.enumResult.CONTINUE_TURN;
+        },
+
+        getColor: function () {
+            pickColor = false;
+            return getColorToChange();
         },
 
         setTakiMode: function (card) {
@@ -601,6 +604,14 @@ var smartComputer = function() {
 
         getAllCards: function(){
             return allCards;
+        },
+
+        colorToPick: function () {
+            return pickColor;
+        },
+
+        getTakiMode: function () {
+            return takiMode;
         }
     }
 };
