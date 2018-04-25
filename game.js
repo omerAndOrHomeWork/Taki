@@ -176,6 +176,7 @@ var game = (function() {
             removeAllCards(enumCard.dives.COMPUTER_CARDS);
             removeAllCards(enumCard.dives.PLAYER_CARDS);
             removeAllCards(enumCard.dives.OPEN_CARDS);
+            removeAllCards(enumCard.dives.STATISTICS);
             endGame = false;
             document.getElementById(enumCard.dives.END_GAME_MODE).style.visibility = "hidden";
             document.getElementById(enumCard.dives.STOCK_AND_OPEN_CARDS).style.visibility = "visible";
@@ -192,7 +193,7 @@ var game = (function() {
             stock.makeStockAgain(allCards);
             players = [player(), smartComputer()];
             partition();
-
+            gameStatistics = undefined;
             gameStatistics = new statistics(players);
             gameStatistics.setStatistics();
             gameStatistics.updateStatistics();
