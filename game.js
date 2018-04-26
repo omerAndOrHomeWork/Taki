@@ -109,6 +109,7 @@ var game = (function() {
             document.getElementById(enumCard.dives.OPEN_CARDS).removeChild(gameCards[gameCards.length - 1].getElement());
             card.setParent(enumCard.dives.OPEN_CARDS, false);
             gameCards[gameCards.length - 1].setActive(false);
+            card.changeImage(true);
             gameCards.push(card);
             calcAmountCardsToTake(card);
             // updateStatics();

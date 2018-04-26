@@ -4,8 +4,12 @@ body {
 
 #playerCards{
  bottom: 2%;
- left: 22%;
+ left: 30%;
  position: absolute;
+}
+
+img{
+ margin-right: -5%;
 }
 
 #computerCards{
@@ -13,7 +17,7 @@ body {
     /*height: 200px;*/
  position: absolute;
  top: 2%;
- left: 22%;
+ left: 30%;
  margin: auto;
 }
 

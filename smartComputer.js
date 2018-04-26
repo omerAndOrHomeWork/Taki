@@ -400,7 +400,7 @@ var smartComputer = function() {
             insertType(cardsToAdd[i]);
             allCards.push(cardsToAdd[i]);
             cardsToAdd[i].setParent(enumCard.dives.COMPUTER_CARDS, false);
-            cardsToAdd[i].changeImage(true);//TODO: CHANGE TO FALSE
+            cardsToAdd[i].changeImage(false);
         }
     }
 
@@ -508,7 +508,7 @@ var smartComputer = function() {
             setAllCards(cards);
             for(var i = 0; i < cards.length; ++i){
                 cards[i].setParent(enumCard.dives.COMPUTER_CARDS, false);
-                cards[i].changeImage(true);
+                cards[i].changeImage(false);
             }
         },
 

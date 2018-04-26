@@ -74,7 +74,7 @@ function takiOperation(player, playerCard) {
  * @return {boolean}
  */
 function takiValidation(lastCard, playerCard) {
-    return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() && lastCard.getSign() !== playerCard.getSign());
+    return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor());
 }
 
 function twoPlusOperation(player, playerCard) {
