@@ -190,3 +190,33 @@ function takiPermission(player, card) {
     var taki = player.getTakiMode();
     return ( taki === undefined || (taki !== undefined && taki.getColor() === card.getColor()));
 }
+
+
+
+//TODO: DELETE THIS AFTER ALL BUGS FIXES
+function getUniqeBugCards(cards) {
+    var hand = [];
+    var taki = false, twoPlus = false, greenHeight = false, greenNumber = false, blueHeight = false;
+    var takiTwo = false;
+    for(var i = 0; i < cards.length; ++i){
+        if(cards[i].getSign() === enumCard.enumTypes.CHANGE_COLOR) {
+            if (!taki) {
+                hand.push(cards.splice(i, 1)[0]);
+                taki = true;
+            }
+            else if (!takiTwo) {
+                hand.push(cards.splice(i, 1)[0]);
+                takiTwo = true;
+            }
+        }
+
+        if(taki && takiTwo)
+            break;
+    }
+
+   /* for (i = 0 ; i < 6; ++i){
+        hand.push(cards.splice(0, 1)[0]);
+    }*/
+
+    return hand;
+}
