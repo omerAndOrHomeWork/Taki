@@ -250,10 +250,6 @@ var smartComputer = function() {
         lastCardInTaki = connectionNumber(lastGameCard.getColor(), different);
         if(lastCardInTaki !== undefined)
             return;
-        if(typesCards[enumCard.enumTypes.CHANGE_COLOR].length > 0){
-            lastCardInTaki = typesCards[enumCard.enumTypes.CHANGE_COLOR][0];
-            return;
-        }
         lastCardInTaki = typeAndColorMatch(enumCard.enumTypes.TWO_PLUS, lastGameCard.getColor(), equal);
         if(lastCardInTaki !== undefined)
             return;//checked!! work good!
@@ -278,10 +274,6 @@ var smartComputer = function() {
         lastCardInTaki = connectionNumber(lastGameCard.getColor(), different);
         if(lastCardInTaki !== undefined)
             return;
-        if(typesCards[enumCard.enumTypes.CHANGE_COLOR].length > 0){
-            lastCardInTaki = typesCards[enumCard.enumTypes.CHANGE_COLOR][0];
-            return;
-        }
         lastCardInTaki = findColorCardNotInGivenType(lastGameCard.getColor(), enumCard.enumTypes.PLUS);
         if(lastCardInTaki !== undefined)
             return;
