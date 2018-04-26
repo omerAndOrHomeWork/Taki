@@ -91,7 +91,7 @@ var stock = (function () {
     }
 
     function shuffleDeck(shuffleCnt) {
-        for(var i = 0; i < shuffleCnt; i++) {
+        for(var i = 0; i < 3*shuffleCnt; i++) {
             var rndNo = getRandomInt(0, 101);
             var Card = cards[i];
             cards[i] = cards[rndNo];

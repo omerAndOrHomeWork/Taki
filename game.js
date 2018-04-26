@@ -164,44 +164,50 @@ var game = (function() {
         }
     }
 
-    // function setPlayerInPage(player) {
-    //     var players = document.getElementById("players");
-    //     players.children.
-    //         ///players.Add(<li>player</li>);
-    // }
-    //
-    // function makePlayers() {
-    //     players.forEach((player) => {
-    //         setPlayerInPage(player);
-    //     });
-    // }
+    function removeHTMLElements(){
+        removeAllCards(enumCard.dives.COMPUTER_CARDS);
+        removeAllCards(enumCard.dives.PLAYER_CARDS);
+        removeAllCards(enumCard.dives.OPEN_CARDS);
+        removeAllCards(enumCard.dives.STATISTICS);
+    }
+    function resetDivsAttributes(){
+        document.getElementById(enumCard.dives.END_GAME_MODE).style.visibility = "hidden";
+        document.getElementById(enumCard.dives.STOCK_AND_OPEN_CARDS).style.visibility = "visible";
+        document.getElementById(enumCard.dives.MASSAGE).innerText = '';
+    }
+
+    function getGameCards() {
+        var allCards = [];
+        takeCards(allCards, players[0].getAllCards());
+        takeCards(allCards, players[1].getAllCards());
+        takeCards(allCards, gameCards);
+        return allCards;
+    }
+
+    function initialGameAndStatistics(){
+        turn = 0;
+        partition();
+        gameStatistics = new statistics(players);
+        gameStatistics.setStatistics();
+        gameStatistics.updateStatistics();
+        setEventsListener();
+    }
 
     return{
         startGame: function () {
             document.getElementById("Enter_Game").style.visibility = "hidden";
             stock.setGame();
-            partition();
-            gameStatistics = new statistics(players);
-            gameStatistics.setStatistics();
-            gameStatistics.updateStatistics();
-            setEventsListener();
+            initialGameAndStatistics();
             setTimeout(computerOperation,2000);
         },
 
         restartGame: function(){
             event.preventDefault();
-            removeAllCards(enumCard.dives.COMPUTER_CARDS);
-            removeAllCards(enumCard.dives.PLAYER_CARDS);
-            removeAllCards(enumCard.dives.OPEN_CARDS);
-            removeAllCards(enumCard.dives.STATISTICS);
             endGame = false;
-            document.getElementById(enumCard.dives.END_GAME_MODE).style.visibility = "hidden";
-            document.getElementById(enumCard.dives.STOCK_AND_OPEN_CARDS).style.visibility = "visible";
-            document.getElementById(enumCard.dives.MASSAGE).innerText = '';
+            removeHTMLElements();
+            resetDivsAttributes();
             var allCards = [];
-            takeCards(allCards, players[0].getAllCards());
-            takeCards(allCards, players[1].getAllCards());
-            takeCards(allCards, gameCards);
+            allCards = getGameCards();
             players[0] = undefined;
             players[1] = undefined;
             gameCards = undefined;
@@ -209,49 +215,11 @@ var game = (function() {
             gameCards = [];
             stock.makeStockAgain(allCards);
             players = [player(), smartComputer()];
-            partition();
             gameStatistics = undefined;
-            gameStatistics = new statistics(players);
-            gameStatistics.setStatistics();
-            gameStatistics.updateStatistics();
-            setEventsListener();
+            initialGameAndStatistics();
             setTimeout(computerOperation,2000);
         },
 
-        endGame: function(){
-
-        }
-        /*
-        restartGame:function(){
-
-            location.reload();
-            document.getElementById(enumCard.dives.CLOCK).innerHTML= '';
-            var deleteElement = document.getElementById("myList");
-
-            while (list.hasChildNodes()) {
-                list.removeChild(list.childNodes[0]);
-            }
-
-            var list = document.getElementById("myList");
-
-            while (list.hasChildNodes()) {
-                list.removeChild(list.childNodes[0]);
-            }
-
-            var list = document.getElementById("myList");
-
-            while (list.hasChildNodes()) {
-                list.removeChild(list.childNodes[0]);
-            }
-
-            var list = document.getElementById("myList");
-
-            while (list.hasChildNodes()) {
-                list.removeChild(list.childNodes[0]);
-            }
-
-        }
-        */
     }
 
 
