@@ -29,6 +29,15 @@ var game = (function() {
         gameCards[0].setParent(enumCard.dives.OPEN_CARDS, false);
         for(var i=0; i < players.length; ++i)
             players[i].setCards(stock.getCards(8), players.length);
+
+
+        //TODO: DELETE THIS AFTER ALL BUGS FIXES
+/*        players[1].setCards(getUniqeBugCards(stock.getAllCards()), players.length);
+        players[0].setCards(stock.getCards(8), players.length);
+        var gameStartCard = stock.getValidOpenCard();
+        setCards(gameCards, gameStartCard);
+        gameCards[0].setParent(enumCard.dives.OPEN_CARDS, false);*/
+
     }
 
     function colorPicked(pickedColor) {
@@ -208,6 +217,8 @@ var game = (function() {
             resetDivsAttributes();
             var allCards = [];
             allCards = getGameCards();
+            var playerAverageTurnTime = players[0].getAverageTimePlayed();
+            var playerTurn = players[0].getTurnsPlayed();
             players[0] = undefined;
             players[1] = undefined;
             gameCards = undefined;
@@ -216,6 +227,8 @@ var game = (function() {
             stock.makeStockAgain(allCards);
             players = [player(), smartComputer()];
             gameStatistics = undefined;
+            players[0].SetAverageTimePlayed(playerAverageTurnTime);
+            players[0].setTurnsPlayed(playerTurn);
             initialGameAndStatistics();
             setTimeout(computerOperation,2000);
         },

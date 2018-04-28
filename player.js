@@ -2,6 +2,7 @@ var player = function () {
     var cards = [];
     var averageTimePlayed = 0;
     var turnsPlayed = 0;
+    var turnsPlayedForStatistics = 0;
     var singleCardCounter = 0;
     var takiMode = undefined;
     var currentTurnTime = 0;
@@ -66,6 +67,10 @@ var player = function () {
             return averageTimePlayed;
         },
 
+        SetAverageTimePlayed: function(currentAvarageTimePlayed){
+          averageTimePlayed = currentAvarageTimePlayed;
+        },
+
         setCards: function (theCards) {
             cards = theCards;
             setInterval(this.calcCurrentTurn.bind(this),1000);
@@ -80,10 +85,15 @@ var player = function () {
         },
 
         getTurnsPlayed: function(){
-          return turnsPlayed;
+          return turnsPlayedForStatistics;
+        },
+
+        setTurnsPlayed: function(currentTurnsPlayed){
+           turnsPlayed =  currentTurnsPlayed;
         },
       
         increasePlayerTurns: function () {
+            turnsPlayedForStatistics+=1;
             turnsPlayed += 1;
         },
       
@@ -160,7 +170,7 @@ var player = function () {
 
         getTakiMode: function () {
             return takiMode;
-        }
+        },
     };
 };
 //stam

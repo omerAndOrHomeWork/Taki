@@ -138,6 +138,10 @@ var stock = (function () {
 
         getLength: function () {
             return cards.length;
+        },
+
+        getAllCards: function () {
+            return cards;
         }
     };
 })();

@@ -329,7 +329,6 @@ var smartComputer = function() {
         var pickedCard = undefined;
         if(colorsLeftAmount() === 1 && colorsCards[lastGameCard.getColor()].length > 0 &&
             typesCards[enumCard.enumTypes.SUPER_TAKI].length > 0){
-            // takiMode = true;
             pickedCard = typesCards[enumCard.enumTypes.SUPER_TAKI][0];
         }
         return pickedCard;
@@ -347,9 +346,6 @@ var smartComputer = function() {
             pickedCard = colorCardInTaki(lastGameCard);//checked! work good!
         }else{
             pickedCard = typeAndColorMatch(enumCard.enumTypes.TAKI, lastGameCard.getColor(), equal);
-            /*if(pickedCard !== undefined && pickedCard.doOperation()){
-                takiMode = true;
-            }*/
         }
         return pickedCard;
     }
@@ -361,7 +357,6 @@ var smartComputer = function() {
             return undefined;
     }
 
-    //TODO: BUG in taki, the last card does not operate, insted took two from my own +2
     function operation(lastGameCard){
         var pickedCard;
         pickedCard = plusTwoOperation(lastGameCard);
@@ -392,7 +387,7 @@ var smartComputer = function() {
             insertType(cardsToAdd[i]);
             allCards.push(cardsToAdd[i]);
             cardsToAdd[i].setParent(enumCard.dives.COMPUTER_CARDS, false);
-            cardsToAdd[i].changeImage(false);
+            cardsToAdd[i].changeImage(true);//TODO: CHANGE TO FALSE
         }
     }
 
@@ -490,7 +485,10 @@ var smartComputer = function() {
         color = colorWithNumberConnection();
         if(color !== undefined)
             return color;
-        return minimumCardsInColor();
+        color = minimumCardsInColor();
+        if(color !== undefined)
+            return color;
+        return enumCard.enumColor.YELLOW;
 
     }
 
@@ -500,7 +498,7 @@ var smartComputer = function() {
             setAllCards(cards);
             for(var i = 0; i < cards.length; ++i){
                 cards[i].setParent(enumCard.dives.COMPUTER_CARDS, false);
-                cards[i].changeImage(false);
+                cards[i].changeImage(true);//TODO: CHANGE TO FALSE
             }
         },
 
@@ -604,7 +602,11 @@ var smartComputer = function() {
 
         getTakiMode: function () {
             return takiMode;
+        },
+
+        //TODO: DElete after bug fixes
+        getCardsAmount: function(){
+            return allCards.length;
         }
     }
 };
-//stam
