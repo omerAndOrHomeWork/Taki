@@ -387,7 +387,7 @@ var smartComputer = function() {
             insertType(cardsToAdd[i]);
             allCards.push(cardsToAdd[i]);
             cardsToAdd[i].setParent(enumCard.dives.COMPUTER_CARDS, false);
-            cardsToAdd[i].changeImage(false);//TODO: CHANGE TO FALSE
+            cardsToAdd[i].changeImage(true);//TODO: CHANGE TO FALSE
         }
     }
 
@@ -498,7 +498,7 @@ var smartComputer = function() {
             setAllCards(cards);
             for(var i = 0; i < cards.length; ++i){
                 cards[i].setParent(enumCard.dives.COMPUTER_CARDS, false);
-                cards[i].changeImage(false);//TODO: CHANGE TO FALSE
+                cards[i].changeImage(true);//TODO: CHANGE TO FALSE
             }
         },
 
@@ -602,6 +602,11 @@ var smartComputer = function() {
 
         getTakiMode: function () {
             return takiMode;
+        },
+
+        //TODO: DElete after bug fixes
+        getCardsAmount: function(){
+            return allCards.length;
         }
     }
 };

@@ -191,9 +191,6 @@ function takiPermission(player, card) {
     return ( taki === undefined || (taki !== undefined && taki.getColor() === card.getColor()));
 }
 
-
-
-//TODO: DELETE THIS AFTER ALL BUGS FIXES
 function getUniqeBugCards(cards) {
     var hand = [];
     var taki = false, twoPlus = false, greenHeight = false, greenNumber = false, blueHeight = false;
