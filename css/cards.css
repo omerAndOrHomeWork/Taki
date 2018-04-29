@@ -29,11 +29,11 @@ img{
 
 #stockCards{
     position: absolute;
-    height: 140px;
-    width: 90px;
+    height: 137px;
+    width: 111px;
     top:35%;
     left: 55%;
-    background: #cccccc url("../Images/other/close_card.png");
+    background: #cccccc url("../Images/other/a_lot_close_cards.png");
 }
 
 #yellowPicker{
