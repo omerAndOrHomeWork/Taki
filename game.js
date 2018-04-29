@@ -217,6 +217,8 @@ var game = (function() {
             resetDivsAttributes();
             var allCards = [];
             allCards = getGameCards();
+            var playerAverageTurnTime = players[0].getAverageTimePlayed();
+            var playerTurn = players[0].getTurnsPlayed();
             players[0] = undefined;
             players[1] = undefined;
             gameCards = undefined;
@@ -225,6 +227,8 @@ var game = (function() {
             stock.makeStockAgain(allCards);
             players = [player(), smartComputer()];
             gameStatistics = undefined;
+            players[0].SetAverageTimePlayed(playerAverageTurnTime);
+            players[0].setTurnsPlayed(playerTurn);
             initialGameAndStatistics();
             setTimeout(computerOperation,2000);
         },
