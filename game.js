@@ -131,8 +131,28 @@ var game = (function() {
         }
     }
 
+    function changeStockImage(){
+       var stockHtml =  document.getElementById(enumCard.dives.STOCK);
+       if(stock.getLength() > 30) {
+           stockHtml.style.background = "#cccccc url('/Taki/Images/other/a_lot_close_cards.png')";
+           stockHtml.style.height = "137px";
+           stockHtml.style.width = "111px";
+       }
+       else if(stock.getLength() > 10) {
+           stockHtml.style.background = "#cccccc url('/Taki/Images/other/few_close_cards.png')";
+           stockHtml.style.height = "140px";
+           stockHtml.style.width = "90px";
+       }
+       else {
+           stockHtml.style.background = "#cccccc url('/Taki/Images/other/close_card.png')";
+           stockHtml.style.height = "140px";
+           stockHtml.style.width = "90px";
+       }
+    }
+
     function pullCardValidation(player) {
         if(player === players[turn] && player.pullApproval(gameCards[gameCards.length-1])){
+            changeStockImage();
             gameCards[gameCards.length - 1].setActive(false);
             player.setTakiMode(undefined);
             var cardsFromStock = stock.getCards(amountOfCardsToTakeFromStock);
@@ -144,6 +164,7 @@ var game = (function() {
                 gameCards = [];
                 gameCards.push(lastCard);
                 lastCard.setParent(enumCard.dives.OPEN_CARDS);
+                changeStockImage();
             }
                 amountOfCardsToTakeFromStock = 1;
             player.pullCardFromStock(cardsFromStock);
