@@ -9,7 +9,6 @@ function Card(theColor, theSign, theValidation, theOperation, theId) {
     var uniqueCardImage;
     var closeCardImage;
 
-
     function setUniqueImage(imgName) {
         var colorName;
         if( color !== undefined)
@@ -26,10 +25,8 @@ function Card(theColor, theSign, theValidation, theOperation, theId) {
         closeCardImage =  document.createElement("img");
         closeCardImage.src = enumCard.images.CLOSE_CARD;
         uniqueCardImage = document.createElement("img");
-                // htmlCard.appendChild(img);
         setUniqueImage(imgName);
     }
-
 
     function setHtmlEvent(draggable) {
         htmlCard.ondragstart = function (event) {
@@ -51,10 +48,6 @@ function Card(theColor, theSign, theValidation, theOperation, theId) {
             return operation(player, this, lastCard);
         },
 
-        makePassive: function () {
-            active = false;
-        },
-
         isActive: function (){
             return active;
         },
@@ -68,13 +61,9 @@ function Card(theColor, theSign, theValidation, theOperation, theId) {
             setHtmlEvent(draggable);
         },
 
-
         setElement: function (theUniqueCard) {
-            //uniqueCardImage = theUniqueCard;
             setHtmlElement(theUniqueCard);
-            // htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
             setHtmlEvent(false);
-            // htmlCard.appendChild(closeCardImage);
             document.getElementById(enumCard.dives.STOCK).appendChild(htmlCard);
         },
 
@@ -86,23 +75,12 @@ function Card(theColor, theSign, theValidation, theOperation, theId) {
                 htmlCard.appendChild(uniqueCardImage);
             else
                 htmlCard.appendChild(closeCardImage);
-            // if(openCard) {
-            //
-            //     // htmlCard.classList.remove(enumCard.cssStyle.CLOSE_CARD);
-            //     // htmlCard.classList.add(enumCard.cssStyle.OPEN_CARD);
-            //     // htmlCard.removeChild(closeCardImage);
-            //     htmlCard.appendChild(uniqueCardImage);
-            // }else{
-            //     htmlCard.appendChild(closeCardImage);
-            //     // htmlCard.classList.add(enumCard.cssStyle.CLOSE_CARD);
-            //     // htmlCard.classList.remove(enumCard.cssStyle.OPEN_CARD);
-            //     // htmlCard.appendChild(closeCardImage);
-            // }
         },
 
         getSign: function(){
             return sign;
         },
+
         getColor: function () {
             return color;
         },
@@ -122,7 +100,5 @@ function Card(theColor, theSign, theValidation, theOperation, theId) {
         setActive: function (activeness) {
             active = activeness;
         }
-
     }
 }
-//stam

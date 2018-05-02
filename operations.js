@@ -1,22 +1,10 @@
-/**
- * @return {number}
- */
+
 function changeColorOperation(player, playerCard) {
 
-    return player.pickColor(playerCard);
-/*
-    var pickedColor = player.pickColor();
-    playerCard.setColor(pickedColor);
-    playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[pickedColor],
-        Object.keys(enumCard.enumTypes)[enumCard.enumTypes.CHANGE_COLOR],'_'));
-    return enumCard.enumResult.NEXT_TURN;
-*/
+    return player.pickColor();
 }
 
-/**
- * @return {boolean}
- */
-function changeColorValidation(lastCard) { //TODO:: CHECK IF WE CAN WITH ONE INPUT ELEMENT
+function changeColorValidation(lastCard) {
    return !lastCard.isActive();
 }
 
@@ -44,9 +32,6 @@ function stopValidation(lastCard, playerCard) {
     return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
-/**
- * @return {number}
- */
 function superTakiOperation(player, playerCard, lastCard) {
     playerCard.setColor(lastCard.getColor());
     playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[playerCard.getColor()],
@@ -55,24 +40,15 @@ function superTakiOperation(player, playerCard, lastCard) {
     return enumCard.enumResult.CONTINUE_TURN;
 }
 
-/**
- * @return {boolean}
- */
 function superTakiValidation(lastCard) {
     return !lastCard.isActive();
 }
 
-/**
- * @return {number}
- */
 function takiOperation(player, playerCard) {
     player.setTakiMode(playerCard);
     return enumCard.enumResult.CONTINUE_TURN;
 }
 
-/**
- * @return {boolean}
- */
 function takiValidation(lastCard, playerCard) {
     return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor());
 }
@@ -81,8 +57,6 @@ function twoPlusOperation(player, playerCard) {
     playerCard.setActive(true);
     return enumCard.enumResult.NEXT_TURN;
 }
-/*work!*/
-
 
 function twoPlusValidation(lastCard, playerCard) {
     return (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
@@ -107,7 +81,6 @@ function takiModeChecker(cards, takiMode) {
 
     return foundColor;
 }
-
 
 function removeCard(cards, card) {
     for (var i = 0; i < cards.length; ++i) {
@@ -134,41 +107,6 @@ function removeAllCards(placeHOlder) {
     }
 }
 
-/*function makeAllCardsNotDraggable(playerCards) {
-    for(var i= 0; i < playerCards.length; ++i)
-        playerCards[i].changeImage(false);
-}*/
-
-var enumCard = (function(){
-    return {
-        enumColor: Object.freeze({RED: 0, BLUE: 1, GREEN: 2, YELLOW: 3}),
-        enumTypes: Object.freeze({
-            STOP: 0, CHANGE_COLOR: 1, PLUS: 2, NUMBER: 3, TAKI: 4,
-            SUPER_TAKI: 5, TWO_PLUS: 6
-        }),
-        enumPlayer: Object.freeze({PLAYER: 0, COMPUTER: 1}), //help for extendable
-
-        dives: Object.freeze({
-            PLAYER_CARDS: "playerCards", COMPUTER_CARDS: "computerCards",
-            STOCK: "stockCards", OPEN_CARDS: "openCards", STOCK_AND_OPEN_CARDS: "stockAndOpenCards", STATISTICS: "statistics",
-            CLOCK:"gameClock", PICK_COLOR: "pickColor", BLUE_PICK: "bluePicker", GREEN_PICK: "greenPicker",
-            RED_PICK: "redPicker", YELLOW_PICK: "yellowPicker", END_GAME_MODE: "endGameMode",
-            MASSAGE: "massage", RESTART_GAME: "restartGame", END_GAME: "endGame"
-        }),
-
-        cssStyle: Object.freeze({
-            OPEN_CARD: "openCard", CLOSE_CARD: "closeCard"
-        }),
-
-        images: Object.freeze({
-            CLOSE_CARD: "../Taki/Images/other/close_card.png"
-        }),
-
-        enumResult: Object.freeze({EXTRA_TURN: 0,NEXT_TURN: 1, JUMP_TURN: 2,
-            CONTINUE_TURN: 3})
-    }
-})();
-
 function getUniqueCss(color,type,separator){
     return color.concat(separator).concat(type);
 }
@@ -189,31 +127,4 @@ function takeCards(stock, cardsToTake) {
 function takiPermission(player, card) {
     var taki = player.getTakiMode();
     return ( taki === undefined || (taki !== undefined && taki.getColor() === card.getColor()));
-}
-
-function getUniqeBugCards(cards) {
-    var hand = [];
-    var taki = false, twoPlus = false, greenHeight = false, greenNumber = false, blueHeight = false;
-    var takiTwo = false;
-    for(var i = 0; i < cards.length; ++i){
-        if(cards[i].getSign() === enumCard.enumTypes.CHANGE_COLOR) {
-            if (!taki) {
-                hand.push(cards.splice(i, 1)[0]);
-                taki = true;
-            }
-            else if (!takiTwo) {
-                hand.push(cards.splice(i, 1)[0]);
-                takiTwo = true;
-            }
-        }
-
-        if(taki && takiTwo)
-            break;
-    }
-
-   /* for (i = 0 ; i < 6; ++i){
-        hand.push(cards.splice(0, 1)[0]);
-    }*/
-
-    return hand;
 }
