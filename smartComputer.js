@@ -1,6 +1,6 @@
 var smartComputer = function() {
-    var colorsCards = [[], [], [], []];//sorting in enumColor sort
-    var typesCards = [[], [], [], [], [], [], []];//sorting in enumType sort
+    var colorsCards = [[], [], [], []];
+    var typesCards = [[], [], [], [], [], [], []];
     var allCards = [];
     var takiMode = undefined;
     var numberOfPlayers;
@@ -44,7 +44,6 @@ var smartComputer = function() {
         return parameterOne !== parameterTwo;
     }
 
-    //find the given type in the most least getColor() in hand
     function typeCardWithLeastSameColorInHand(type) {
         var pickedCard = undefined;
         for(var i = 0; i < typesCards[type].length; ++i) {
@@ -57,8 +56,6 @@ var smartComputer = function() {
         return pickedCard;
     }
 
-
-    /*checked! works good!*/
     function typeAndColorMatch(type, color, matchFunc) {
         for(var i = 0; i < typesCards[type].length; ++i){
             if(matchFunc(typesCards[type][i].getColor(), color))
@@ -75,28 +72,6 @@ var smartComputer = function() {
         return pickedCard;
     }
 
-
-
-    /*
-        //find the first card in given type that have same getColor() in given
-        function typeInColor(type, getColor()) {
-            for(var i = 0; i < typesCards[type].length; ++i){
-                if(typesCards[type][i].getColor() === getColor())
-                    return typesCards[type][i];
-            }
-            return undefined;
-        }
-
-        //find the first card in given type that have different getColor() from given
-        function typesInDifferentColor(type, getColor()) {
-            for(var i = 0; i < typesCards[type].length; ++i){
-                if(typesCards[type][i].getColor() !== getColor())
-                    return typesCards[type][i];
-            }
-            return undefined;
-        }
-    */
-
     function connectionNumber(color, matchFunc) {
         var pickedCard;
         for(var i = 0; i < colorsCards[color].length; ++i){
@@ -110,33 +85,6 @@ var smartComputer = function() {
         return undefined;
     }
 
-/*
-    //find the first card number(different getColor()), that have matching number in the given getColor()
-    function findFirstConnectionNumber(getColor()) {
-        var card = undefined;
-        for(var i = 0; i < colorsCards[getColor()].length; ++i){
-            if(colorsCards[getColor()][i].getSign() === enumCard.enumTypes.NUMBER)
-                card = cardNumberInDifferentColor(colorsCards[getColor()][i]);
-            if(card !== undefined)
-                return card;
-        }
-        return card;
-    }
-
-    //find the first card number that have no matching number in the other colors
-    function findFirstNoConnectionNumber(getColor()) {
-        var card = undefined;
-        for(var i = 0; i < colorsCards[getColor()].length; ++i){
-            if(colorsCards[getColor()][i].getSign() === enumCard.enumTypes.NUMBER)
-                card = cardNumberInDifferentColor(colorsCards[getColor()][i]);
-            if(card === undefined)
-                return colorsCards[getColor()][i];
-        }
-        return card;
-    }
-*/
-
-    //find if there is same number, in different getColor()
     function cardNumberInDifferentColor(lastGameCard) {
         //var cards = [];
         for(var i = 0; i < typesCards[enumCard.enumTypes.NUMBER].length; ++i){
@@ -148,7 +96,6 @@ var smartComputer = function() {
         return undefined;
     }
 
-    //search for the first same getColor(), in different type
     function findColorCardNotInGivenType(color, type) {
         for(var i = 0; i < colorsCards[color].length; ++i){
             if(colorsCards[color][i].getSign() !== type)
@@ -157,33 +104,24 @@ var smartComputer = function() {
         return undefined;
     }
 
-   /*function removeCard(array, card) {
-        for(var i = 0; i < array.length; ++i) {
-            if(array[i] === card) {
-                array.splice(i, 1);
-                return;
-            }
-        }
-    }*/
-
     function regularOperationWithTwoPlayers(lastGameCard) {
         var pickedCard;
         if(typeAndColorMatch(enumCard.enumTypes.STOP, lastGameCard.getColor(), different) === undefined){
             pickedCard = typeAndColorMatch(enumCard.enumTypes.STOP, lastGameCard.getColor(), equal);
             if(pickedCard !== undefined)
                 return pickedCard;
-        }//checked!! works good
+        }
 
-        pickedCard = connectionNumber(lastGameCard.getColor(), equal);//firstUnconnectedNumber
+        pickedCard = connectionNumber(lastGameCard.getColor(), equal);
         if(pickedCard !== undefined)
-            return pickedCard;//checked!! work good!
-        pickedCard = connectionNumber(lastGameCard.getColor(), different);//firstConnectedNumber
+            return pickedCard;
+        pickedCard = connectionNumber(lastGameCard.getColor(), different);
         if(pickedCard !== undefined)
-            return pickedCard;//checked!! work good!
+            return pickedCard;
         if (lastGameCard.getSign() === enumCard.enumTypes.NUMBER) {
             pickedCard = cardNumberInDifferentColor(lastGameCard);
             if (pickedCard !== undefined)
-                return pickedCard;//checked!! work good!
+                return pickedCard;
         }
         pickedCard = typeOrColorMatch(enumCard.enumTypes.TWO_PLUS, lastGameCard, equal);
         if(pickedCard !== undefined)
@@ -198,25 +136,24 @@ var smartComputer = function() {
         var pickedCard;
         pickedCard = connectionNumber(lastGameCard.getColor(), equal);
         if (pickedCard !== undefined)
-            return pickedCard;//checked!! work good!
+            return pickedCard;
         pickedCard = connectionNumber(lastGameCard.getColor(), different());
         if (pickedCard !== undefined)
-            return pickedCard;//checked!! work good!
+            return pickedCard;
         if (lastGameCard.getSign() === enumCard.enumTypes.NUMBER) {
         pickedCard = cardNumberInDifferentColor(lastGameCard);
         if (pickedCard !== undefined)
-            return pickedCard;//checked!! work good!
+            return pickedCard;
         }
         pickedCard = typeOrColorMatch(enumCard.enumTypes.PLUS, lastGameCard, equal);
         if(pickedCard !== undefined)
-            return pickedCard;//checked!! work good!
+            return pickedCard;
         pickedCard = typeOrColorMatch(enumCard.enumTypes.STOP, lastGameCard, equal);
         if(pickedCard !== undefined)
             return pickedCard;
         return typeOrColorMatch(enumCard.enumTypes.TWO_PLUS, lastGameCard, equal);
     }
 
-    //checked! work good!
     function colorCardInTaki(lastGameCard) {
         var currentCard;
         for(var i = 0; i < colorsCards[lastGameCard.getColor()].length; ++i){
@@ -227,7 +164,6 @@ var smartComputer = function() {
         }
 
         if(lastCardInTaki.doValidation(lastGameCard)){
-            // takiMode = false;
             currentCard = lastCardInTaki;
             lastCardInTaki = undefined;
             return currentCard;
@@ -241,18 +177,18 @@ var smartComputer = function() {
             lastCardInTaki = typeAndColorMatch(enumCard.enumTypes.PLUS, lastGameCard.getColor(), equal);
             if(lastCardInTaki !== undefined)
                 return;
-        }//checked! work good!
+        }
         if(typeAndColorMatch(enumCard.enumTypes.STOP, lastGameCard.getColor(), different) !== undefined){
             lastCardInTaki = typeAndColorMatch(enumCard.enumTypes.STOP, lastGameCard.getColor(), equal);
             if(lastCardInTaki !== undefined)
                 return;
-        }//checked! work good!
+        }
         lastCardInTaki = connectionNumber(lastGameCard.getColor(), different);
         if(lastCardInTaki !== undefined)
             return;
         lastCardInTaki = typeAndColorMatch(enumCard.enumTypes.TWO_PLUS, lastGameCard.getColor(), equal);
         if(lastCardInTaki !== undefined)
-            return;//checked!! work good!
+            return;
         lastCardInTaki = findColorCardNotInGivenType(lastGameCard.getColor(), enumCard.enumTypes.PLUS);
         if(lastCardInTaki !== undefined)
             return;
@@ -304,7 +240,7 @@ var smartComputer = function() {
             pickedCard = typeAndColorMatch(enumCard.enumTypes.PLUS, lastGameCard.getColor(), equal);
             if(pickedCard !== undefined)
                 return pickedCard;
-        }//checked!! work good
+        }
         if (numberOfPlayers === 2)
             pickedCard = regularOperationWithTwoPlayers(lastGameCard);
         else if (numberOfPlayers > 2)
@@ -343,7 +279,7 @@ var smartComputer = function() {
                 else if (numberOfPlayers > 2)
                     takiOperationWithMorePlayers(lastGameCard);
             }
-            pickedCard = colorCardInTaki(lastGameCard);//checked! work good!
+            pickedCard = colorCardInTaki(lastGameCard);
         }else{
             pickedCard = typeAndColorMatch(enumCard.enumTypes.TAKI, lastGameCard.getColor(), equal);
         }
@@ -387,7 +323,7 @@ var smartComputer = function() {
             insertType(cardsToAdd[i]);
             allCards.push(cardsToAdd[i]);
             cardsToAdd[i].setParent(enumCard.dives.COMPUTER_CARDS, false);
-            cardsToAdd[i].changeImage(true);//TODO: CHANGE TO FALSE
+            cardsToAdd[i].changeImage(false);
         }
     }
 
@@ -455,7 +391,7 @@ var smartComputer = function() {
     }
 
     function minimumCardsInColor() {
-        var minimumLength;
+        var minimumLength = undefined;
         for (var i = 0; i < colorsCards.length; ++i) {
             if (colorsCards[i].length === 0)
                 continue;
@@ -469,7 +405,7 @@ var smartComputer = function() {
     }
 
     function getColorToChange() {
-        var color, tempCard;
+        var color;
         color = takiWithConnection();
         if(color !== undefined)
             return color;
@@ -498,7 +434,7 @@ var smartComputer = function() {
             setAllCards(cards);
             for(var i = 0; i < cards.length; ++i){
                 cards[i].setParent(enumCard.dives.COMPUTER_CARDS, false);
-                cards[i].changeImage(true);//TODO: CHANGE TO FALSE
+                cards[i].changeImage(false);
             }
         },
 
@@ -508,10 +444,6 @@ var smartComputer = function() {
 
         pickCard: function(lastGameCard){
            return operation(lastGameCard);
-        },
-
-        reducePlayer: function(){
-            numberOfPlayers = numberOfPlayers - 1;
         },
 
         increasePlayerTurns: function () {
@@ -533,6 +465,7 @@ var smartComputer = function() {
         getAverageTimePlayed: function(){
             return 0;
         },
+
         doOperation: function(card, lastCard) {
             var promote = card.doOperation(this, lastCard);
             removeAllCardAppearances(card);
@@ -578,7 +511,7 @@ var smartComputer = function() {
             return turnsPlayed;
         },
       
-        pickColor: function (playerCard) {
+        pickColor: function () {
             pickColor = true;
             return enumCard.enumResult.CONTINUE_TURN;
         },
@@ -602,11 +535,6 @@ var smartComputer = function() {
 
         getTakiMode: function () {
             return takiMode;
-        },
-
-        //TODO: DElete after bug fixes
-        getCardsAmount: function(){
-            return allCards.length;
         }
     }
 };

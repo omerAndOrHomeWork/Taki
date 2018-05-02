@@ -2,23 +2,55 @@ body {
  background: #87CEEB;
 }
 
-#playerCards{
- bottom: 2%;
- left: 30%;
- position: absolute;
+@media all and (min-height: 768px) and (min-width: 680px) {
+    img {
+        height: 110px;
+        width: 80px;
+    }
+}
+
+@media all and (min-height: 768px) and (min-width: 720px) {
+    img {
+        height: 120px;
+        width: 83px;
+    }
+}
+
+@media all and (min-height: 768px) and (min-width: 760px) {
+    img {
+        height: 120px;
+        width: 86px;
+    }
+}
+
+@media all and (min-height: 768px) and (min-width: 800px) {
+    img {
+        height: 140px;
+        width: 90px;
+    }
 }
 
 img{
- margin-right: -5%;
+    margin-right: -5%;
 }
 
-#computerCards{
-    /*width: 700px;*/
-    /*height: 200px;*/
- position: absolute;
- top: 2%;
- left: 30%;
- margin: auto;
+#playerCards {
+    bottom: 2%;
+    left: 30%;
+    position: absolute;
+}
+
+#computerCards {
+    position: absolute;
+    top: 2%;
+    left: 30%;
+    margin: auto;
+}
+
+#computerCards .closeCard{
+    height: 140px;
+    width: 90px;
+    float: left;
 }
 
 #openCards{
@@ -33,7 +65,10 @@ img{
     width: 111px;
     top:35%;
     left: 55%;
-    background: #cccccc url("../Images/other/a_lot_close_cards.png");
+}
+
+#pickColor{
+    visibility: hidden;
 }
 
 #yellowPicker{
@@ -73,16 +108,6 @@ img{
 
 }
 
-#pickColor{
-    visibility: hidden;
-}
-
-#computerCards .closeCard{
- height: 140px;
- width: 90px;
- float: left;
-}
-
 #Enter_Game{
     background: #32CD32;
     font-size: 15px;
@@ -95,6 +120,7 @@ img{
     left: 45%;
     font-size:30px;
 }
+
 #restartGame{
     position: absolute;
     font-size: 15px;
@@ -103,6 +129,7 @@ img{
     top: 35%;
     left: 40%;
 }
+
 #endGame{
     position: absolute;
     font-size: 15px;

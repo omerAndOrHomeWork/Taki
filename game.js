@@ -5,6 +5,7 @@ var game = (function() {
     var amountOfCardsToTakeFromStock = 1;
     var gameStatistics;
     var endGame = false;
+
     function changeTurn(promote) {
         players[turn].increasePlayerTurns();
         players[turn].calculateAVG();
@@ -29,15 +30,6 @@ var game = (function() {
         gameCards[0].setParent(enumCard.dives.OPEN_CARDS, false);
         for(var i=0; i < players.length; ++i)
             players[i].setCards(stock.getCards(8), players.length);
-
-
-        //TODO: DELETE THIS AFTER ALL BUGS FIXES
-/*        players[1].setCards(getUniqeBugCards(stock.getAllCards()), players.length);
-        players[0].setCards(stock.getCards(8), players.length);
-        var gameStartCard = stock.getValidOpenCard();
-        setCards(gameCards, gameStartCard);
-        gameCards[0].setParent(enumCard.dives.OPEN_CARDS, false);*/
-
     }
 
     function colorPicked(pickedColor) {
@@ -53,8 +45,8 @@ var game = (function() {
         var drop = document.getElementById(enumCard.dives.OPEN_CARDS);
         drop.draggable = false;
         drop.ondragover = function (ev) {
-            event.preventDefault();
-        };
+            ev.preventDefault();
+       };
 
         drop.ondrop = function (event) {
             event.preventDefault();
@@ -69,7 +61,7 @@ var game = (function() {
         };
 
         var click =  document.getElementById(enumCard.dives.STOCK);
-        click.onclick = function(event) {//TODO: MAKE IT RESICD FOR CLICKING OUT OF TURN
+        click.onclick = function(event) {
             event.preventDefault();
             var pickColorId = document.getElementById(enumCard.dives.PICK_COLOR);
             if(pickColorId.style.visibility === "visible")
@@ -77,7 +69,6 @@ var game = (function() {
             if(!players[turn].isComputer())
                 pullCardValidation(players[turn]);
         };
-        var restart = document.getElementById(enumCard.dives.RESTART_GAME);
 
         var blue = document.getElementById(enumCard.dives.BLUE_PICK);
         blue.onclick = function (ev) {
@@ -101,7 +92,7 @@ var game = (function() {
         yellow.onclick = function (ev) {
             ev.preventDefault();
             colorPicked(enumCard.enumColor.YELLOW);
-        };//work checked!
+        };
     }
 
     function endGameMode() {
@@ -121,7 +112,6 @@ var game = (function() {
             card.changeImage(true);
             gameCards.push(card);
             calcAmountCardsToTake(card);
-            // updateStatics();
             if(players[turn].getAmountOfCards() === 0 && card.getSign() !== enumCard.enumTypes.PLUS){
                 endGameMode();
             }
@@ -131,48 +121,30 @@ var game = (function() {
         }
     }
 
-    function changeStockImage(){
-       var stockHtml =  document.getElementById(enumCard.dives.STOCK);
-       if(stock.getLength() > 30) {
-           stockHtml.style.background = "#cccccc url('/Taki/Images/other/a_lot_close_cards.png')";
-           stockHtml.style.height = "137px";
-           stockHtml.style.width = "111px";
-       }
-       else if(stock.getLength() > 10) {
-           stockHtml.style.background = "#cccccc url('/Taki/Images/other/few_close_cards.png')";
-           stockHtml.style.height = "140px";
-           stockHtml.style.width = "90px";
-       }
-       else {
-           stockHtml.style.background = "#cccccc url('/Taki/Images/other/close_card.png')";
-           stockHtml.style.height = "140px";
-           stockHtml.style.width = "90px";
-       }
+    function refreshStockAndOpenCards() {
+        var lastCard = gameCards.pop();
+        removeAllCards(enumCard.dives.OPEN_CARDS);
+        stock.makeStockAgain(gameCards);
+        gameCards = undefined;
+        gameCards = [];
+        gameCards.push(lastCard);
+        lastCard.setParent(enumCard.dives.OPEN_CARDS);
+        stock.changeStockImage();
     }
 
     function pullCardValidation(player) {
         if(player === players[turn] && player.pullApproval(gameCards[gameCards.length-1])){
-            changeStockImage();
+            stock.changeStockImage();
             gameCards[gameCards.length - 1].setActive(false);
             player.setTakiMode(undefined);
             var cardsFromStock = stock.getCards(amountOfCardsToTakeFromStock);
             if(stock.getLength() <= amountOfCardsToTakeFromStock){
-                var lastCard = gameCards.pop();
-                removeAllCards(enumCard.dives.OPEN_CARDS);
-                stock.makeStockAgain(gameCards);
-                gameCards = undefined;
-                gameCards = [];
-                gameCards.push(lastCard);
-                lastCard.setParent(enumCard.dives.OPEN_CARDS);
-                changeStockImage();
+                refreshStockAndOpenCards();
             }
-                amountOfCardsToTakeFromStock = 1;
+            amountOfCardsToTakeFromStock = 1;
             player.pullCardFromStock(cardsFromStock);
-           for(var i = 0; i < cardsFromStock.length; ++i)
+            for(var i = 0; i < cardsFromStock.length; ++i)
                cardsFromStock[i].setParent(player.getHtmlDiv(), player.isDraggable());
-            //TODO: take the cards from the stock. change the cssClass, cut the cards elements from the stock to the player cards element
-            // gameCards.lastIndexOf(Card).makePassive(); why we need that?
-            // updateStatistics();
             changeTurn(enumCard.enumResult.NEXT_TURN);
             setTimeout(computerOperation,2000);
         }
@@ -236,7 +208,7 @@ var game = (function() {
             endGame = false;
             removeHTMLElements();
             resetDivsAttributes();
-            var allCards = [];
+            var allCards;
             allCards = getGameCards();
             var playerAverageTurnTime = players[0].getAverageTimePlayed();
             var playerTurn = players[0].getTurnsPlayed();
@@ -248,14 +220,10 @@ var game = (function() {
             stock.makeStockAgain(allCards);
             players = [player(), smartComputer()];
             gameStatistics = undefined;
-            players[0].SetAverageTimePlayed(playerAverageTurnTime);
+            players[0].setAverageTimePlayed(playerAverageTurnTime);
             players[0].setTurnsPlayed(playerTurn);
             initialGameAndStatistics();
             setTimeout(computerOperation,2000);
-        },
-
+        }
     }
-
-
 })();
-//stam

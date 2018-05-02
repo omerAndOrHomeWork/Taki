@@ -8,7 +8,11 @@ var stock = (function () {
     var htmlStock;
 
     function createDeck() {
+        var stockImage =  document.createElement("img");
         htmlStock = document.createElement("div");
+
+        htmlStock.appendChild(stockImage);
+        stockImage.src = enumCard.images.MANY_CLOSE_CARDS;
         htmlStock.setAttribute("id", enumCard.dives.STOCK);
         document.getElementById(enumCard.dives.STOCK_AND_OPEN_CARDS).appendChild(htmlStock);
          for(var number = 0; number < twoCardsNumber.length; ++number){
@@ -64,7 +68,6 @@ var stock = (function () {
             cards.push(new Card(undefined, enumCard.enumTypes.CHANGE_COLOR,
                 changeColorValidation, changeColorOperation, id++));
             cards[cards.length-1].setElement(css);
-
         }
 
         css = getUniqueCss('', Object.keys(enumCard.enumTypes)[enumCard.enumTypes.SUPER_TAKI],'');
@@ -83,8 +86,6 @@ var stock = (function () {
         red_change_color.src = "../Taki/Images/red/red_change_color.png";
         yellow_change_color.src = "../Taki/Images/yellow/yellow_change_color.png";
     }
-
-
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -106,7 +107,7 @@ var stock = (function () {
 
         setGame: function () {
             createDeck();
-            shuffleDeck(getRandomInt(10, 25));//random number (the numbers not very important),amount of times to make shuffle
+            shuffleDeck(getRandomInt(10, 25));
         },
 
         getValidOpenCard: function () {
@@ -142,6 +143,25 @@ var stock = (function () {
 
         getAllCards: function () {
             return cards;
+        },
+
+        changeStockImage: function (){
+            var stockHtml =  document.getElementById(enumCard.dives.STOCK);
+            var stockImage =  document.createElement("img");
+            while (stockHtml.firstChild) {
+                stockHtml.removeChild(stockHtml.firstChild);
+            }
+            stockHtml.appendChild(stockImage);
+            if(stock.getLength() > 30) {
+                stockImage.src = enumCard.images.MANY_CLOSE_CARDS;
+            }
+            else if(stock.getLength() > 10) {
+                stockImage.src = enumCard.images.FEW_CLOSE_CARDS;
+
+            }
+            else {
+                stockImage.src = enumCard.images.CLOSE_CARD;
+            }
         }
     };
 })();
