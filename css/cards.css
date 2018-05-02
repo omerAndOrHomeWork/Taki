@@ -108,7 +108,7 @@ img{
 
 }
 
-#Enter_Game{
+#Enter_Game, #Quit_Game{
     background: #32CD32;
     font-size: 15px;
     color: white;

@@ -6,7 +6,14 @@ var statistics = function(thePlayersGame) {
     var gameClock = new clock();
     gameClock.run();
     return{
+        initialStatisticsTitle: function(){
+            var gameName = document.createElement("h3");
+            gameName.innerText = "Game Statistics:";
+            document.getElementById("sidebar").insertBefore(gameName,document.getElementById(enumCard.dives.STATISTICS));
+        },
+
         setStatistics:function(){
+
             for(var i = 0; i <htmlDivsPlayers.length;++i){
                 htmlDivsPlayers[i] = document.createElement("div");
                 htmlDivsPlayers[i].setAttribute("id",Object.keys(enumCard.enumPlayer)[i]);
@@ -16,15 +23,15 @@ var statistics = function(thePlayersGame) {
 
         updateStatistics: function () {
             turnsCounter++;
+            htmlDivsPlayers[0].innerHTML = "\n" + "Turns played totally :" + turnsCounter;
             for(var i = 0; i < playersGame.length; ++i) {
                 singleCardPlayers[i] = playersGame[i].getSingleCardCounter();
-                var playerLocal = Object.keys(enumCard.enumPlayer)[i] + ":\n";
+                var playerLocal = "\n\n" + Object.keys(enumCard.enumPlayer)[i] + ":\n";
                 playerLocal += "Turns played: " + playersGame[i].getTurnsPlayed() + "\n";
-                playerLocal += "Single cards times: " + playersGame[i].getSingleCardCounter() + "\n\n";
-                playerLocal += "Average turn time: " + playersGame[i].getAverageTimePlayed() + "\n\n";
-                htmlDivsPlayers[i].innerText = playerLocal;
+                playerLocal += "Single cards times: " + playersGame[i].getSingleCardCounter() + "\n";
+                playerLocal += "Average turn time: " + Math.round(playersGame[i].getAverageTimePlayed()*100)/100 + " sec";
+                htmlDivsPlayers[i].innerText += playerLocal;
             }
-            htmlDivsPlayers[htmlDivsPlayers.length - 1].innerHTML += "Turns played totally :" + turnsCounter + "<br />";
         }
     };
 };

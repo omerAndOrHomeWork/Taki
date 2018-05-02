@@ -95,12 +95,13 @@ var game = (function() {
         };
     }
 
-    function endGameMode() {
+    function endGameMode(massage) {
         endGame = true;
+        document.getElementById(enumCard.dives.QUIT_GAME).style.visibility = "hidden";
         document.getElementById(enumCard.dives.PICK_COLOR).style.visibility = "hidden";
         document.getElementById(enumCard.dives.END_GAME_MODE).style.visibility = "visible";
         document.getElementById(enumCard.dives.STOCK_AND_OPEN_CARDS).style.visibility = "hidden";
-        document.getElementById(enumCard.dives.MASSAGE).innerText = Object.keys(enumCard.enumPlayer)[turn] + " win!";
+        document.getElementById(enumCard.dives.MASSAGE).innerText = massage + " win!";
     }
 
     function dropValidation(id, card) {
@@ -113,7 +114,7 @@ var game = (function() {
             gameCards.push(card);
             calcAmountCardsToTake(card);
             if(players[turn].getAmountOfCards() === 0 && card.getSign() !== enumCard.enumTypes.PLUS){
-                endGameMode();
+                endGameMode(Object.keys(enumCard.enumPlayer)[turn]);
             }
             if(promote !== enumCard.enumResult.CONTINUE_TURN)
                 changeTurn(promote);
@@ -173,6 +174,7 @@ var game = (function() {
         removeAllCards(enumCard.dives.STATISTICS);
     }
     function resetDivsAttributes(){
+        document.getElementById(enumCard.dives.QUIT_GAME).style.visibility = "visible";
         document.getElementById(enumCard.dives.END_GAME_MODE).style.visibility = "hidden";
         document.getElementById(enumCard.dives.STOCK_AND_OPEN_CARDS).style.visibility = "visible";
         document.getElementById(enumCard.dives.MASSAGE).innerText = '';
@@ -198,8 +200,10 @@ var game = (function() {
     return{
         startGame: function () {
             document.getElementById("Enter_Game").style.visibility = "hidden";
+            document.getElementById(enumCard.dives.QUIT_GAME).style.visibility = "visible";
             stock.setGame();
             initialGameAndStatistics();
+            gameStatistics.initialStatisticsTitle();
             setTimeout(computerOperation,2000);
         },
 
@@ -224,6 +228,10 @@ var game = (function() {
             players[0].setTurnsPlayed(playerTurn);
             initialGameAndStatistics();
             setTimeout(computerOperation,2000);
+        },
+
+        quitGame: function(){
+            endGameMode("PLAYER quit! COMPUTER");
         }
     }
 })();
