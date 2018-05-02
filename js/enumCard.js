@@ -12,7 +12,7 @@ var enumCard = (function(){
             STOCK: "stockCards", OPEN_CARDS: "openCards", STOCK_AND_OPEN_CARDS: "stockAndOpenCards", STATISTICS: "statistics",
             CLOCK:"gameClock", PICK_COLOR: "pickColor", BLUE_PICK: "bluePicker", GREEN_PICK: "greenPicker",
             RED_PICK: "redPicker", YELLOW_PICK: "yellowPicker", END_GAME_MODE: "endGameMode",
-            MASSAGE: "massage", RESTART_GAME: "restartGame", END_GAME: "endGame"
+            MASSAGE: "massage", RESTART_GAME: "restartGame", END_GAME: "endGame", QUIT_GAME: "Quit_Game"
         }),
 
         cssStyle: Object.freeze({
