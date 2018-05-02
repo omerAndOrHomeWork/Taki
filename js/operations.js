@@ -1,5 +1,5 @@
 
-function changeColorOperation(player, playerCard) {
+function changeColorOperation(player) {
 
     return player.pickColor();
 }
@@ -32,18 +32,6 @@ function stopValidation(lastCard, playerCard) {
     return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
-function superTakiOperation(player, playerCard, lastCard) {
-    playerCard.setColor(lastCard.getColor());
-    playerCard.setImage(getUniqueCss(Object.keys(enumCard.enumColor)[playerCard.getColor()],
-        Object.keys(enumCard.enumTypes)[enumCard.enumTypes.TAKI],'_'));
-    player.setTakiMode(playerCard);
-    return enumCard.enumResult.CONTINUE_TURN;
-}
-
-function superTakiValidation(lastCard) {
-    return !lastCard.isActive();
-}
-
 function takiOperation(player, playerCard) {
     player.setTakiMode(playerCard);
     return enumCard.enumResult.CONTINUE_TURN;
@@ -51,15 +39,6 @@ function takiOperation(player, playerCard) {
 
 function takiValidation(lastCard, playerCard) {
     return !lastCard.isActive() && (lastCard.getColor() === playerCard.getColor());
-}
-
-function twoPlusOperation(player, playerCard) {
-    playerCard.setActive(true);
-    return enumCard.enumResult.NEXT_TURN;
-}
-
-function twoPlusValidation(lastCard, playerCard) {
-    return (lastCard.getColor() === playerCard.getColor() || lastCard.getSign() === playerCard.getSign());
 }
 
 function pullApproval(cards, lastCard) {
