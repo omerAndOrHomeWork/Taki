@@ -48,14 +48,6 @@ var stock = (function () {
                 stopValidation, stopOperation, id++));
             cards[cards.length-1].setElement(css);
 
-            css = getUniqueCss(Object.keys(enumCard.enumColor)[color], Object.keys(enumCard.enumTypes)[enumCard.enumTypes.TWO_PLUS],'_');
-            cards.push(new Card(colorNumber[color], enumCard.enumTypes.TWO_PLUS,
-                twoPlusValidation, twoPlusOperation, id++));
-            cards[cards.length-1].setElement(css);
-            cards.push(new Card(colorNumber[color], enumCard.enumTypes.TWO_PLUS,
-                twoPlusValidation, twoPlusOperation, id++));
-            cards[cards.length-1].setElement(css);
-
             css = getUniqueCss(Object.keys(enumCard.enumColor)[color], Object.keys(enumCard.enumTypes)[enumCard.enumTypes.PLUS],'_');
             cards.push(new Card(colorNumber[color], enumCard.enumTypes.PLUS,
                 plusValidation, plusOperation, id++));
@@ -70,21 +62,14 @@ var stock = (function () {
             cards[cards.length-1].setElement(css);
         }
 
-        css = getUniqueCss('', Object.keys(enumCard.enumTypes)[enumCard.enumTypes.SUPER_TAKI],'');
-        for(color = 0; color < 2; ++color){
-            cards.push(new Card(undefined, enumCard.enumTypes.SUPER_TAKI,
-                superTakiValidation, superTakiOperation, id++));
-            cards[cards.length-1].setElement(css);
-        }
-
         var blue_change_color = document.createElement("img");
         var green_change_color = document.createElement("img");
         var red_change_color = document.createElement("img");
         var yellow_change_color = document.createElement("img");
-        blue_change_color.src = "../Taki/Images/blue/blue_change_color.png";
-        green_change_color.src = "../Taki/Images/green/green_change_color.png";
-        red_change_color.src = "../Taki/Images/red/red_change_color.png";
-        yellow_change_color.src = "../Taki/Images/yellow/yellow_change_color.png";
+        blue_change_color.src = "../Images/blue/blue_change_color.png";
+        green_change_color.src = "../Images/green/green_change_color.png";
+        red_change_color.src = "../Images/red/red_change_color.png";
+        yellow_change_color.src = "../Images/yellow/yellow_change_color.png";
     }
 
     function getRandomInt(min, max) {
@@ -93,7 +78,7 @@ var stock = (function () {
 
     function shuffleDeck(shuffleCnt) {
         for(var i = 0; i < 3*shuffleCnt; i++) {
-            var rndNo = getRandomInt(0, 101);
+            var rndNo = getRandomInt(0, 91);
             var Card = cards[i];
             cards[i] = cards[rndNo];
             cards[rndNo] = Card;

@@ -20,9 +20,9 @@ var enumCard = (function(){
         }),
 
         images: Object.freeze({
-            CLOSE_CARD: "../Taki/Images/other/close_card.png",
-            MANY_CLOSE_CARDS: "../Taki/Images/other/many_close_cards.png",
-            FEW_CLOSE_CARDS: "../Taki/Images/other/few_close_cards.png",
+            CLOSE_CARD: "../Images/other/close_card.png",
+            MANY_CLOSE_CARDS: "../Images/other/many_close_cards.png",
+            FEW_CLOSE_CARDS: "../Images/other/few_close_cards.png"
         }),
 
         enumResult: Object.freeze({EXTRA_TURN: 0,NEXT_TURN: 1, JUMP_TURN: 2,

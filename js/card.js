@@ -15,7 +15,7 @@ function Card(theColor, theSign, theValidation, theOperation, theId) {
             colorName = Object.keys(enumCard.enumColor)[color].toLowerCase();
         else
             colorName = "other";
-        uniqueCardImage.setAttribute("src", "../Taki/Images/" + colorName + "/" + imgName.toLowerCase() + ".png");
+        uniqueCardImage.setAttribute("src", "../Images/" + colorName + "/" + imgName.toLowerCase() + ".png");
 
     }
 
