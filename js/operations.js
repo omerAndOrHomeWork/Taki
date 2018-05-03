@@ -107,3 +107,30 @@ function takiPermission(player, card) {
     var taki = player.getTakiMode();
     return ( taki === undefined || (taki !== undefined && taki.getColor() === card.getColor()));
 }
+
+function changeMerging(placeHolder, cardsLength){
+    var images = placeHolder.getElementsByTagName("img");
+    var factor = 0;
+    var size;
+    if(window.innerWidth < 720)
+        factor -= 4;
+    else if(window.innerWidth < 760)
+        factor -= 3;
+    else if(window.innerWidth < 780)
+        factor -= 2;
+    if(cardsLength > 21)
+        size = -7;
+    else if(cardsLength > 18)
+        size = -6.5;
+    else if(cardsLength > 15)
+        size = -6;
+    else if(cardsLength > 12)
+        size = -5.5;
+    else
+        size = -5;
+    size += factor;
+    var marge = size.toString() + "%";
+    for (var i = 0; i < images.length; i++) {
+        images[i].style.marginRight= marge;
+    }
+}
