@@ -30,7 +30,10 @@ var statistics = function(thePlayersGame) {
                 playerLocal += "Turns played: " + playersGame[i].getTurnsPlayed() + "\n";
                 playerLocal += "Single cards times: " + playersGame[i].getSingleCardCounter() + "\n";
                 playerLocal += "Average turn time: " + Math.round(playersGame[i].getAverageTimePlayed()*100)/100 + " sec";
-                htmlDivsPlayers[i].innerText += playerLocal;
+                if(i === 0)
+                    htmlDivsPlayers[i].innerText += playerLocal;
+                else
+                    htmlDivsPlayers[i].innerText = playerLocal;
             }
         }
     };
