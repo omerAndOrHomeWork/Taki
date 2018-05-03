@@ -77,8 +77,10 @@ var stock = (function () {
     }
 
     function shuffleDeck(shuffleCnt) {
+        if(3*shuffleCnt > cards.length - 1)
+            shuffleCnt = (cards.length - 1) / 3;
         for(var i = 0; i < 3*shuffleCnt; i++) {
-            var rndNo = getRandomInt(0, 91);
+            var rndNo = getRandomInt(0, cards.length - 1);
             var Card = cards[i];
             cards[i] = cards[rndNo];
             cards[rndNo] = Card;

@@ -59,6 +59,7 @@ var player = function () {
       
         doOperation: function (card, lastCard) {
             removeCard(cards, card);
+            changeMerging(document.getElementById(enumCard.dives.PLAYER_CARDS), cards.length);
             var promote = card.doOperation(this, lastCard);
             if (takiMode !== undefined) {
                 if(takiModeChecker(cards, takiMode)) {
@@ -79,6 +80,7 @@ var player = function () {
 
         pullCardFromStock: function (cardsToSet) {
             setCards(cards, cardsToSet);
+            changeMerging(document.getElementById(enumCard.dives.PLAYER_CARDS), cards.length);
         },
 
         pullApproval: function (lastCard){

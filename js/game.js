@@ -69,6 +69,7 @@ var game = (function() {
             if(!players[turn].isComputer())
                 pullCardValidation(players[turn]);
         };
+        click.ondragstart = function () { return false; };
 
         var blue = document.getElementById(enumCard.dives.BLUE_PICK);
         blue.onclick = function (ev) {
@@ -92,6 +93,11 @@ var game = (function() {
         yellow.onclick = function (ev) {
             ev.preventDefault();
             colorPicked(enumCard.enumColor.YELLOW);
+        };
+
+        window.onresize = function () {
+            changeMerging(document.getElementById(enumCard.dives.PLAYER_CARDS), players[0].getAllCards().length);
+            changeMerging(document.getElementById(enumCard.dives.COMPUTER_CARDS), players[1].getAllCards().length);
         };
     }
 
@@ -123,18 +129,22 @@ var game = (function() {
     }
 
     function refreshStockAndOpenCards() {
-        var lastCard = gameCards.pop();
-        removeAllCards(enumCard.dives.OPEN_CARDS);
-        stock.makeStockAgain(gameCards);
-        gameCards = undefined;
-        gameCards = [];
-        gameCards.push(lastCard);
-        lastCard.setParent(enumCard.dives.OPEN_CARDS);
-        stock.changeStockImage();
+        if(gameCards.length === 1) {
+            endGameMode("TIE! nobody ");
+        }else {
+            removeAllCards(enumCard.dives.OPEN_CARDS);
+            var lastCard = gameCards.pop();
+            stock.makeStockAgain(gameCards);
+            gameCards = undefined;
+            gameCards = [];
+            gameCards.push(lastCard);
+            lastCard.setParent(enumCard.dives.OPEN_CARDS);
+            stock.changeStockImage();
+        }
     }
 
     function pullCardValidation(player) {
-        if(player === players[turn] && player.pullApproval(gameCards[gameCards.length-1])){
+       if(player === players[turn] && player.pullApproval(gameCards[gameCards.length-1])){
             stock.changeStockImage();
             gameCards[gameCards.length - 1].setActive(false);
             player.setTakiMode(undefined);

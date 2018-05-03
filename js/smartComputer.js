@@ -86,7 +86,6 @@ var smartComputer = function() {
     }
 
     function cardNumberInDifferentColor(lastGameCard) {
-        //var cards = [];
         for(var i = 0; i < typesCards[enumCard.enumTypes.NUMBER].length; ++i){
             var numberCard = typesCards[enumCard.enumTypes.NUMBER][i];
             if(numberCard.getColor() !== lastGameCard.getColor() && numberCard.number === lastGameCard.number)
@@ -440,10 +439,11 @@ var smartComputer = function() {
 
         pullCardFromStock: function(cardsToAdd){
             addCard(cardsToAdd);
+            changeMerging(document.getElementById(enumCard.dives.COMPUTER_CARDS), allCards.length);
         },
 
         pickCard: function(lastGameCard){
-           return operation(lastGameCard);
+            return operation(lastGameCard);
         },
 
         increasePlayerTurns: function () {
@@ -469,6 +469,7 @@ var smartComputer = function() {
         doOperation: function(card, lastCard) {
             var promote = card.doOperation(this, lastCard);
             removeAllCardAppearances(card);
+            changeMerging(document.getElementById(enumCard.dives.COMPUTER_CARDS), allCards.length);
             if (takiMode !== undefined) {
                 if(takiModeChecker(allCards, takiMode)) {
                     promote = enumCard.enumResult.CONTINUE_TURN;
